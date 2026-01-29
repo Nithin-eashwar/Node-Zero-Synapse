@@ -1,0 +1,215 @@
+# ================================
+# Python
+# ================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+pytest_debug.log
+
+# Translations
+*.mo
+*.pot
+
+# ================================
+# Virtual Environments
+# ================================
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# ================================
+# IDEs and Editors
+# ================================
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+
+# ================================
+# OS Generated Files
+# ================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+# ================================
+# Environment Variables & Secrets
+# ================================
+.env
+.env.local
+.env.*.local
+*.env
+secrets/
+*.pem
+*.key
+*.crt
+
+# ================================
+# Logs & Databases
+# ================================
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# ================================
+# Node.js (for frontend)
+# ================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+package-lock.json
+yarn.lock
+
+# Frontend build outputs
+frontend/dashboard/dist/
+frontend/dashboard/build/
+.next/
+out/
+
+# ================================
+# FastAPI / Uvicorn
+# ================================
+.uvicorn.pid
+
+# ================================
+# Jupyter Notebooks
+# ================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ================================
+# MyPy / Type Checking
+# ================================
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ================================
+# Tree-sitter
+# ================================
+# Compiled grammar files
+*.so
+build/
+
+# ================================
+# Project Specific
+# ================================
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Data files (if containing sensitive data)
+# Uncomment if needed:
+# backend/data/
+
+# Dummy/test repositories
+dummy_repo/
+
+# Model caches
+*.pkl
+*.pickle
+
+# ================================
+# Miscellaneous
+# ================================
+*.bak
+*.old
+*.orig
+.cache/

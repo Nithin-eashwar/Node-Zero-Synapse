@@ -1,0 +1,19 @@
+# Core Backend API
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.7
+
+# Graph & Data Structures
+networkx>=3.2.1
+matplotlib>=3.8.2   # Useful for static plotting if needed later
+
+# Source Code Parsing (The Eyes)
+tree-sitter==0.21.3
+tree-sitter-languages>=1.10.0
+
+# Version Control Analysis (The History)
+gitpython>=3.1.41
+
+# Utilities
+requests>=2.31.0
+pydantic>=2.6.0

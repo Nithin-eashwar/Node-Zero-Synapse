@@ -1,0 +1,35 @@
+[
+  {
+    "name": "app_start",
+    "file": "./dummy_repo\\main.py",
+    "range": [
+      2,
+      5
+    ],
+    "calls": [
+      "print",
+      "helper.fetch_data",
+      "helper.process_data"
+    ]
+  },
+  {
+    "name": "fetch_data",
+    "file": "./dummy_repo\\utils.py",
+    "range": [
+      0,
+      1
+    ],
+    "calls": []
+  },
+  {
+    "name": "process_data",
+    "file": "./dummy_repo\\utils.py",
+    "range": [
+      3,
+      4
+    ],
+    "calls": [
+      "print"
+    ]
+  }
+]
