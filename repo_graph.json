@@ -1,0 +1,624 @@
+[
+  {
+    "type": "function",
+    "name": "get_display_name",
+    "unique_id": "dummy_repo\\complex_example.py:UserProfile.get_display_name",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      25,
+      27
+    ],
+    "signature": "def get_display_name() -> str",
+    "parameters": [],
+    "return_type": "str",
+    "decorators": [],
+    "docstring": "Get formatted display name.",
+    "is_async": false,
+    "is_generator": false,
+    "is_method": true,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": "UserProfile",
+    "complexity": {
+      "cyclomatic": 1,
+      "lines_of_code": 3,
+      "cognitive": 0
+    },
+    "calls": [],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "__init__",
+    "unique_id": "dummy_repo\\complex_example.py:BaseProcessor.__init__",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      33,
+      35
+    ],
+    "signature": "def __init__(config: Dict)",
+    "parameters": [
+      {
+        "name": "config",
+        "type_hint": "Dict",
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      }
+    ],
+    "return_type": null,
+    "decorators": [],
+    "docstring": null,
+    "is_async": false,
+    "is_generator": false,
+    "is_method": true,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": "BaseProcessor",
+    "complexity": {
+      "cyclomatic": 1,
+      "lines_of_code": 3,
+      "cognitive": 0
+    },
+    "calls": [],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "validate",
+    "unique_id": "dummy_repo\\complex_example.py:BaseProcessor.validate",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      42,
+      46
+    ],
+    "signature": "def validate(data: List) -> bool",
+    "parameters": [
+      {
+        "name": "data",
+        "type_hint": "List",
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      }
+    ],
+    "return_type": "bool",
+    "decorators": [],
+    "docstring": "Validate input data.",
+    "is_async": false,
+    "is_generator": false,
+    "is_method": true,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": "BaseProcessor",
+    "complexity": {
+      "cyclomatic": 2,
+      "lines_of_code": 5,
+      "cognitive": 1
+    },
+    "calls": [],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "__init__",
+    "unique_id": "dummy_repo\\complex_example.py:DataProcessor.__init__",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      52,
+      55
+    ],
+    "signature": "def __init__(config: Dict, max_items: int)",
+    "parameters": [
+      {
+        "name": "config",
+        "type_hint": "Dict",
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      },
+      {
+        "name": "max_items",
+        "type_hint": "int",
+        "default_value": "100",
+        "is_args": false,
+        "is_kwargs": false
+      }
+    ],
+    "return_type": null,
+    "decorators": [],
+    "docstring": null,
+    "is_async": false,
+    "is_generator": false,
+    "is_method": true,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": "DataProcessor",
+    "complexity": {
+      "cyclomatic": 1,
+      "lines_of_code": 4,
+      "cognitive": 1
+    },
+    "calls": [
+      "super().__init__",
+      "super"
+    ],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "process",
+    "unique_id": "dummy_repo\\complex_example.py:DataProcessor.process",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      57,
+      69
+    ],
+    "signature": "def process(data: List) -> List",
+    "parameters": [
+      {
+        "name": "data",
+        "type_hint": "List",
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      }
+    ],
+    "return_type": "List",
+    "decorators": [],
+    "docstring": "Process the data with filtering and transformation.",
+    "is_async": false,
+    "is_generator": false,
+    "is_method": true,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": "DataProcessor",
+    "complexity": {
+      "cyclomatic": 4,
+      "lines_of_code": 13,
+      "cognitive": 4
+    },
+    "calls": [
+      "self.validate",
+      "ValueError",
+      "self._should_include",
+      "self._transform",
+      "results.append"
+    ],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "_should_include",
+    "unique_id": "dummy_repo\\complex_example.py:DataProcessor._should_include",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      71,
+      73
+    ],
+    "signature": "def _should_include(item) -> bool",
+    "parameters": [
+      {
+        "name": "item",
+        "type_hint": null,
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      }
+    ],
+    "return_type": "bool",
+    "decorators": [],
+    "docstring": "Check if item should be included.",
+    "is_async": false,
+    "is_generator": false,
+    "is_method": true,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": "DataProcessor",
+    "complexity": {
+      "cyclomatic": 1,
+      "lines_of_code": 3,
+      "cognitive": 0
+    },
+    "calls": [],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "_transform",
+    "unique_id": "dummy_repo\\complex_example.py:DataProcessor._transform",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      75,
+      77
+    ],
+    "signature": "def _transform(item)",
+    "parameters": [
+      {
+        "name": "item",
+        "type_hint": null,
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      }
+    ],
+    "return_type": null,
+    "decorators": [],
+    "docstring": "Transform a single item.",
+    "is_async": false,
+    "is_generator": false,
+    "is_method": true,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": "DataProcessor",
+    "complexity": {
+      "cyclomatic": 1,
+      "lines_of_code": 3,
+      "cognitive": 0
+    },
+    "calls": [],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "fetch_user_data",
+    "unique_id": "dummy_repo\\complex_example.py:fetch_user_data",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      99,
+      111
+    ],
+    "signature": "def fetch_user_data(user_id: str, timeout: int) -> Optional[UserProfile]",
+    "parameters": [
+      {
+        "name": "user_id",
+        "type_hint": "str",
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      },
+      {
+        "name": "timeout",
+        "type_hint": "int",
+        "default_value": "DEFAULT_TIMEOUT",
+        "is_args": false,
+        "is_kwargs": false
+      }
+    ],
+    "return_type": "Optional[UserProfile]",
+    "decorators": [],
+    "docstring": "Async function to fetch user data from external service.\n    \n    Args:\n        user_id: The user's unique identifier\n        timeout: Request timeout in seconds\n        \n    Returns:\n        UserProfile if found, None otherwise",
+    "is_async": false,
+    "is_generator": false,
+    "is_method": false,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": null,
+    "complexity": {
+      "cyclomatic": 1,
+      "lines_of_code": 13,
+      "cognitive": 0
+    },
+    "calls": [
+      "UserProfile"
+    ],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "process_batch",
+    "unique_id": "dummy_repo\\complex_example.py:process_batch",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      114,
+      155
+    ],
+    "signature": "def process_batch(items: List[str], processor: Optional[DataProcessor], options) -> List[Dict]",
+    "parameters": [
+      {
+        "name": "items",
+        "type_hint": "List[str]",
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      },
+      {
+        "name": "processor",
+        "type_hint": "Optional[DataProcessor]",
+        "default_value": "None",
+        "is_args": false,
+        "is_kwargs": false
+      },
+      {
+        "name": "options",
+        "type_hint": null,
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": true
+      }
+    ],
+    "return_type": "List[Dict]",
+    "decorators": [],
+    "docstring": "Process a batch of items with complex control flow.\n    \n    This function demonstrates:\n    - Multiple conditions (cyclomatic complexity)\n    - Nested loops\n    - Exception handling",
+    "is_async": false,
+    "is_generator": false,
+    "is_method": false,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": null,
+    "complexity": {
+      "cyclomatic": 12,
+      "lines_of_code": 42,
+      "cognitive": 42
+    },
+    "calls": [
+      "DataProcessor.create_default",
+      "enumerate",
+      "options.get",
+      "options.get",
+      "len",
+      "ValueError",
+      "processor.validate",
+      "processor.process",
+      "results.append",
+      "options.get",
+      "results.append",
+      "str"
+    ],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "generator_example",
+    "unique_id": "dummy_repo\\complex_example.py:generator_example",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      158,
+      162
+    ],
+    "signature": "def generator_example(n: int)",
+    "parameters": [
+      {
+        "name": "n",
+        "type_hint": "int",
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      }
+    ],
+    "return_type": null,
+    "decorators": [],
+    "docstring": "Generator function example.",
+    "is_async": false,
+    "is_generator": true,
+    "is_method": false,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": null,
+    "complexity": {
+      "cyclomatic": 3,
+      "lines_of_code": 5,
+      "cognitive": 3
+    },
+    "calls": [
+      "range"
+    ],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "class",
+    "name": "UserProfile",
+    "unique_id": "dummy_repo\\complex_example.py:UserProfile",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      19,
+      27
+    ],
+    "bases": [],
+    "metaclass": null,
+    "is_abstract": false,
+    "is_dataclass": true,
+    "is_protocol": false,
+    "decorators": [
+      "dataclass"
+    ],
+    "docstring": "Represents a user profile.",
+    "methods": [
+      "get_display_name"
+    ],
+    "class_variables": [
+      "name",
+      "email",
+      "age"
+    ],
+    "instance_variables": [],
+    "nested_classes": [],
+    "inheritance_depth": 0
+  },
+  {
+    "type": "class",
+    "name": "BaseProcessor",
+    "unique_id": "dummy_repo\\complex_example.py:BaseProcessor",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      30,
+      46
+    ],
+    "bases": [
+      "ABC"
+    ],
+    "metaclass": null,
+    "is_abstract": true,
+    "is_dataclass": false,
+    "is_protocol": false,
+    "decorators": [],
+    "docstring": "Abstract base class for data processors.",
+    "methods": [
+      "__init__",
+      "validate"
+    ],
+    "class_variables": [],
+    "instance_variables": [
+      "config",
+      "is_initialized"
+    ],
+    "nested_classes": [],
+    "inheritance_depth": 1
+  },
+  {
+    "type": "class",
+    "name": "DataProcessor",
+    "unique_id": "dummy_repo\\complex_example.py:DataProcessor",
+    "file": "dummy_repo\\complex_example.py",
+    "range": [
+      49,
+      96
+    ],
+    "bases": [
+      "BaseProcessor"
+    ],
+    "metaclass": null,
+    "is_abstract": false,
+    "is_dataclass": false,
+    "is_protocol": false,
+    "decorators": [],
+    "docstring": "Concrete implementation of data processor.",
+    "methods": [
+      "__init__",
+      "process",
+      "_should_include",
+      "_transform"
+    ],
+    "class_variables": [],
+    "instance_variables": [
+      "max_items",
+      "processed_count"
+    ],
+    "nested_classes": [],
+    "inheritance_depth": 1
+  },
+  {
+    "type": "function",
+    "name": "app_start",
+    "unique_id": "dummy_repo\\main.py:app_start",
+    "file": "dummy_repo\\main.py",
+    "range": [
+      3,
+      6
+    ],
+    "signature": "def app_start()",
+    "parameters": [],
+    "return_type": null,
+    "decorators": [],
+    "docstring": null,
+    "is_async": false,
+    "is_generator": false,
+    "is_method": false,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": null,
+    "complexity": {
+      "cyclomatic": 1,
+      "lines_of_code": 4,
+      "cognitive": 0
+    },
+    "calls": [
+      "print",
+      "helper.fetch_data",
+      "helper.process_data"
+    ],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "fetch_data",
+    "unique_id": "dummy_repo\\utils.py:fetch_data",
+    "file": "dummy_repo\\utils.py",
+    "range": [
+      1,
+      2
+    ],
+    "signature": "def fetch_data()",
+    "parameters": [],
+    "return_type": null,
+    "decorators": [],
+    "docstring": null,
+    "is_async": false,
+    "is_generator": false,
+    "is_method": false,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": null,
+    "complexity": {
+      "cyclomatic": 1,
+      "lines_of_code": 2,
+      "cognitive": 0
+    },
+    "calls": [],
+    "reads_globals": [],
+    "writes_globals": []
+  },
+  {
+    "type": "function",
+    "name": "process_data",
+    "unique_id": "dummy_repo\\utils.py:process_data",
+    "file": "dummy_repo\\utils.py",
+    "range": [
+      4,
+      5
+    ],
+    "signature": "def process_data(data)",
+    "parameters": [
+      {
+        "name": "data",
+        "type_hint": null,
+        "default_value": null,
+        "is_args": false,
+        "is_kwargs": false
+      }
+    ],
+    "return_type": null,
+    "decorators": [],
+    "docstring": null,
+    "is_async": false,
+    "is_generator": false,
+    "is_method": false,
+    "is_static": false,
+    "is_classmethod": false,
+    "is_property": false,
+    "parent_class": null,
+    "complexity": {
+      "cyclomatic": 1,
+      "lines_of_code": 2,
+      "cognitive": 0
+    },
+    "calls": [
+      "print"
+    ],
+    "reads_globals": [],
+    "writes_globals": []
+  }
+]
