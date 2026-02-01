@@ -1,21 +1,32 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 import json
 import networkx as nx
 import os
 import sys
+from typing import Optional
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from core.graph import build_dependency_graph
-from core.git import get_git_blame
+from core.smart_git import (
+    get_git_blame,
+    get_expertise_heatmap,
+    get_bus_factor_analysis,
+    get_knowledge_gaps,
+    get_developer_expertise
+)
 
 # --- CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(BASE_DIR, "..", "data", "repo_graph.json")
 REPO_PATH = os.path.join(BASE_DIR, "..", "..", "dummy_repo") # Point back to root
 
-app = FastAPI(title="Synapse Backend Engine")
+app = FastAPI(
+    title="Synapse Backend Engine",
+    description="GraphRAG platform for code intelligence with Smart Blame expertise identification",
+    version="1.0.0"
+)
 
 # Enable CORS (so your future VS Code extension can talk to this)
 app.add_middleware(
@@ -67,11 +78,11 @@ async def load_data():
             data = json.load(f)
             graph_db["raw_data"] = data
             graph_db["nx_graph"] = build_graph(data)
-            print(f"✅ Loaded Graph: {graph_db['nx_graph'].number_of_nodes()} nodes")
+            print(f"Loaded Graph: {graph_db['nx_graph'].number_of_nodes()} nodes")
     except Exception as e:
-        print(f"❌ Error loading graph: {e}")
+        print(f"Error loading graph: {e}")
 
-# --- ENDPOINTS ---
+# --- CORE ENDPOINTS ---
 
 @app.get("/")
 def health_check():
@@ -101,4 +112,172 @@ def get_blast_radius(function_name: str):
         "target": function_name,
         "blast_radius_score": len(affected_nodes),
         "affected_functions": affected_nodes
+    }
+
+
+# --- SMART BLAME ENDPOINTS ---
+
+@app.get("/blame/expert/{file_path:path}")
+async def get_expert_for_file(
+    file_path: str,
+    repo_path: Optional[str] = Query(None, description="Path to the git repository")
+):
+    """
+    Get the recommended expert for a file.
+    
+    Returns expert recommendation with confidence score and reasoning.
+    Output format example: "Ask Sarah, she architected this"
+    
+    **Acceptance Criteria (from requirements):**
+    - System analyzes commit history beyond simple git blame
+    - Algorithm considers refactor depth, architectural decisions, and code ownership patterns
+    - System identifies primary expert with confidence score
+    - System distinguishes between code authors and domain experts
+    """
+    try:
+        result = await get_git_blame(file_path, repo_path)
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to analyze file: {str(e)}")
+
+
+@app.get("/blame/heatmap")
+async def get_heatmap(
+    module: Optional[str] = Query(None, description="Filter to specific module/directory"),
+    repo_path: Optional[str] = Query(None, description="Path to the git repository")
+):
+    """
+    Get expertise heatmap for the codebase or a specific module.
+    
+    **Acceptance Criteria (from requirements):**
+    - System generates expertise heatmaps for different modules
+    - Identifies single points of failure ("Bus Factor" analysis)
+    - Shows expertise gaps and recommends knowledge transfer
+    """
+    try:
+        result = await get_expertise_heatmap(module, repo_path)
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to generate heatmap: {str(e)}")
+
+
+@app.get("/blame/bus-factor")
+async def get_bus_factor(
+    repo_path: Optional[str] = Query(None, description="Path to the git repository")
+):
+    """
+    Get bus factor analysis across the codebase.
+    
+    Bus factor = the number of developers who would need to leave
+    before a module becomes orphaned (no one understands it).
+    
+    Returns dict mapping module paths to bus factor values.
+    Low bus factor (1-2) indicates high risk areas.
+    """
+    try:
+        result = await get_bus_factor_analysis(repo_path)
+        return {
+            "analysis": result,
+            "warning_threshold": 2,
+            "risk_areas": [k for k, v in result.items() if v <= 2]
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to analyze bus factor: {str(e)}")
+
+
+@app.get("/blame/gaps")
+async def get_gaps(
+    repo_path: Optional[str] = Query(None, description="Path to the git repository")
+):
+    """
+    Identify areas of the codebase with insufficient expertise coverage.
+    
+    Knowledge gaps are files/modules where no developer has a strong
+    expertise score, indicating potential maintenance risks.
+    """
+    try:
+        gaps = await get_knowledge_gaps(repo_path)
+        return {
+            "knowledge_gaps": gaps,
+            "total_gaps": len(gaps),
+            "recommendation": "Consider pairing junior developers with experts on these areas"
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to identify gaps: {str(e)}")
+
+
+@app.get("/blame/developer/{email}")
+async def get_developer_areas(
+    email: str,
+    repo_path: Optional[str] = Query(None, description="Path to the git repository")
+):
+    """
+    Get all expertise areas for a specific developer.
+    
+    Returns a list of files/modules the developer has expertise in,
+    sorted by expertise score.
+    """
+    try:
+        expertise = await get_developer_expertise(email, repo_path)
+        return {
+            "developer_email": email,
+            "expertise_areas": expertise,
+            "total_areas": len(expertise)
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get developer expertise: {str(e)}")
+
+
+# --- API DOCUMENTATION ---
+
+@app.get("/api/info")
+def api_info():
+    """Get information about available Smart Blame endpoints"""
+    return {
+        "smart_blame_endpoints": [
+            {
+                "path": "/blame/expert/{file_path}",
+                "method": "GET",
+                "description": "Get recommended expert for a file"
+            },
+            {
+                "path": "/blame/heatmap",
+                "method": "GET",
+                "description": "Get expertise heatmap for codebase"
+            },
+            {
+                "path": "/blame/bus-factor",
+                "method": "GET",
+                "description": "Get bus factor analysis"
+            },
+            {
+                "path": "/blame/gaps",
+                "method": "GET",
+                "description": "Identify knowledge gaps"
+            },
+            {
+                "path": "/blame/developer/{email}",
+                "method": "GET",
+                "description": "Get developer expertise areas"
+            }
+        ],
+        "scoring_factors": [
+            {"name": "commit_frequency", "weight": 0.15},
+            {"name": "lines_changed", "weight": 0.10},
+            {"name": "refactor_depth", "weight": 0.25},
+            {"name": "architectural_changes", "weight": 0.20},
+            {"name": "bug_fixes", "weight": 0.15},
+            {"name": "recency", "weight": 0.10},
+            {"name": "code_review_participation", "weight": 0.05}
+        ]
     }
