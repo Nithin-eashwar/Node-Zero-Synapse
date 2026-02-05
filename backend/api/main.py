@@ -8,13 +8,18 @@ from typing import Optional
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from core.graph import build_dependency_graph
-from core.smart_git import (
+from backend.graph.code_graph import build_dependency_graph
+from backend.git.smart_git import (
     get_git_blame,
     get_expertise_heatmap,
     get_bus_factor_analysis,
     get_knowledge_gaps,
     get_developer_expertise
+)
+from backend.governance import (
+    ArchitectureValidator,
+    DriftDetector,
+    print_validation_report,
 )
 
 # --- CONFIGURATION ---
@@ -236,6 +241,85 @@ async def get_developer_areas(
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get developer expertise: {str(e)}")
+
+
+# --- GOVERNANCE ENDPOINTS ---
+
+@app.get("/governance/validate")
+async def validate_architecture(
+    repo_path: Optional[str] = Query(None, description="Path to the repository to validate")
+):
+    """
+    Validate repository architecture against defined rules.
+    
+    Returns all violations and warnings found.
+    """
+    try:
+        path = repo_path or REPO_PATH
+        validator = ArchitectureValidator()
+        result = validator.validate_repository(path)
+        return result.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Validation failed: {str(e)}")
+
+
+@app.get("/governance/violations")
+async def get_violations(
+    repo_path: Optional[str] = Query(None, description="Path to the repository")
+):
+    """
+    Get list of current architectural violations.
+    
+    Violations are imports that cross layer boundaries in prohibited ways.
+    """
+    try:
+        path = repo_path or REPO_PATH
+        validator = ArchitectureValidator()
+        result = validator.validate_repository(path)
+        return {
+            "total_violations": result.total_violations,
+            "total_warnings": result.total_warnings,
+            "violations": [v.to_dict() for v in result.all_violations],
+            "warnings": [w.to_dict() for w in result.all_warnings]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get violations: {str(e)}")
+
+
+@app.get("/governance/drift")
+async def get_drift(
+    repo_path: Optional[str] = Query(None, description="Path to the repository"),
+    baseline_path: Optional[str] = Query(None, description="Path to baseline metrics JSON")
+):
+    """
+    Get architectural drift report.
+    
+    Compares current metrics to baseline to detect architectural drift.
+    """
+    try:
+        path = repo_path or REPO_PATH
+        detector = DriftDetector(baseline_path=baseline_path)
+        report = detector.detect_drift(path)
+        return report.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Drift detection failed: {str(e)}")
+
+
+@app.get("/governance/layers")
+async def get_layers():
+    """
+    Get configured architectural layers.
+    
+    Returns the layer definitions used for validation.
+    """
+    try:
+        validator = ArchitectureValidator()
+        return {
+            "layers": validator.rule_engine.get_layer_summary(),
+            "rules": validator.rule_engine.get_rules_summary()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get layers: {str(e)}")
 
 
 # --- API DOCUMENTATION ---

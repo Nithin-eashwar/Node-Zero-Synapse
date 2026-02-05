@@ -14,11 +14,77 @@ from typing import List, Dict, Optional, Set, Tuple
 from dataclasses import dataclass
 
 from .relationships import Relationship, RelationType, RelationshipGraph
-from .entities import ParsedFile
+from backend.parsing.entities import ParsedFile
 
 
 # --- CONFIGURATION ---
 INPUT_FILE = "repo_graph.json"
+
+# Risk scoring weights
+RISK_WEIGHTS = {
+    'complexity': 0.25,      # Code complexity impact
+    'centrality': 0.20,      # Graph centrality (how connected)
+    'test_coverage': 0.20,   # Whether tests cover this
+    'dependency_count': 0.15, # Number of dependencies
+    'change_frequency': 0.10, # How often code changes
+    'bus_factor': 0.10,      # Author concentration
+}
+
+
+@dataclass
+class RiskFactors:
+    """
+    Detailed breakdown of risk factors for a code change.
+    
+    Each factor is normalized to 0.0 - 1.0 where higher = more risky.
+    """
+    complexity_risk: float = 0.0      # Based on cyclomatic/cognitive complexity
+    centrality_risk: float = 0.0      # Based on graph centrality (hub = risky)
+    test_coverage_risk: float = 0.5   # 0.0 = well tested, 1.0 = no tests
+    dependency_risk: float = 0.0      # Based on # of things depending on this
+    change_frequency_risk: float = 0.0  # Recently changed = unstable
+    bus_factor_risk: float = 0.5      # Single expert = risky
+    
+    @property
+    def weighted_total(self) -> float:
+        """Calculate weighted total risk score."""
+        total = (
+            self.complexity_risk * RISK_WEIGHTS['complexity'] +
+            self.centrality_risk * RISK_WEIGHTS['centrality'] +
+            self.test_coverage_risk * RISK_WEIGHTS['test_coverage'] +
+            self.dependency_risk * RISK_WEIGHTS['dependency_count'] +
+            self.change_frequency_risk * RISK_WEIGHTS['change_frequency'] +
+            self.bus_factor_risk * RISK_WEIGHTS['bus_factor']
+        )
+        return min(total, 1.0)
+    
+    def to_dict(self) -> Dict:
+        return {
+            "complexity_risk": round(self.complexity_risk, 3),
+            "centrality_risk": round(self.centrality_risk, 3),
+            "test_coverage_risk": round(self.test_coverage_risk, 3),
+            "dependency_risk": round(self.dependency_risk, 3),
+            "change_frequency_risk": round(self.change_frequency_risk, 3),
+            "bus_factor_risk": round(self.bus_factor_risk, 3),
+            "weighted_total": round(self.weighted_total, 3)
+        }
+    
+    def get_top_risks(self, threshold: float = 0.5) -> List[str]:
+        """Get list of risk factors above threshold."""
+        risks = []
+        if self.complexity_risk >= threshold:
+            risks.append(f"High complexity ({self.complexity_risk:.0%})")
+        if self.centrality_risk >= threshold:
+            risks.append(f"High centrality - hub node ({self.centrality_risk:.0%})")
+        if self.test_coverage_risk >= threshold:
+            risks.append(f"Low test coverage ({self.test_coverage_risk:.0%})")
+        if self.dependency_risk >= threshold:
+            risks.append(f"Many dependencies ({self.dependency_risk:.0%})")
+        if self.change_frequency_risk >= threshold:
+            risks.append(f"Frequently changed ({self.change_frequency_risk:.0%})")
+        if self.bus_factor_risk >= threshold:
+            risks.append(f"Low bus factor ({self.bus_factor_risk:.0%})")
+        return risks
 
 
 @dataclass
@@ -32,7 +98,9 @@ class ImpactAssessment:
         indirect_callers: Functions that indirectly depend on this entity
         affected_tests: Test functions that would be affected
         risk_score: Overall risk score (0.0 - 1.0)
+        risk_factors: Detailed breakdown of risk factors
         affected_by_type: Breakdown of affected entities by relationship type
+        recommendations: List of recommendations based on analysis
     """
     target: str
     direct_callers: List[str]
@@ -41,17 +109,40 @@ class ImpactAssessment:
     risk_score: float
     affected_by_type: Dict[str, List[str]]
     blast_radius: int  # Total count of affected entities
+    risk_factors: RiskFactors = None
+    recommendations: List[str] = None
+    
+    def __post_init__(self):
+        if self.risk_factors is None:
+            self.risk_factors = RiskFactors()
+        if self.recommendations is None:
+            self.recommendations = []
     
     def to_dict(self) -> Dict:
         return {
             "target": self.target,
             "blast_radius": self.blast_radius,
-            "risk_score": self.risk_score,
+            "risk_score": round(self.risk_score, 3),
+            "risk_level": self._get_risk_level(),
+            "risk_factors": self.risk_factors.to_dict() if self.risk_factors else {},
             "direct_callers": self.direct_callers,
             "indirect_callers": self.indirect_callers,
             "affected_tests": self.affected_tests,
-            "affected_by_type": self.affected_by_type
+            "affected_by_type": self.affected_by_type,
+            "recommendations": self.recommendations,
+            "top_risks": self.risk_factors.get_top_risks() if self.risk_factors else []
         }
+    
+    def _get_risk_level(self) -> str:
+        """Get human-readable risk level."""
+        if self.risk_score < 0.2:
+            return "LOW"
+        elif self.risk_score < 0.5:
+            return "MEDIUM"
+        elif self.risk_score < 0.8:
+            return "HIGH"
+        else:
+            return "CRITICAL"
 
 
 class CodeGraph:
@@ -135,15 +226,16 @@ class CodeGraph:
                 deps.append(pred)
         return deps
     
-    def calculate_blast_radius(self, target: str) -> ImpactAssessment:
+    def calculate_blast_radius(self, target: str, complexity_data: Optional[Dict] = None) -> ImpactAssessment:
         """
         Calculate the full blast radius of changing an entity.
         
         Args:
             target: Entity ID to analyze
+            complexity_data: Optional dict mapping entity_id -> complexity metrics
             
         Returns:
-            ImpactAssessment with full impact analysis
+            ImpactAssessment with full impact analysis including enhanced risk factors
         """
         if target not in self.graph:
             return ImpactAssessment(
@@ -174,12 +266,20 @@ class CodeGraph:
         # Categorize by relationship type
         affected_by_type = self._categorize_affected(target, all_affected)
         
-        # Calculate risk score
-        risk_score = self._calculate_risk_score(
-            len(direct_callers), 
-            len(indirect_callers),
-            len(affected_tests)
+        # Calculate enhanced risk factors
+        risk_factors = self._calculate_enhanced_risk_factors(
+            target=target,
+            direct_callers=direct_callers,
+            indirect_callers=indirect_callers,
+            affected_tests=affected_tests,
+            complexity_data=complexity_data
         )
+        
+        # Use weighted total as risk score
+        risk_score = risk_factors.weighted_total
+        
+        # Generate recommendations
+        recommendations = self._generate_recommendations(risk_factors, affected_tests)
         
         return ImpactAssessment(
             target=target,
@@ -188,8 +288,132 @@ class CodeGraph:
             affected_tests=affected_tests,
             risk_score=risk_score,
             affected_by_type=affected_by_type,
-            blast_radius=len(all_affected)
+            blast_radius=len(all_affected),
+            risk_factors=risk_factors,
+            recommendations=recommendations
         )
+    
+    def _calculate_enhanced_risk_factors(
+        self,
+        target: str,
+        direct_callers: List[str],
+        indirect_callers: List[str],
+        affected_tests: List[str],
+        complexity_data: Optional[Dict] = None
+    ) -> RiskFactors:
+        """
+        Calculate comprehensive risk factors for an entity.
+        
+        Uses graph analysis, complexity metrics, and coverage data
+        to produce a detailed risk breakdown.
+        """
+        # 1. Complexity Risk
+        complexity_risk = 0.0
+        if complexity_data and target in complexity_data:
+            metrics = complexity_data[target]
+            cyclomatic = metrics.get('cyclomatic', 0)
+            cognitive = metrics.get('cognitive', 0)
+            # Normalize: 10+ cyclomatic = high risk
+            complexity_risk = min((cyclomatic + cognitive / 2) / 15, 1.0)
+        else:
+            # Default: check entity metadata for stored complexity
+            metadata = self.entity_metadata.get(target, {})
+            if 'complexity' in metadata:
+                complexity_risk = min(metadata['complexity'] / 15, 1.0)
+        
+        # 2. Centrality Risk (how connected is this node)
+        centrality_risk = self._calculate_centrality_risk(target)
+        
+        # 3. Test Coverage Risk
+        test_coverage_risk = 1.0  # Assume no coverage
+        if affected_tests:
+            # More tests = less risk
+            test_coverage_risk = max(0.0, 1.0 - len(affected_tests) * 0.3)
+        
+        # 4. Dependency Risk (many dependents = high risk)
+        total_dependents = len(direct_callers) + len(indirect_callers)
+        dependency_risk = min(total_dependents / 10, 1.0)
+        
+        # 5. Change Frequency Risk (placeholder - would need git integration)
+        # For now, use graph degree as proxy (highly connected = often changed)
+        in_degree = self.graph.in_degree(target) if target in self.graph else 0
+        out_degree = self.graph.out_degree(target) if target in self.graph else 0
+        change_frequency_risk = min((in_degree + out_degree) / 20, 1.0)
+        
+        # 6. Bus Factor Risk (placeholder - would need git integration)
+        # For now, default to medium risk
+        bus_factor_risk = 0.5
+        
+        return RiskFactors(
+            complexity_risk=complexity_risk,
+            centrality_risk=centrality_risk,
+            test_coverage_risk=test_coverage_risk,
+            dependency_risk=dependency_risk,
+            change_frequency_risk=change_frequency_risk,
+            bus_factor_risk=bus_factor_risk
+        )
+    
+    def _calculate_centrality_risk(self, target: str) -> float:
+        """
+        Calculate centrality-based risk using graph algorithms.
+        
+        Uses betweenness centrality to identify critical path nodes.
+        """
+        try:
+            if self.graph.number_of_nodes() < 3:
+                return 0.0
+            
+            # Calculate betweenness centrality for the target
+            # This measures how often a node appears on shortest paths
+            centrality = nx.betweenness_centrality(self.graph)
+            target_centrality = centrality.get(target, 0.0)
+            
+            # Normalize against max centrality in graph
+            max_centrality = max(centrality.values()) if centrality else 1.0
+            if max_centrality > 0:
+                normalized = target_centrality / max_centrality
+            else:
+                normalized = 0.0
+            
+            return min(normalized, 1.0)
+        except Exception:
+            # Fallback to simple degree-based calculation
+            if target in self.graph:
+                degree = self.graph.degree(target)
+                max_degree = max(dict(self.graph.degree()).values()) if self.graph.number_of_nodes() > 0 else 1
+                return min(degree / max_degree, 1.0) if max_degree > 0 else 0.0
+            return 0.0
+    
+    def _generate_recommendations(
+        self,
+        risk_factors: RiskFactors,
+        affected_tests: List[str]
+    ) -> List[str]:
+        """Generate actionable recommendations based on risk factors."""
+        recommendations = []
+        
+        if risk_factors.complexity_risk >= 0.7:
+            recommendations.append("Consider refactoring to reduce complexity before changes")
+        
+        if risk_factors.test_coverage_risk >= 0.7:
+            if not affected_tests:
+                recommendations.append("Add unit tests before modifying this code")
+            else:
+                recommendations.append("Consider adding more test coverage")
+        
+        if risk_factors.centrality_risk >= 0.6:
+            recommendations.append("This is a critical path node - changes will have wide impact")
+        
+        if risk_factors.dependency_risk >= 0.6:
+            recommendations.append("Many modules depend on this - coordinate with affected teams")
+        
+        if risk_factors.bus_factor_risk >= 0.7:
+            recommendations.append("Consider pair programming or code review with another developer")
+        
+        if not recommendations:
+            recommendations.append("Risk level acceptable for standard development workflow")
+        
+        return recommendations
     
     def _collect_upstream(self, entity_id: str, collected: Set[str]):
         """Recursively collect all upstream dependencies."""
@@ -223,20 +447,6 @@ class CodeGraph:
                                 categories["type_users"].append(entity)
         
         return categories
-    
-    def _calculate_risk_score(self, direct: int, indirect: int, tests: int) -> float:
-        """Calculate a risk score based on impact."""
-        # Base score from direct callers
-        score = min(direct * 0.2, 0.5)
-        
-        # Add for indirect impact
-        score += min(indirect * 0.05, 0.3)
-        
-        # Reduce if tests exist (they'll catch issues)
-        if tests > 0:
-            score *= 0.8
-        
-        return min(score, 1.0)
     
     def get_inheritance_tree(self, class_id: str) -> Dict:
         """Get the inheritance tree for a class."""

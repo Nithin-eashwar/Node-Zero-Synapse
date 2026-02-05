@@ -1,5 +1,8 @@
 """
-Core module for Node-Zero-Synapse code analysis.
+Parsing module - Code parsing and entity extraction.
+
+This module handles AST parsing using tree-sitter and extracts
+rich metadata from code including functions, classes, and complexity metrics.
 """
 
 from .entities import (
@@ -32,32 +35,6 @@ from .parser import (
     get_all_entities
 )
 
-from .relationships import (
-    RelationType,
-    Relationship,
-    RelationshipGraph
-)
-
-from .resolver import (
-    ImportMapping,
-    EntityRegistry,
-    CallResolver,
-    ResolvedCall,
-    build_registry_from_parsed_files
-)
-
-from .relationship_extractor import (
-    RelationshipExtractor,
-    extract_relationships
-)
-
-from .graph import (
-    CodeGraph,
-    ImpactAssessment,
-    build_dependency_graph,
-    calculate_blast_radius
-)
-
 __all__ = [
     # Entities
     "EntityType",
@@ -83,22 +60,4 @@ __all__ = [
     "parse_file",
     "scan_repository",
     "get_all_entities",
-    # Relationships
-    "RelationType",
-    "Relationship",
-    "RelationshipGraph",
-    # Resolver
-    "ImportMapping",
-    "EntityRegistry",
-    "CallResolver",
-    "ResolvedCall",
-    "build_registry_from_parsed_files",
-    # Relationship Extractor
-    "RelationshipExtractor",
-    "extract_relationships",
-    # Graph
-    "CodeGraph",
-    "ImpactAssessment",
-    "build_dependency_graph",
-    "calculate_blast_radius",
 ]

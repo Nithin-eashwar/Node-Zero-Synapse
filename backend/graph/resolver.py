@@ -12,7 +12,7 @@ to actual function/method definitions, accounting for:
 
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Set, Tuple
-from .entities import FunctionEntity, ClassEntity, ImportEntity, ParsedFile
+from backend.parsing.entities import FunctionEntity, ClassEntity, ImportEntity, ParsedFile
 
 
 @dataclass

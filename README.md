@@ -29,7 +29,18 @@ A Graph-Augmented Generation (GraphRAG) platform that creates a "Living Knowledg
 - Expertise heatmap and bus factor analysis
 - AWS cloud-ready architecture (Neptune/CodeCommit ready)
 
-### 🔲 Phase 4: Advanced Complexity (Planned)
+### ✅ Phase 4: Architectural Governance (Complete)
+- Boundary rules engine with YAML configuration
+- Clean Architecture defaults with import validation
+- Real-time violation detection
+- Drift metrics and tracking over time
+
+### ✅ Phase 4.5: Enhanced Risk Assessment (Complete)
+- 6-factor weighted risk scoring (complexity, centrality, coverage, etc.)
+- Betweenness centrality for hub node detection
+- Actionable recommendations based on risk factors
+- Risk levels: LOW/MEDIUM/HIGH/CRITICAL
+
 ### 🔲 Phase 5: Semantic/Vector Layer (Planned)
 
 ## 📁 Project Structure
@@ -37,25 +48,32 @@ A Graph-Augmented Generation (GraphRAG) platform that creates a "Living Knowledg
 ```
 Node-Zero-Synapse/
 ├── backend/
-│   ├── app/
-│   │   └── main.py              # FastAPI application
-│   ├── core/
-│   │   ├── entities.py          # Data models (FunctionEntity, ClassEntity, etc.)
-│   │   ├── complexity.py        # Cyclomatic & cognitive complexity
+│   ├── api/                     # API Layer
+│   │   ├── main.py              # FastAPI application
+│   │   └── routes/              # Route handlers
+│   ├── parsing/                 # Code Parsing Domain
 │   │   ├── parser.py            # tree-sitter AST parsing
+│   │   ├── entities.py          # FunctionEntity, ClassEntity, etc.
+│   │   └── complexity.py        # Cyclomatic & cognitive metrics
+│   ├── graph/                   # Graph Analysis Domain
 │   │   ├── relationships.py     # RelationType enum, Relationship model
 │   │   ├── resolver.py          # Smart call resolution
-│   │   ├── relationship_extractor.py  # Edge extraction
-│   │   ├── graph.py             # CodeGraph, blast radius analysis
+│   │   ├── extractor.py         # Relationship extraction
+│   │   └── code_graph.py        # CodeGraph, blast radius, RiskFactors
+│   ├── git/                     # Git Analysis Domain
 │   │   ├── smart_git.py         # High-level Smart Blame API
 │   │   └── blame/               # Smart Blame module
-│   │       ├── models.py        # DeveloperProfile, ExpertiseScore, etc.
+│   │       ├── models.py        # DeveloperProfile, ExpertiseScore
 │   │       ├── analyzer.py      # SmartBlameAnalyzer orchestrator
 │   │       ├── providers/       # Git providers (local, AWS)
 │   │       ├── scoring/         # 7 weighted scoring factors
 │   │       └── stores/          # Expert stores (memory, Neptune)
-│   └── tests/
-│       └── test_smart_blame.py  # Smart Blame test suite
+│   ├── governance/              # Architectural Governance
+│   │   ├── models.py            # Layer, BoundaryRule, Violation, DriftMetrics
+│   │   ├── rules.py             # RuleEngine with YAML config
+│   │   ├── validator.py         # ArchitectureValidator
+│   │   └── drift.py             # DriftDetector
+│   └── data/                    # Data files
 ├── dummy_repo/                  # Test codebase
 ├── design.md                    # System architecture
 └── requirements.md              # Business requirements
@@ -73,13 +91,13 @@ source .venv/bin/activate  # Linux/Mac
 pip install -r backend/requirements.txt
 
 # 3. Parse a repository
-python -m backend.core.parser <path_to_repo>
+python -m backend.parsing.parser <path_to_repo>
 
 # 4. Analyze the graph
-python -m backend.core.graph
+python -m backend.graph.code_graph
 
 # 5. Run the API server
-uvicorn backend.app.main:app --reload
+uvicorn backend.api.main:app --reload
 ```
 
 ## 📊 Example Output
@@ -92,16 +110,34 @@ uvicorn backend.app.main:app --reload
 [*] Calculating Blast Radius for: 'process_data'
 [!] WARNING: Changing this affects 1 functions!
     Direct callers: 1
-    Risk score: 0.20
+    Risk score: 0.27 (MEDIUM)
+    
+Risk Factors:
+    complexity_risk: 0.0
+    centrality_risk: 0.5
+    test_coverage_risk: 1.0
+    dependency_risk: 0.1
+    
+Recommendations:
+    - Add unit tests before modifying this code
 ```
 
 ## 🔧 API Endpoints
 
+### Core Endpoints
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/health` | GET | Health check |
 | `/graph` | GET | Get full dependency graph |
-| `/blast-radius/{function}` | GET | Calculate blast radius |
+| `/blast-radius/{function}` | GET | Calculate blast radius with risk factors |
+
+### Governance Endpoints
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/governance/validate` | GET | Validate architecture against rules |
+| `/governance/violations` | GET | List boundary violations |
+| `/governance/drift` | GET | Get architectural drift report |
+| `/governance/layers` | GET | View configured layers and rules |
 
 ## 🛠️ Tech Stack
 
@@ -248,6 +284,86 @@ Factors:
   - recency: 0.85
   - code_review_participation: 0.70
 ```
+
+---
+
+## ✅ Phase 4: Architectural Governance (Complete)
+
+Enforce layered architecture boundaries and detect drift over time.
+
+### Features
+
+| Feature | Description |
+|---------|-------------|
+| **Boundary Rules Engine** | Define allowed/blocked imports between layers |
+| **YAML Configuration** | Customizable layer definitions via `.synapse/architecture.yaml` |
+| **Clean Architecture Defaults** | Built-in rules for API → Service → Data patterns |
+| **Violation Detection** | Real-time import validation |
+| **Drift Metrics** | Track coupling, cohesion, and violations over time |
+
+### Usage
+
+```bash
+# Validate architecture
+python -m backend.governance.validator <repo_path>
+
+# Save baseline metrics
+python -m backend.governance.drift --save-baseline <repo_path> baseline.json
+
+# Detect drift
+python -m backend.governance.drift <repo_path> baseline.json
+```
+
+### Example Config (`.synapse/architecture.yaml`)
+
+```yaml
+layers:
+  api:
+    patterns: ["**/api/**", "**/routes/**"]
+  service:
+    patterns: ["**/services/**", "**/core/**"]
+  data:
+    patterns: ["**/data/**", "**/models/**"]
+
+rules:
+  - name: "API cannot access Data directly"
+    from: api
+    to: data
+    action: block
+```
+
+---
+
+## ✅ Phase 4.5: Enhanced Risk Assessment (Complete)
+
+Multi-factor risk scoring for blast radius analysis.
+
+### Risk Factors
+
+| Factor | Weight | Description |
+|--------|--------|-------------|
+| `complexity_risk` | 25% | Cyclomatic/cognitive complexity |
+| `centrality_risk` | 20% | Betweenness centrality (hub nodes) |
+| `test_coverage_risk` | 20% | 0.0 = well tested, 1.0 = no tests |
+| `dependency_risk` | 15% | Number of things depending on this |
+| `change_frequency_risk` | 10% | How often the code changes |
+| `bus_factor_risk` | 10% | Single expert = higher risk |
+
+### Risk Levels
+
+| Score | Level | Action |
+|-------|-------|--------|
+| 0.0 - 0.2 | LOW | Standard workflow |
+| 0.2 - 0.5 | MEDIUM | Extra review recommended |
+| 0.5 - 0.8 | HIGH | Pair programming suggested |
+| 0.8 - 1.0 | CRITICAL | Refactor before changes |
+
+### Recommendations Generated
+
+The system automatically generates actionable advice:
+- "Add unit tests before modifying this code"
+- "This is a critical path node - changes will have wide impact"
+- "Consider refactoring to reduce complexity before changes"
 
 ---
 

@@ -6,7 +6,7 @@ building the complete knowledge graph edge set.
 """
 
 from typing import List, Dict, Optional, Set
-from .entities import (
+from backend.parsing.entities import (
     FunctionEntity, ClassEntity, ImportEntity, 
     ModuleEntity, VariableEntity, ParsedFile
 )
