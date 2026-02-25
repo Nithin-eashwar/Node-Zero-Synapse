@@ -7,21 +7,13 @@ python-multipart>=0.0.7
 networkx>=3.2.1
 matplotlib>=3.8.2
 
-# Source Code Parsing
+# Source Code Parsing (The Eyes)
 tree-sitter==0.21.3
 tree-sitter-languages>=1.10.0
 
-# Version Control
+# Version Control Analysis (The History)
 gitpython>=3.1.41
 
 # Utilities
 requests>=2.31.0
 pydantic>=2.6.0
-python-dotenv>=1.0.0
-
-# AI & Vector Search
-chromadb>=0.4.22
-langchain>=0.1.0
-langchain-community>=0.0.10
-langchain-google-genai>=0.0.9
-sentence-transformers>=2.3.1

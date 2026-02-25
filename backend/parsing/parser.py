@@ -579,7 +579,10 @@ def scan_repository(path: str) -> List[ParsedFile]:
     print(f"[*] Scanning Repository: {path}...")
     parsed_files = []
     
-    for root, _, files in os.walk(path):
+    for root, dirs, files in os.walk(path):
+        # Skip hidden and system directories
+        dirs[:] = [d for d in dirs if d not in [".venv", "venv", ".git", "__pycache__", "node_modules", "site-packages", "chroma_db", "tests"]]
+        
         for file in files:
             if file.endswith(".py"):
                 full_path = os.path.join(root, file)

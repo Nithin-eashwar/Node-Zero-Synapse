@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import json
 import networkx as nx
 import os
@@ -21,10 +22,12 @@ from backend.governance import (
     DriftDetector,
     print_validation_report,
 )
+# Import AI components
+from backend.ai.rag import RAGPipeline
 
 # --- CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-INPUT_FILE = os.path.join(BASE_DIR, "..", "data", "repo_graph.json")
+INPUT_FILE = os.path.join(BASE_DIR, "..", "..", "repo_graph.json")
 REPO_PATH = os.path.join(BASE_DIR, "..", "..", "dummy_repo") # Point back to root
 
 app = FastAPI(
@@ -43,10 +46,17 @@ app.add_middleware(
 
 # --- GLOBAL STATE ---
 # We keep the graph in memory for speed
+# --- GLOBAL STATE ---
+# We keep the graph in memory for speed
 graph_db = {
-    "nx_graph": None,
+    "nx_graph": nx.DiGraph(),
     "raw_data": []
 }
+startup_error = None
+
+# Initialize AI Pipeline (lazy load or global?)
+# We'll initialize it globally but it handles its own key checks
+rag_pipeline = RAGPipeline()
 
 def build_graph(data):
     """Rebuilds the NetworkX graph from JSON data"""
@@ -55,6 +65,7 @@ def build_graph(data):
     
     # 1. Add Nodes
     for func in data:
+
         node_id = func['name']
         G.add_node(node_id, file=func['file'], line=func['range'][0])
         all_nodes.add(node_id)
@@ -62,7 +73,7 @@ def build_graph(data):
     # 2. Add Edges (Fuzzy Match)
     for func in data:
         caller = func['name']
-        for call_str in func['calls']:
+        for call_str in func.get('calls', []):
             # Find which node this call refers to
             target = None
             for candidate in all_nodes:
@@ -78,6 +89,7 @@ def build_graph(data):
 @app.on_event("startup")
 async def load_data():
     """Load the graph into memory on startup"""
+    global startup_error
     try:
         with open(INPUT_FILE, "r") as f:
             data = json.load(f)
@@ -85,13 +97,20 @@ async def load_data():
             graph_db["nx_graph"] = build_graph(data)
             print(f"Loaded Graph: {graph_db['nx_graph'].number_of_nodes()} nodes")
     except Exception as e:
+        import traceback
+        traceback.print_exc()
+        startup_error = str(e)
         print(f"Error loading graph: {e}")
 
 # --- CORE ENDPOINTS ---
 
 @app.get("/")
 def health_check():
-    return {"status": "active", "system": "Node Zero Synapse"}
+    return {
+        "status": "active", 
+        "system": "Node Zero Synapse",
+        "startup_error": startup_error
+    }
 
 @app.get("/graph")
 def get_full_graph():
@@ -365,3 +384,23 @@ def api_info():
             {"name": "code_review_participation", "weight": 0.05}
         ]
     }
+
+# --- AI ENDPOINTS ---
+
+class QueryRequest(BaseModel):
+    query: str
+
+@app.post("/ai/index")
+async def index_graph():
+    """Triggers the embeddings generation for the current graph"""
+    if not graph_db["raw_data"]:
+        raise HTTPException(status_code=400, detail="Graph not loaded yet")
+    
+    count = rag_pipeline.index_codebase(graph_db["raw_data"])
+    return {"status": "success", "indexed_nodes": count}
+
+@app.get("/ai/ask")
+async def ask_ai(query: str):
+    """Asks the RAG pipeline a question"""
+    result = rag_pipeline.ask(query)
+    return result
