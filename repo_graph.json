@@ -2,8 +2,8 @@
   {
     "type": "function",
     "name": "test_chroma",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\debug_chroma.py:test_chroma",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\debug_chroma.py",
+    "unique_id": ".\\debug_chroma.py:test_chroma",
+    "file": ".\\debug_chroma.py",
     "range": [
       10,
       29
@@ -41,8 +41,8 @@
   {
     "type": "function",
     "name": "test_indexing",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\debug_index.py:test_indexing",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\debug_index.py",
+    "unique_id": ".\\debug_index.py:test_indexing",
+    "file": ".\\debug_index.py",
     "range": [
       11,
       31
@@ -85,8 +85,8 @@
   {
     "type": "function",
     "name": "test_retrieval",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\debug_retrieval.py:test_retrieval",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\debug_retrieval.py",
+    "unique_id": ".\\debug_retrieval.py:test_retrieval",
+    "file": ".\\debug_retrieval.py",
     "range": [
       11,
       44
@@ -132,8 +132,8 @@
   {
     "type": "function",
     "name": "run_checks",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\verify_full_flow.py:run_checks",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\verify_full_flow.py",
+    "unique_id": ".\\verify_full_flow.py:run_checks",
+    "file": ".\\verify_full_flow.py",
     "range": [
       7,
       69
@@ -202,8 +202,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\embeddings.py:CodeEmbedder.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\embeddings.py",
+    "unique_id": ".\\backend\\ai\\embeddings.py:CodeEmbedder.__init__",
+    "file": ".\\backend\\ai\\embeddings.py",
     "range": [
       4,
       8
@@ -244,8 +244,8 @@
   {
     "type": "function",
     "name": "embed_text",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\embeddings.py:CodeEmbedder.embed_text",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\embeddings.py",
+    "unique_id": ".\\backend\\ai\\embeddings.py:CodeEmbedder.embed_text",
+    "file": ".\\backend\\ai\\embeddings.py",
     "range": [
       10,
       11
@@ -285,8 +285,8 @@
   {
     "type": "function",
     "name": "embed_nodes",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\embeddings.py:CodeEmbedder.embed_nodes",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\embeddings.py",
+    "unique_id": ".\\backend\\ai\\embeddings.py:CodeEmbedder.embed_nodes",
+    "file": ".\\backend\\ai\\embeddings.py",
     "range": [
       13,
       32
@@ -327,8 +327,8 @@
   {
     "type": "class",
     "name": "CodeEmbedder",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\embeddings.py:CodeEmbedder",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\embeddings.py",
+    "unique_id": ".\\backend\\ai\\embeddings.py:CodeEmbedder",
+    "file": ".\\backend\\ai\\embeddings.py",
     "range": [
       3,
       32
@@ -355,8 +355,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\rag.py:RAGPipeline.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\rag.py",
+    "unique_id": ".\\backend\\ai\\rag.py:RAGPipeline.__init__",
+    "file": ".\\backend\\ai\\rag.py",
     "range": [
       12,
       41
@@ -393,8 +393,8 @@
   {
     "type": "function",
     "name": "index_codebase",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\rag.py:RAGPipeline.index_codebase",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\rag.py",
+    "unique_id": ".\\backend\\ai\\rag.py:RAGPipeline.index_codebase",
+    "file": ".\\backend\\ai\\rag.py",
     "range": [
       43,
       54
@@ -438,8 +438,8 @@
   {
     "type": "function",
     "name": "ask",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\rag.py:RAGPipeline.ask",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\rag.py",
+    "unique_id": ".\\backend\\ai\\rag.py:RAGPipeline.ask",
+    "file": ".\\backend\\ai\\rag.py",
     "range": [
       56,
       81
@@ -482,8 +482,8 @@
   {
     "type": "class",
     "name": "RAGPipeline",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\rag.py:RAGPipeline",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\rag.py",
+    "unique_id": ".\\backend\\ai\\rag.py:RAGPipeline",
+    "file": ".\\backend\\ai\\rag.py",
     "range": [
       11,
       81
@@ -514,8 +514,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\store.py:VectorStore.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\store.py",
+    "unique_id": ".\\backend\\ai\\store.py:VectorStore.__init__",
+    "file": ".\\backend\\ai\\store.py",
     "range": [
       5,
       8
@@ -555,8 +555,8 @@
   {
     "type": "function",
     "name": "add_nodes",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\store.py:VectorStore.add_nodes",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\store.py",
+    "unique_id": ".\\backend\\ai\\store.py:VectorStore.add_nodes",
+    "file": ".\\backend\\ai\\store.py",
     "range": [
       10,
       56
@@ -613,8 +613,8 @@
   {
     "type": "function",
     "name": "search",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\store.py:VectorStore.search",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\store.py",
+    "unique_id": ".\\backend\\ai\\store.py:VectorStore.search",
+    "file": ".\\backend\\ai\\store.py",
     "range": [
       58,
       65
@@ -660,8 +660,8 @@
   {
     "type": "class",
     "name": "VectorStore",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\store.py:VectorStore",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\ai\\store.py",
+    "unique_id": ".\\backend\\ai\\store.py:VectorStore",
+    "file": ".\\backend\\ai\\store.py",
     "range": [
       4,
       65
@@ -689,8 +689,8 @@
   {
     "type": "function",
     "name": "build_graph",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:build_graph",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:build_graph",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       61,
       87
@@ -735,8 +735,8 @@
   {
     "type": "function",
     "name": "load_data",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:load_data",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:load_data",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       90,
       103
@@ -776,8 +776,8 @@
   {
     "type": "function",
     "name": "health_check",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:health_check",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:health_check",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       108,
       113
@@ -808,8 +808,8 @@
   {
     "type": "function",
     "name": "get_full_graph",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_full_graph",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_full_graph",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       116,
       122
@@ -843,8 +843,8 @@
   {
     "type": "function",
     "name": "get_blast_radius",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_blast_radius",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_blast_radius",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       125,
       139
@@ -888,8 +888,8 @@
   {
     "type": "function",
     "name": "get_expert_for_file",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_expert_for_file",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_expert_for_file",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       145,
       167
@@ -941,8 +941,8 @@
   {
     "type": "function",
     "name": "get_heatmap",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_heatmap",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_heatmap",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       171,
       189
@@ -994,8 +994,8 @@
   {
     "type": "function",
     "name": "get_bus_factor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_bus_factor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_bus_factor",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       193,
       215
@@ -1041,8 +1041,8 @@
   {
     "type": "function",
     "name": "get_gaps",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_gaps",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_gaps",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       219,
       238
@@ -1088,8 +1088,8 @@
   {
     "type": "function",
     "name": "get_developer_areas",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_developer_areas",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_developer_areas",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       242,
       262
@@ -1142,8 +1142,8 @@
   {
     "type": "function",
     "name": "validate_architecture",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:validate_architecture",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:validate_architecture",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       268,
       282
@@ -1188,8 +1188,8 @@
   {
     "type": "function",
     "name": "get_violations",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_violations",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_violations",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       286,
       305
@@ -1235,8 +1235,8 @@
   {
     "type": "function",
     "name": "get_drift",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_drift",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_drift",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       309,
       324
@@ -1288,8 +1288,8 @@
   {
     "type": "function",
     "name": "get_layers",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:get_layers",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:get_layers",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       328,
       341
@@ -1326,8 +1326,8 @@
   {
     "type": "function",
     "name": "api_info",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:api_info",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:api_info",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       347,
       386
@@ -1358,8 +1358,8 @@
   {
     "type": "function",
     "name": "index_graph",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:index_graph",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:index_graph",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       394,
       400
@@ -1393,8 +1393,8 @@
   {
     "type": "function",
     "name": "ask_ai",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:ask_ai",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:ask_ai",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       403,
       406
@@ -1435,8 +1435,8 @@
   {
     "type": "class",
     "name": "QueryRequest",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py:QueryRequest",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\api\\main.py",
+    "unique_id": ".\\backend\\api\\main.py:QueryRequest",
+    "file": ".\\backend\\api\\main.py",
     "range": [
       390,
       391
@@ -1461,8 +1461,8 @@
   {
     "type": "function",
     "name": "get_analyzer",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py:get_analyzer",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py",
+    "unique_id": ".\\backend\\git\\smart_git.py:get_analyzer",
+    "file": ".\\backend\\git\\smart_git.py",
     "range": [
       44,
       61
@@ -1502,8 +1502,8 @@
   {
     "type": "function",
     "name": "get_git_blame",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py:get_git_blame",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py",
+    "unique_id": ".\\backend\\git\\smart_git.py:get_git_blame",
+    "file": ".\\backend\\git\\smart_git.py",
     "range": [
       64,
       100
@@ -1554,8 +1554,8 @@
   {
     "type": "function",
     "name": "get_expertise_heatmap",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py:get_expertise_heatmap",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py",
+    "unique_id": ".\\backend\\git\\smart_git.py:get_expertise_heatmap",
+    "file": ".\\backend\\git\\smart_git.py",
     "range": [
       103,
       119
@@ -1603,8 +1603,8 @@
   {
     "type": "function",
     "name": "get_bus_factor_analysis",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py:get_bus_factor_analysis",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py",
+    "unique_id": ".\\backend\\git\\smart_git.py:get_bus_factor_analysis",
+    "file": ".\\backend\\git\\smart_git.py",
     "range": [
       122,
       133
@@ -1644,8 +1644,8 @@
   {
     "type": "function",
     "name": "get_knowledge_gaps",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py:get_knowledge_gaps",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py",
+    "unique_id": ".\\backend\\git\\smart_git.py:get_knowledge_gaps",
+    "file": ".\\backend\\git\\smart_git.py",
     "range": [
       136,
       147
@@ -1685,8 +1685,8 @@
   {
     "type": "function",
     "name": "get_developer_expertise",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py:get_developer_expertise",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py",
+    "unique_id": ".\\backend\\git\\smart_git.py:get_developer_expertise",
+    "file": ".\\backend\\git\\smart_git.py",
     "range": [
       150,
       166
@@ -1734,8 +1734,8 @@
   {
     "type": "function",
     "name": "reset_analyzer",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py:reset_analyzer",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\smart_git.py",
+    "unique_id": ".\\backend\\git\\smart_git.py:reset_analyzer",
+    "file": ".\\backend\\git\\smart_git.py",
     "range": [
       169,
       172
@@ -1764,8 +1764,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.__init__",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       44,
       66
@@ -1827,8 +1827,8 @@
   {
     "type": "function",
     "name": "identify_expert",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.identify_expert",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.identify_expert",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       68,
       92
@@ -1877,8 +1877,8 @@
   {
     "type": "function",
     "name": "analyze_file",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.analyze_file",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.analyze_file",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       94,
       132
@@ -1923,8 +1923,8 @@
   {
     "type": "function",
     "name": "analyze_repository",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.analyze_repository",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.analyze_repository",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       134,
       173
@@ -1974,8 +1974,8 @@
   {
     "type": "function",
     "name": "get_expertise_ranking",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_expertise_ranking",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_expertise_ranking",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       175,
       198
@@ -2022,8 +2022,8 @@
   {
     "type": "function",
     "name": "generate_heatmap",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.generate_heatmap",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.generate_heatmap",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       200,
       230
@@ -2072,8 +2072,8 @@
   {
     "type": "function",
     "name": "get_bus_factor_analysis",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_bus_factor_analysis",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_bus_factor_analysis",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       232,
       244
@@ -2105,8 +2105,8 @@
   {
     "type": "function",
     "name": "get_knowledge_gaps",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_knowledge_gaps",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_knowledge_gaps",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       246,
       255
@@ -2137,8 +2137,8 @@
   {
     "type": "function",
     "name": "get_developer_expertise",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_developer_expertise",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_developer_expertise",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       257,
       270
@@ -2177,8 +2177,8 @@
   {
     "type": "function",
     "name": "_build_recommendation",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer._build_recommendation",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer._build_recommendation",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       272,
       313
@@ -2227,8 +2227,8 @@
   {
     "type": "function",
     "name": "_generate_recommendation_text",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer._generate_recommendation_text",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer._generate_recommendation_text",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       315,
       337
@@ -2278,8 +2278,8 @@
   {
     "type": "function",
     "name": "_calculate_bus_factor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer._calculate_bus_factor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer._calculate_bus_factor",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       339,
       347
@@ -2318,8 +2318,8 @@
   {
     "type": "function",
     "name": "get_blame_for_lines",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_blame_for_lines",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_blame_for_lines",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       349,
       382
@@ -2375,8 +2375,8 @@
   {
     "type": "function",
     "name": "refresh_all",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.refresh_all",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.refresh_all",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       384,
       389
@@ -2408,8 +2408,8 @@
   {
     "type": "function",
     "name": "get_statistics",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_statistics",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer.get_statistics",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       391,
       405
@@ -2441,8 +2441,8 @@
   {
     "type": "function",
     "name": "create_analyzer",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:create_analyzer",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:create_analyzer",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       408,
       436
@@ -2492,8 +2492,8 @@
   {
     "type": "class",
     "name": "SmartBlameAnalyzer",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\analyzer.py",
+    "unique_id": ".\\backend\\git\\blame\\analyzer.py:SmartBlameAnalyzer",
+    "file": ".\\backend\\git\\blame\\analyzer.py",
     "range": [
       25,
       405
@@ -2536,8 +2536,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:DeveloperProfile.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:DeveloperProfile.to_dict",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       46,
       55
@@ -2569,8 +2569,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:CommitAnalysis.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:CommitAnalysis.to_dict",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       93,
       108
@@ -2601,8 +2601,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:ExpertiseScore.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:ExpertiseScore.to_dict",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       129,
       139
@@ -2638,8 +2638,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:ExpertRecommendation.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:ExpertRecommendation.to_dict",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       156,
       167
@@ -2673,8 +2673,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:ModuleExpertise.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:ModuleExpertise.to_dict",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       179,
       186
@@ -2706,8 +2706,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:ExpertiseHeatmap.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:ExpertiseHeatmap.to_dict",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       203,
       211
@@ -2740,8 +2740,8 @@
   {
     "type": "function",
     "name": "validate",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:SmartBlameConfig.validate",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:SmartBlameConfig.validate",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       284,
       287
@@ -2774,8 +2774,8 @@
   {
     "type": "class",
     "name": "CommitType",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:CommitType",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:CommitType",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       14,
       23
@@ -2807,8 +2807,8 @@
   {
     "type": "class",
     "name": "DeveloperProfile",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:DeveloperProfile",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:DeveloperProfile",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       27,
       55
@@ -2841,8 +2841,8 @@
   {
     "type": "class",
     "name": "CommitAnalysis",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:CommitAnalysis",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:CommitAnalysis",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       59,
       108
@@ -2883,8 +2883,8 @@
   {
     "type": "class",
     "name": "ExpertiseScore",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:ExpertiseScore",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:ExpertiseScore",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       112,
       139
@@ -2918,8 +2918,8 @@
   {
     "type": "class",
     "name": "ExpertRecommendation",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:ExpertRecommendation",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:ExpertRecommendation",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       143,
       167
@@ -2951,8 +2951,8 @@
   {
     "type": "class",
     "name": "ModuleExpertise",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:ModuleExpertise",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:ModuleExpertise",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       171,
       186
@@ -2983,8 +2983,8 @@
   {
     "type": "class",
     "name": "ExpertiseHeatmap",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:ExpertiseHeatmap",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:ExpertiseHeatmap",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       190,
       211
@@ -3016,8 +3016,8 @@
   {
     "type": "class",
     "name": "ScoringContext",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:ScoringContext",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:ScoringContext",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       215,
       230
@@ -3049,8 +3049,8 @@
   {
     "type": "class",
     "name": "SmartBlameConfig",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py:SmartBlameConfig",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\models.py",
+    "unique_id": ".\\backend\\git\\blame\\models.py:SmartBlameConfig",
+    "file": ".\\backend\\git\\blame\\models.py",
     "range": [
       234,
       287
@@ -3087,8 +3087,8 @@
   {
     "type": "class",
     "name": "GitProvider",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\base.py:GitProvider",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\base.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\base.py:GitProvider",
+    "file": ".\\backend\\git\\blame\\providers\\base.py",
     "range": [
       15,
       139
@@ -3111,8 +3111,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.__init__",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       47,
       64
@@ -3161,8 +3161,8 @@
   {
     "type": "function",
     "name": "_initialize_repo",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._initialize_repo",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._initialize_repo",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       66,
       72
@@ -3194,8 +3194,8 @@
   {
     "type": "function",
     "name": "get_commits_for_file",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_commits_for_file",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_commits_for_file",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       82,
       116
@@ -3259,8 +3259,8 @@
   {
     "type": "function",
     "name": "get_blame_for_file",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_blame_for_file",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_blame_for_file",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       118,
       142
@@ -3300,8 +3300,8 @@
   {
     "type": "function",
     "name": "get_all_contributors",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_all_contributors",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_all_contributors",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       144,
       181
@@ -3344,8 +3344,8 @@
   {
     "type": "function",
     "name": "get_file_history",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_file_history",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_file_history",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       183,
       203
@@ -3392,8 +3392,8 @@
   {
     "type": "function",
     "name": "get_all_files",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_all_files",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_all_files",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       205,
       218
@@ -3424,8 +3424,8 @@
   {
     "type": "function",
     "name": "get_file_content",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_file_content",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_file_content",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       220,
       235
@@ -3473,8 +3473,8 @@
   {
     "type": "function",
     "name": "get_commit_diff",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_commit_diff",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_commit_diff",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       237,
       270
@@ -3518,8 +3518,8 @@
   {
     "type": "function",
     "name": "_analyze_commit",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._analyze_commit",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._analyze_commit",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       272,
       316
@@ -3574,8 +3574,8 @@
   {
     "type": "function",
     "name": "_classify_commit",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._classify_commit",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._classify_commit",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       318,
       350
@@ -3620,8 +3620,8 @@
   {
     "type": "function",
     "name": "_is_feature_commit",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._is_feature_commit",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._is_feature_commit",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       352,
       355
@@ -3660,8 +3660,8 @@
   {
     "type": "function",
     "name": "_is_test_file",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._is_test_file",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._is_test_file",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       357,
       360
@@ -3701,8 +3701,8 @@
   {
     "type": "function",
     "name": "_get_or_create_developer",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._get_or_create_developer",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider._get_or_create_developer",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       362,
       370
@@ -3748,8 +3748,8 @@
   {
     "type": "function",
     "name": "get_commits_by_type",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_commits_by_type",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_commits_by_type",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       372,
       403
@@ -3804,8 +3804,8 @@
   {
     "type": "function",
     "name": "get_developer_stats",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_developer_stats",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider.get_developer_stats",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       405,
       459
@@ -3852,8 +3852,8 @@
   {
     "type": "class",
     "name": "LocalGitProvider",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\providers\\local_git.py",
+    "unique_id": ".\\backend\\git\\blame\\providers\\local_git.py:LocalGitProvider",
+    "file": ".\\backend\\git\\blame\\providers\\local_git.py",
     "range": [
       36,
       459
@@ -3899,8 +3899,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator.__init__",
+    "file": ".\\backend\\git\\blame\\scoring\\calculator.py",
     "range": [
       29,
       48
@@ -3950,8 +3950,8 @@
   {
     "type": "function",
     "name": "calculate_expertise",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator.calculate_expertise",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator.calculate_expertise",
+    "file": ".\\backend\\git\\blame\\scoring\\calculator.py",
     "range": [
       50,
       111
@@ -4020,8 +4020,8 @@
   {
     "type": "function",
     "name": "_calculate_confidence",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator._calculate_confidence",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator._calculate_confidence",
+    "file": ".\\backend\\git\\blame\\scoring\\calculator.py",
     "range": [
       113,
       155
@@ -4083,8 +4083,8 @@
   {
     "type": "function",
     "name": "_generate_reasoning",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator._generate_reasoning",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator._generate_reasoning",
+    "file": ".\\backend\\git\\blame\\scoring\\calculator.py",
     "range": [
       157,
       200
@@ -4146,8 +4146,8 @@
   {
     "type": "function",
     "name": "calculate_multiple",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator.calculate_multiple",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator.calculate_multiple",
+    "file": ".\\backend\\git\\blame\\scoring\\calculator.py",
     "range": [
       202,
       240
@@ -4210,8 +4210,8 @@
   {
     "type": "class",
     "name": "ExpertiseScoreCalculator",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\calculator.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\calculator.py:ExpertiseScoreCalculator",
+    "file": ".\\backend\\git\\blame\\scoring\\calculator.py",
     "range": [
       21,
       240
@@ -4241,8 +4241,8 @@
   {
     "type": "function",
     "name": "calculate",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:CommitFrequencyFactor.calculate",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:CommitFrequencyFactor.calculate",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       79,
       90
@@ -4289,8 +4289,8 @@
   {
     "type": "function",
     "name": "calculate",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:LinesChangedFactor.calculate",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:LinesChangedFactor.calculate",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       115,
       132
@@ -4339,8 +4339,8 @@
   {
     "type": "function",
     "name": "calculate",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:RefactorDepthFactor.calculate",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:RefactorDepthFactor.calculate",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       158,
       186
@@ -4390,8 +4390,8 @@
   {
     "type": "function",
     "name": "calculate",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:ArchitecturalChangesFactor.calculate",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:ArchitecturalChangesFactor.calculate",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       212,
       234
@@ -4439,8 +4439,8 @@
   {
     "type": "function",
     "name": "calculate",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:BugFixesFactor.calculate",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:BugFixesFactor.calculate",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       259,
       278
@@ -4488,8 +4488,8 @@
   {
     "type": "function",
     "name": "calculate",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:RecencyFactor.calculate",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:RecencyFactor.calculate",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       304,
       322
@@ -4540,8 +4540,8 @@
   {
     "type": "function",
     "name": "calculate",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:CodeReviewParticipationFactor.calculate",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:CodeReviewParticipationFactor.calculate",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       347,
       369
@@ -4590,8 +4590,8 @@
   {
     "type": "function",
     "name": "get_default_factors",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:get_default_factors",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:get_default_factors",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       372,
       387
@@ -4628,8 +4628,8 @@
   {
     "type": "function",
     "name": "validate_weights",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:validate_weights",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:validate_weights",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       390,
       401
@@ -4669,8 +4669,8 @@
   {
     "type": "class",
     "name": "ScoringFactor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:ScoringFactor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:ScoringFactor",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       16,
       54
@@ -4693,8 +4693,8 @@
   {
     "type": "class",
     "name": "CommitFrequencyFactor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:CommitFrequencyFactor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:CommitFrequencyFactor",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       57,
       90
@@ -4719,8 +4719,8 @@
   {
     "type": "class",
     "name": "LinesChangedFactor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:LinesChangedFactor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:LinesChangedFactor",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       93,
       132
@@ -4745,8 +4745,8 @@
   {
     "type": "class",
     "name": "RefactorDepthFactor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:RefactorDepthFactor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:RefactorDepthFactor",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       135,
       186
@@ -4771,8 +4771,8 @@
   {
     "type": "class",
     "name": "ArchitecturalChangesFactor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:ArchitecturalChangesFactor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:ArchitecturalChangesFactor",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       189,
       234
@@ -4797,8 +4797,8 @@
   {
     "type": "class",
     "name": "BugFixesFactor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:BugFixesFactor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:BugFixesFactor",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       237,
       278
@@ -4823,8 +4823,8 @@
   {
     "type": "class",
     "name": "RecencyFactor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:RecencyFactor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:RecencyFactor",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       281,
       322
@@ -4849,8 +4849,8 @@
   {
     "type": "class",
     "name": "CodeReviewParticipationFactor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py:CodeReviewParticipationFactor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\scoring\\factors.py",
+    "unique_id": ".\\backend\\git\\blame\\scoring\\factors.py:CodeReviewParticipationFactor",
+    "file": ".\\backend\\git\\blame\\scoring\\factors.py",
     "range": [
       325,
       369
@@ -4875,8 +4875,8 @@
   {
     "type": "class",
     "name": "ExpertStore",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\base.py:ExpertStore",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\base.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\base.py:ExpertStore",
+    "file": ".\\backend\\git\\blame\\stores\\base.py",
     "range": [
       14,
       169
@@ -4899,8 +4899,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.__init__",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       34,
       50
@@ -4941,8 +4941,8 @@
   {
     "type": "function",
     "name": "store_expertise",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.store_expertise",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.store_expertise",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       52,
       76
@@ -4983,8 +4983,8 @@
   {
     "type": "function",
     "name": "store_expertise_batch",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.store_expertise_batch",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.store_expertise_batch",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       78,
       81
@@ -5023,8 +5023,8 @@
   {
     "type": "function",
     "name": "get_experts_for_file",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_experts_for_file",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_experts_for_file",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       83,
       90
@@ -5070,8 +5070,8 @@
   {
     "type": "function",
     "name": "get_experts_for_module",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_experts_for_module",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_experts_for_module",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       92,
       138
@@ -5128,8 +5128,8 @@
   {
     "type": "function",
     "name": "get_developer_expertise",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_developer_expertise",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_developer_expertise",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       140,
       145
@@ -5168,8 +5168,8 @@
   {
     "type": "function",
     "name": "get_expertise_heatmap",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_expertise_heatmap",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_expertise_heatmap",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       147,
       217
@@ -5226,8 +5226,8 @@
   {
     "type": "function",
     "name": "get_bus_factor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_bus_factor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_bus_factor",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       219,
       237
@@ -5270,8 +5270,8 @@
   {
     "type": "function",
     "name": "get_knowledge_gaps",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_knowledge_gaps",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_knowledge_gaps",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       239,
       255
@@ -5313,8 +5313,8 @@
   {
     "type": "function",
     "name": "get_all_developers",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_all_developers",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_all_developers",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       257,
       259
@@ -5346,8 +5346,8 @@
   {
     "type": "function",
     "name": "clear",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.clear",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.clear",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       261,
       265
@@ -5380,8 +5380,8 @@
   {
     "type": "function",
     "name": "get_statistics",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_statistics",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore.get_statistics",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       267,
       278
@@ -5417,8 +5417,8 @@
   {
     "type": "class",
     "name": "InMemoryStore",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py:InMemoryStore",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\git\\blame\\stores\\memory.py",
+    "unique_id": ".\\backend\\git\\blame\\stores\\memory.py:InMemoryStore",
+    "file": ".\\backend\\git\\blame\\stores\\memory.py",
     "range": [
       22,
       278
@@ -5459,8 +5459,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector.__init__",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       27,
       44
@@ -5508,8 +5508,8 @@
   {
     "type": "function",
     "name": "calculate_metrics",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector.calculate_metrics",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector.calculate_metrics",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       46,
       107
@@ -5566,8 +5566,8 @@
   {
     "type": "function",
     "name": "detect_drift",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector.detect_drift",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector.detect_drift",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       109,
       146
@@ -5612,8 +5612,8 @@
   {
     "type": "function",
     "name": "save_baseline",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector.save_baseline",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector.save_baseline",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       148,
       167
@@ -5662,8 +5662,8 @@
   {
     "type": "function",
     "name": "_load_baseline",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector._load_baseline",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector._load_baseline",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       169,
       181
@@ -5705,8 +5705,8 @@
   {
     "type": "function",
     "name": "_calculate_dependency_depth",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector._calculate_dependency_depth",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector._calculate_dependency_depth",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       183,
       190
@@ -5748,8 +5748,8 @@
   {
     "type": "function",
     "name": "_calculate_indicators",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector._calculate_indicators",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector._calculate_indicators",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       192,
       227
@@ -5804,8 +5804,8 @@
   {
     "type": "function",
     "name": "_calculate_drift_score",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector._calculate_drift_score",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector._calculate_drift_score",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       229,
       261
@@ -5852,8 +5852,8 @@
   {
     "type": "function",
     "name": "_generate_recommendations",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector._generate_recommendations",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector._generate_recommendations",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       263,
       295
@@ -5907,8 +5907,8 @@
   {
     "type": "function",
     "name": "print_drift_report",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:print_drift_report",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:print_drift_report",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       298,
       322
@@ -5963,8 +5963,8 @@
   {
     "type": "class",
     "name": "DriftDetector",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py:DriftDetector",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\drift.py",
+    "unique_id": ".\\backend\\governance\\drift.py:DriftDetector",
+    "file": ".\\backend\\governance\\drift.py",
     "range": [
       19,
       295
@@ -6000,8 +6000,8 @@
   {
     "type": "function",
     "name": "matches",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:Layer.matches",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:Layer.matches",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       44,
       48
@@ -6042,8 +6042,8 @@
   {
     "type": "function",
     "name": "matches",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:BoundaryRule.matches",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:BoundaryRule.matches",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       69,
       71
@@ -6087,8 +6087,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:Violation.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:Violation.to_dict",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       101,
       114
@@ -6119,8 +6119,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:DriftMetrics.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:DriftMetrics.to_dict",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       137,
       145
@@ -6151,8 +6151,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:DriftReport.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:DriftReport.to_dict",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       166,
       173
@@ -6184,8 +6184,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:ValidationResult.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:ValidationResult.to_dict",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       188,
       192
@@ -6216,8 +6216,8 @@
   {
     "type": "class",
     "name": "RuleAction",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:RuleAction",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:RuleAction",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       13,
       17
@@ -6244,8 +6244,8 @@
   {
     "type": "class",
     "name": "ViolationSeverity",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:ViolationSeverity",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:ViolationSeverity",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       20,
       25
@@ -6273,8 +6273,8 @@
   {
     "type": "class",
     "name": "Layer",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:Layer",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:Layer",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       29,
       48
@@ -6304,8 +6304,8 @@
   {
     "type": "class",
     "name": "BoundaryRule",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:BoundaryRule",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:BoundaryRule",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       52,
       71
@@ -6336,8 +6336,8 @@
   {
     "type": "class",
     "name": "Violation",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:Violation",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:Violation",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       75,
       114
@@ -6373,8 +6373,8 @@
   {
     "type": "class",
     "name": "DriftMetrics",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:DriftMetrics",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:DriftMetrics",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       118,
       145
@@ -6406,8 +6406,8 @@
   {
     "type": "class",
     "name": "DriftReport",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:DriftReport",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:DriftReport",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       149,
       173
@@ -6438,8 +6438,8 @@
   {
     "type": "class",
     "name": "ValidationResult",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:ValidationResult",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:ValidationResult",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       177,
       192
@@ -6467,8 +6467,8 @@
   {
     "type": "class",
     "name": "ArchitectureConfig",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py:ArchitectureConfig",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\models.py",
+    "unique_id": ".\\backend\\governance\\models.py:ArchitectureConfig",
+    "file": ".\\backend\\governance\\models.py",
     "range": [
       196,
       207
@@ -6495,8 +6495,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py:RuleEngine.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py",
+    "unique_id": ".\\backend\\governance\\rules.py:RuleEngine.__init__",
+    "file": ".\\backend\\governance\\rules.py",
     "range": [
       52,
       60
@@ -6535,8 +6535,8 @@
   {
     "type": "function",
     "name": "classify_layer",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py:RuleEngine.classify_layer",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py",
+    "unique_id": ".\\backend\\governance\\rules.py:RuleEngine.classify_layer",
+    "file": ".\\backend\\governance\\rules.py",
     "range": [
       146,
       169
@@ -6577,8 +6577,8 @@
   {
     "type": "function",
     "name": "validate_import",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py:RuleEngine.validate_import",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py",
+    "unique_id": ".\\backend\\governance\\rules.py:RuleEngine.validate_import",
+    "file": ".\\backend\\governance\\rules.py",
     "range": [
       171,
       271
@@ -6653,8 +6653,8 @@
   {
     "type": "function",
     "name": "get_layer_summary",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py:RuleEngine.get_layer_summary",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py",
+    "unique_id": ".\\backend\\governance\\rules.py:RuleEngine.get_layer_summary",
+    "file": ".\\backend\\governance\\rules.py",
     "range": [
       273,
       282
@@ -6685,8 +6685,8 @@
   {
     "type": "function",
     "name": "get_rules_summary",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py:RuleEngine.get_rules_summary",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py",
+    "unique_id": ".\\backend\\governance\\rules.py:RuleEngine.get_rules_summary",
+    "file": ".\\backend\\governance\\rules.py",
     "range": [
       284,
       295
@@ -6715,8 +6715,8 @@
   {
     "type": "class",
     "name": "RuleEngine",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py:RuleEngine",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\rules.py",
+    "unique_id": ".\\backend\\governance\\rules.py:RuleEngine",
+    "file": ".\\backend\\governance\\rules.py",
     "range": [
       44,
       295
@@ -6746,8 +6746,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:FileValidationResult.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:FileValidationResult.to_dict",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       33,
       41
@@ -6779,8 +6779,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:RepositoryValidationResult.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:RepositoryValidationResult.to_dict",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       78,
       87
@@ -6811,8 +6811,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:ArchitectureValidator.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:ArchitectureValidator.__init__",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       98,
       107
@@ -6851,8 +6851,8 @@
   {
     "type": "function",
     "name": "validate_file",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:ArchitectureValidator.validate_file",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:ArchitectureValidator.validate_file",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       115,
       165
@@ -6908,8 +6908,8 @@
   {
     "type": "function",
     "name": "validate_repository",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:ArchitectureValidator.validate_repository",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:ArchitectureValidator.validate_repository",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       167,
       227
@@ -6964,8 +6964,8 @@
   {
     "type": "function",
     "name": "get_violations",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:ArchitectureValidator.get_violations",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:ArchitectureValidator.get_violations",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       229,
       231
@@ -6996,8 +6996,8 @@
   {
     "type": "function",
     "name": "get_warnings",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:ArchitectureValidator.get_warnings",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:ArchitectureValidator.get_warnings",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       233,
       235
@@ -7028,8 +7028,8 @@
   {
     "type": "function",
     "name": "_extract_imports",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:ArchitectureValidator._extract_imports",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:ArchitectureValidator._extract_imports",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       237,
       278
@@ -7081,8 +7081,8 @@
   {
     "type": "function",
     "name": "_resolve_relative_import",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:ArchitectureValidator._resolve_relative_import",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:ArchitectureValidator._resolve_relative_import",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       280,
       301
@@ -7139,8 +7139,8 @@
   {
     "type": "function",
     "name": "print_validation_report",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:print_validation_report",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:print_validation_report",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       304,
       329
@@ -7195,8 +7195,8 @@
   {
     "type": "class",
     "name": "FileValidationResult",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:FileValidationResult",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:FileValidationResult",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       18,
       41
@@ -7226,8 +7226,8 @@
   {
     "type": "class",
     "name": "RepositoryValidationResult",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:RepositoryValidationResult",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:RepositoryValidationResult",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       45,
       87
@@ -7257,8 +7257,8 @@
   {
     "type": "class",
     "name": "ArchitectureValidator",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py:ArchitectureValidator",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\governance\\validator.py",
+    "unique_id": ".\\backend\\governance\\validator.py:ArchitectureValidator",
+    "file": ".\\backend\\governance\\validator.py",
     "range": [
       90,
       301
@@ -7291,8 +7291,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:RiskFactors.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:RiskFactors.to_dict",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       61,
       70
@@ -7329,8 +7329,8 @@
   {
     "type": "function",
     "name": "get_top_risks",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:RiskFactors.get_top_risks",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:RiskFactors.get_top_risks",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       72,
       87
@@ -7374,8 +7374,8 @@
   {
     "type": "function",
     "name": "__post_init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:ImpactAssessment.__post_init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:ImpactAssessment.__post_init__",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       115,
       119
@@ -7406,8 +7406,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:ImpactAssessment.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:ImpactAssessment.to_dict",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       121,
       134
@@ -7441,8 +7441,8 @@
   {
     "type": "function",
     "name": "_get_risk_level",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:ImpactAssessment._get_risk_level",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:ImpactAssessment._get_risk_level",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       136,
       145
@@ -7471,8 +7471,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.__init__",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       155,
       158
@@ -7503,8 +7503,8 @@
   {
     "type": "function",
     "name": "add_entity",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.add_entity",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.add_entity",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       160,
       164
@@ -7550,8 +7550,8 @@
   {
     "type": "function",
     "name": "add_relationship",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.add_relationship",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.add_relationship",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       166,
       178
@@ -7591,8 +7591,8 @@
   {
     "type": "function",
     "name": "add_relationships",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.add_relationships",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.add_relationships",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       180,
       183
@@ -7631,8 +7631,8 @@
   {
     "type": "function",
     "name": "get_callers",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.get_callers",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.get_callers",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       185,
       192
@@ -7674,8 +7674,8 @@
   {
     "type": "function",
     "name": "get_callees",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.get_callees",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.get_callees",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       194,
       201
@@ -7717,8 +7717,8 @@
   {
     "type": "function",
     "name": "get_dependencies",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.get_dependencies",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.get_dependencies",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       203,
       214
@@ -7767,8 +7767,8 @@
   {
     "type": "function",
     "name": "get_dependents",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.get_dependents",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.get_dependents",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       216,
       227
@@ -7817,8 +7817,8 @@
   {
     "type": "function",
     "name": "calculate_blast_radius",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.calculate_blast_radius",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.calculate_blast_radius",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       229,
       294
@@ -7875,8 +7875,8 @@
   {
     "type": "function",
     "name": "_calculate_enhanced_risk_factors",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph._calculate_enhanced_risk_factors",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph._calculate_enhanced_risk_factors",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       296,
       354
@@ -7957,8 +7957,8 @@
   {
     "type": "function",
     "name": "_calculate_centrality_risk",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph._calculate_centrality_risk",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph._calculate_centrality_risk",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       356,
       385
@@ -8009,8 +8009,8 @@
   {
     "type": "function",
     "name": "_generate_recommendations",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph._generate_recommendations",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph._generate_recommendations",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       387,
       416
@@ -8062,8 +8062,8 @@
   {
     "type": "function",
     "name": "_collect_upstream",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph._collect_upstream",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph._collect_upstream",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       418,
       423
@@ -8111,8 +8111,8 @@
   {
     "type": "function",
     "name": "_categorize_affected",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph._categorize_affected",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph._categorize_affected",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       425,
       449
@@ -8163,8 +8163,8 @@
   {
     "type": "function",
     "name": "get_inheritance_tree",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.get_inheritance_tree",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.get_inheritance_tree",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       451,
       467
@@ -8210,8 +8210,8 @@
   {
     "type": "function",
     "name": "find_cycles",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.find_cycles",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.find_cycles",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       469,
       475
@@ -8243,8 +8243,8 @@
   {
     "type": "function",
     "name": "get_statistics",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph.get_statistics",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph.get_statistics",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       477,
       492
@@ -8281,8 +8281,8 @@
   {
     "type": "function",
     "name": "build_dependency_graph",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:build_dependency_graph",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:build_dependency_graph",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       495,
       574
@@ -8348,8 +8348,8 @@
   {
     "type": "function",
     "name": "_resolve_call",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:_resolve_call",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:_resolve_call",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       577,
       593
@@ -8401,8 +8401,8 @@
   {
     "type": "function",
     "name": "calculate_blast_radius",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:calculate_blast_radius",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:calculate_blast_radius",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       596,
       626
@@ -8461,8 +8461,8 @@
   {
     "type": "class",
     "name": "RiskFactors",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:RiskFactors",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:RiskFactors",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       35,
       87
@@ -8495,8 +8495,8 @@
   {
     "type": "class",
     "name": "ImpactAssessment",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:ImpactAssessment",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:ImpactAssessment",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       91,
       145
@@ -8533,8 +8533,8 @@
   {
     "type": "class",
     "name": "CodeGraph",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py:CodeGraph",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\code_graph.py",
+    "unique_id": ".\\backend\\graph\\code_graph.py:CodeGraph",
+    "file": ".\\backend\\graph\\code_graph.py",
     "range": [
       148,
       492
@@ -8577,8 +8577,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor.__init__",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       30,
       45
@@ -8620,8 +8620,8 @@
   {
     "type": "function",
     "name": "extract_all",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor.extract_all",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor.extract_all",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       47,
       65
@@ -8656,8 +8656,8 @@
   {
     "type": "function",
     "name": "_extract_containment",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor._extract_containment",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor._extract_containment",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       67,
       86
@@ -8699,8 +8699,8 @@
   {
     "type": "function",
     "name": "_extract_imports",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor._extract_imports",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor._extract_imports",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       88,
       119
@@ -8742,8 +8742,8 @@
   {
     "type": "function",
     "name": "_extract_function_relationships",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor._extract_function_relationships",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor._extract_function_relationships",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       121,
       176
@@ -8791,8 +8791,8 @@
   {
     "type": "function",
     "name": "_extract_type_usage",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor._extract_type_usage",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor._extract_type_usage",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       178,
       196
@@ -8848,8 +8848,8 @@
   {
     "type": "function",
     "name": "_parse_type_string",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor._parse_type_string",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor._parse_type_string",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       198,
       210
@@ -8895,8 +8895,8 @@
   {
     "type": "function",
     "name": "_extract_class_relationships",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor._extract_class_relationships",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor._extract_class_relationships",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       212,
       248
@@ -8941,8 +8941,8 @@
   {
     "type": "function",
     "name": "_extract_overrides",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor._extract_overrides",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor._extract_overrides",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       250,
       279
@@ -8987,8 +8987,8 @@
   {
     "type": "function",
     "name": "_extract_global_access",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor._extract_global_access",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor._extract_global_access",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       281,
       302
@@ -9030,8 +9030,8 @@
   {
     "type": "function",
     "name": "extract_relationships",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:extract_relationships",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:extract_relationships",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       305,
       316
@@ -9071,8 +9071,8 @@
   {
     "type": "class",
     "name": "RelationshipExtractor",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py:RelationshipExtractor",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\extractor.py",
+    "unique_id": ".\\backend\\graph\\extractor.py:RelationshipExtractor",
+    "file": ".\\backend\\graph\\extractor.py",
     "range": [
       17,
       302
@@ -9109,8 +9109,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:Relationship.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:Relationship.to_dict",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       77,
       87
@@ -9139,8 +9139,8 @@
   {
     "type": "function",
     "name": "add",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.add",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.add",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       112,
       114
@@ -9179,8 +9179,8 @@
   {
     "type": "function",
     "name": "add_all",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.add_all",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.add_all",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       116,
       118
@@ -9219,8 +9219,8 @@
   {
     "type": "function",
     "name": "get_by_source",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.get_by_source",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.get_by_source",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       120,
       122
@@ -9257,8 +9257,8 @@
   {
     "type": "function",
     "name": "get_by_target",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.get_by_target",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.get_by_target",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       124,
       126
@@ -9295,8 +9295,8 @@
   {
     "type": "function",
     "name": "get_by_type",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.get_by_type",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.get_by_type",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       128,
       130
@@ -9333,8 +9333,8 @@
   {
     "type": "function",
     "name": "get_callers",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.get_callers",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.get_callers",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       132,
       135
@@ -9371,8 +9371,8 @@
   {
     "type": "function",
     "name": "get_callees",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.get_callees",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.get_callees",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       137,
       140
@@ -9409,8 +9409,8 @@
   {
     "type": "function",
     "name": "get_inheritance_chain",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.get_inheritance_chain",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.get_inheritance_chain",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       142,
       158
@@ -9451,8 +9451,8 @@
   {
     "type": "function",
     "name": "get_subclasses",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.get_subclasses",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.get_subclasses",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       160,
       163
@@ -9489,8 +9489,8 @@
   {
     "type": "function",
     "name": "get_dependents",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.get_dependents",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.get_dependents",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       165,
       170
@@ -9530,8 +9530,8 @@
   {
     "type": "function",
     "name": "get_dependencies",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.get_dependencies",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.get_dependencies",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       172,
       177
@@ -9571,8 +9571,8 @@
   {
     "type": "function",
     "name": "to_dict_list",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.to_dict_list",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.to_dict_list",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       179,
       181
@@ -9603,8 +9603,8 @@
   {
     "type": "function",
     "name": "statistics",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph.statistics",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph.statistics",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       183,
       191
@@ -9636,8 +9636,8 @@
   {
     "type": "class",
     "name": "RelationType",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationType",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationType",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       13,
       50
@@ -9677,8 +9677,8 @@
   {
     "type": "class",
     "name": "Relationship",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:Relationship",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:Relationship",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       54,
       100
@@ -9711,8 +9711,8 @@
   {
     "type": "class",
     "name": "RelationshipGraph",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py:RelationshipGraph",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\relationships.py",
+    "unique_id": ".\\backend\\graph\\relationships.py:RelationshipGraph",
+    "file": ".\\backend\\graph\\relationships.py",
     "range": [
       104,
       191
@@ -9751,8 +9751,8 @@
   {
     "type": "function",
     "name": "register",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:EntityRegistry.register",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:EntityRegistry.register",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       83,
       101
@@ -9794,8 +9794,8 @@
   {
     "type": "function",
     "name": "register_all",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:EntityRegistry.register_all",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:EntityRegistry.register_all",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       103,
       106
@@ -9834,8 +9834,8 @@
   {
     "type": "function",
     "name": "find_by_name",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:EntityRegistry.find_by_name",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:EntityRegistry.find_by_name",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       108,
       110
@@ -9874,8 +9874,8 @@
   {
     "type": "function",
     "name": "find_by_id",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:EntityRegistry.find_by_id",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:EntityRegistry.find_by_id",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       112,
       114
@@ -9914,8 +9914,8 @@
   {
     "type": "function",
     "name": "find_in_file",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:EntityRegistry.find_in_file",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:EntityRegistry.find_in_file",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       116,
       121
@@ -9961,8 +9961,8 @@
   {
     "type": "function",
     "name": "get_class",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:EntityRegistry.get_class",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:EntityRegistry.get_class",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       123,
       125
@@ -10001,8 +10001,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver.__init__",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       151,
       153
@@ -10039,8 +10039,8 @@
   {
     "type": "function",
     "name": "set_imports",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver.set_imports",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver.set_imports",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       155,
       157
@@ -10086,8 +10086,8 @@
   {
     "type": "function",
     "name": "resolve",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver.resolve",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver.resolve",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       159,
       195
@@ -10143,8 +10143,8 @@
   {
     "type": "function",
     "name": "_resolve_self_call",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver._resolve_self_call",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver._resolve_self_call",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       197,
       236
@@ -10205,8 +10205,8 @@
   {
     "type": "function",
     "name": "_resolve_super_call",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver._resolve_super_call",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver._resolve_super_call",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       238,
       271
@@ -10265,8 +10265,8 @@
   {
     "type": "function",
     "name": "_resolve_instantiation",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver._resolve_instantiation",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver._resolve_instantiation",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       273,
       289
@@ -10307,8 +10307,8 @@
   {
     "type": "function",
     "name": "_resolve_qualified_call",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver._resolve_qualified_call",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver._resolve_qualified_call",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       291,
       341
@@ -10369,8 +10369,8 @@
   {
     "type": "function",
     "name": "_resolve_direct_call",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver._resolve_direct_call",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver._resolve_direct_call",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       343,
       400
@@ -10432,8 +10432,8 @@
   {
     "type": "function",
     "name": "resolve_all",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver.resolve_all",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver.resolve_all",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       402,
       407
@@ -10473,8 +10473,8 @@
   {
     "type": "function",
     "name": "build_registry_from_parsed_files",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:build_registry_from_parsed_files",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:build_registry_from_parsed_files",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       410,
       428
@@ -10515,8 +10515,8 @@
   {
     "type": "class",
     "name": "ImportMapping",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:ImportMapping",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:ImportMapping",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       19,
       61
@@ -10543,8 +10543,8 @@
   {
     "type": "class",
     "name": "EntityRegistry",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:EntityRegistry",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:EntityRegistry",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       65,
       125
@@ -10579,8 +10579,8 @@
   {
     "type": "class",
     "name": "ResolvedCall",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:ResolvedCall",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:ResolvedCall",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       129,
       135
@@ -10609,8 +10609,8 @@
   {
     "type": "class",
     "name": "CallResolver",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py:CallResolver",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\graph\\resolver.py",
+    "unique_id": ".\\backend\\graph\\resolver.py:CallResolver",
+    "file": ".\\backend\\graph\\resolver.py",
     "range": [
       138,
       407
@@ -10644,8 +10644,8 @@
   {
     "type": "function",
     "name": "calculate_cyclomatic_complexity",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:calculate_cyclomatic_complexity",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:calculate_cyclomatic_complexity",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       65,
       133
@@ -10686,8 +10686,8 @@
   {
     "type": "function",
     "name": "calculate_cognitive_complexity",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:calculate_cognitive_complexity",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:calculate_cognitive_complexity",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       136,
       244
@@ -10740,8 +10740,8 @@
   {
     "type": "function",
     "name": "count_lines_of_code",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:count_lines_of_code",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:count_lines_of_code",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       247,
       262
@@ -10778,8 +10778,8 @@
   {
     "type": "function",
     "name": "count_total_lines",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:count_total_lines",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:count_total_lines",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       265,
       316
@@ -10823,8 +10823,8 @@
   {
     "type": "function",
     "name": "contains_yield",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:contains_yield",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:contains_yield",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       319,
       343
@@ -10865,8 +10865,8 @@
   {
     "type": "function",
     "name": "contains_await",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:contains_await",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:contains_await",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       346,
       370
@@ -10907,8 +10907,8 @@
   {
     "type": "function",
     "name": "__init__",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:ScopeTracker.__init__",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:ScopeTracker.__init__",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       381,
       384
@@ -10940,8 +10940,8 @@
   {
     "type": "function",
     "name": "enter_scope",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:ScopeTracker.enter_scope",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:ScopeTracker.enter_scope",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       386,
       388
@@ -10973,8 +10973,8 @@
   {
     "type": "function",
     "name": "exit_scope",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:ScopeTracker.exit_scope",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:ScopeTracker.exit_scope",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       390,
       393
@@ -11005,8 +11005,8 @@
   {
     "type": "function",
     "name": "define_local",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:ScopeTracker.define_local",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:ScopeTracker.define_local",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       395,
       398
@@ -11045,8 +11045,8 @@
   {
     "type": "function",
     "name": "declare_global",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:ScopeTracker.declare_global",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:ScopeTracker.declare_global",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       400,
       402
@@ -11085,8 +11085,8 @@
   {
     "type": "function",
     "name": "declare_nonlocal",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:ScopeTracker.declare_nonlocal",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:ScopeTracker.declare_nonlocal",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       404,
       406
@@ -11125,8 +11125,8 @@
   {
     "type": "function",
     "name": "is_local",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:ScopeTracker.is_local",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:ScopeTracker.is_local",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       408,
       413
@@ -11163,8 +11163,8 @@
   {
     "type": "function",
     "name": "is_explicitly_global",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:ScopeTracker.is_explicitly_global",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:ScopeTracker.is_explicitly_global",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       415,
       417
@@ -11201,8 +11201,8 @@
   {
     "type": "function",
     "name": "get_accessed_globals",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:get_accessed_globals",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:get_accessed_globals",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       420,
       622
@@ -11313,8 +11313,8 @@
   {
     "type": "function",
     "name": "extract_local_definitions",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:extract_local_definitions",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:extract_local_definitions",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       625,
       712
@@ -11379,8 +11379,8 @@
   {
     "type": "class",
     "name": "ScopeTracker",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py:ScopeTracker",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\complexity.py",
+    "unique_id": ".\\backend\\parsing\\complexity.py:ScopeTracker",
+    "file": ".\\backend\\parsing\\complexity.py",
     "range": [
       373,
       417
@@ -11414,8 +11414,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:Parameter.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:Parameter.to_dict",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       32,
       39
@@ -11444,8 +11444,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:FunctionEntity.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:FunctionEntity.to_dict",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       106,
       133
@@ -11476,8 +11476,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:ClassEntity.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:ClassEntity.to_dict",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       181,
       200
@@ -11506,8 +11506,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:ImportEntity.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:ImportEntity.to_dict",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       226,
       238
@@ -11536,8 +11536,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:ModuleEntity.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:ModuleEntity.to_dict",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       273,
       289
@@ -11566,8 +11566,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:VariableEntity.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:VariableEntity.to_dict",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       319,
       332
@@ -11596,8 +11596,8 @@
   {
     "type": "function",
     "name": "to_dict",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:ParsedFile.to_dict",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:ParsedFile.to_dict",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       354,
       365
@@ -11632,8 +11632,8 @@
   {
     "type": "function",
     "name": "get_all_entities",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:ParsedFile.get_all_entities",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:ParsedFile.get_all_entities",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       367,
       372
@@ -11667,8 +11667,8 @@
   {
     "type": "class",
     "name": "EntityType",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:EntityType",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:EntityType",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       13,
       20
@@ -11698,8 +11698,8 @@
   {
     "type": "class",
     "name": "Parameter",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:Parameter",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:Parameter",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       24,
       39
@@ -11730,8 +11730,8 @@
   {
     "type": "class",
     "name": "FunctionEntity",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:FunctionEntity",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:FunctionEntity",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       43,
       133
@@ -11778,8 +11778,8 @@
   {
     "type": "class",
     "name": "ClassEntity",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:ClassEntity",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:ClassEntity",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       137,
       200
@@ -11820,8 +11820,8 @@
   {
     "type": "class",
     "name": "ImportEntity",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:ImportEntity",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:ImportEntity",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       204,
       238
@@ -11856,8 +11856,8 @@
   {
     "type": "class",
     "name": "ModuleEntity",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:ModuleEntity",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:ModuleEntity",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       242,
       289
@@ -11893,8 +11893,8 @@
   {
     "type": "class",
     "name": "VariableEntity",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:VariableEntity",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:VariableEntity",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       293,
       332
@@ -11929,8 +11929,8 @@
   {
     "type": "class",
     "name": "ParsedFile",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py:ParsedFile",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\entities.py",
+    "unique_id": ".\\backend\\parsing\\entities.py:ParsedFile",
+    "file": ".\\backend\\parsing\\entities.py",
     "range": [
       336,
       372
@@ -11966,8 +11966,8 @@
   {
     "type": "function",
     "name": "extract_docstring",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_docstring",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_docstring",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       35,
       50
@@ -12013,8 +12013,8 @@
   {
     "type": "function",
     "name": "extract_decorators",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_decorators",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_decorators",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       53,
       72
@@ -12055,8 +12055,8 @@
   {
     "type": "function",
     "name": "extract_parameters",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_parameters",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_parameters",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       75,
       154
@@ -12117,8 +12117,8 @@
   {
     "type": "function",
     "name": "extract_return_type",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_return_type",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_return_type",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       157,
       162
@@ -12158,8 +12158,8 @@
   {
     "type": "function",
     "name": "find_calls",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:find_calls",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:find_calls",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       165,
       178
@@ -12202,8 +12202,8 @@
   {
     "type": "function",
     "name": "extract_function",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_function",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_function",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       181,
       231
@@ -12268,8 +12268,8 @@
   {
     "type": "function",
     "name": "extract_bases",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_bases",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_bases",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       234,
       253
@@ -12311,8 +12311,8 @@
   {
     "type": "function",
     "name": "extract_metaclass",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_metaclass",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_metaclass",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       256,
       266
@@ -12354,8 +12354,8 @@
   {
     "type": "function",
     "name": "extract_class",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_class",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_class",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       269,
       342
@@ -12419,8 +12419,8 @@
   {
     "type": "function",
     "name": "extract_instance_variables",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_instance_variables",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_instance_variables",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       345,
       365
@@ -12467,8 +12467,8 @@
   {
     "type": "function",
     "name": "extract_import",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_import",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_import",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       368,
       434
@@ -12533,8 +12533,8 @@
   {
     "type": "function",
     "name": "extract_global_variable",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:extract_global_variable",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:extract_global_variable",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       437,
       466
@@ -12586,8 +12586,8 @@
   {
     "type": "function",
     "name": "parse_file",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:parse_file",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:parse_file",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       469,
       566
@@ -12654,8 +12654,8 @@
   {
     "type": "function",
     "name": "scan_repository",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:scan_repository",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:scan_repository",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       569,
       596
@@ -12701,8 +12701,8 @@
   {
     "type": "function",
     "name": "get_all_entities",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py:get_all_entities",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\backend\\parsing\\parser.py",
+    "unique_id": ".\\backend\\parsing\\parser.py:get_all_entities",
+    "file": ".\\backend\\parsing\\parser.py",
     "range": [
       599,
       606
@@ -12742,8 +12742,8 @@
   {
     "type": "function",
     "name": "main",
-    "unique_id": "C:\\Users\\prana\\Node-Zero-Synapse\\scripts\\index_codebase.py:main",
-    "file": "C:\\Users\\prana\\Node-Zero-Synapse\\scripts\\index_codebase.py",
+    "unique_id": ".\\scripts\\index_codebase.py:main",
+    "file": ".\\scripts\\index_codebase.py",
     "range": [
       11,
       41

@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+/* ── Custom Theme ────────────────────────────────────── */
+@theme {
+  --color-synapse-bg: #000000;
+  --color-synapse-panel: #0a0a0a;
+  --color-synapse-border: rgba(255, 255, 255, 0.08);
+  --color-synapse-surface: #111111;
+
+  --color-neon-emerald: #34d399;
+  --color-neon-amber: #fbbf24;
+  --color-neon-rose: #fb7185;
+  --color-neon-indigo: #818cf8;
+  --color-neon-cyan: #22d3ee;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "SF Mono", "Fira Code", ui-monospace, monospace;
+}
+
+/* ── Base Styles ─────────────────────────────────────── */
+@layer base {
+  body {
+    @apply bg-synapse-bg text-neutral-300 antialiased;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.3);
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
+/* ── Utility Classes ─────────────────────────────────── */
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 24px rgba(52, 211, 153, 0.08);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 24px rgba(251, 191, 36, 0.08);
+  }
+
+  .glow-rose {
+    box-shadow: 0 0 24px rgba(251, 113, 133, 0.08);
+  }
+
+  .glow-indigo {
+    box-shadow: 0 0 24px rgba(129, 140, 248, 0.08);
+  }
+
+  .text-glow-emerald {
+    text-shadow: 0 0 12px rgba(52, 211, 153, 0.4);
+  }
+
+  .text-glow-rose {
+    text-shadow: 0 0 12px rgba(251, 113, 133, 0.4);
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* ── React Flow Overrides ────────────────────────────── */
+.react-flow__background {
+  background-color: #000000 !important;
+}
+
+.react-flow__minimap {
+  background-color: #0a0a0a !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 0.75rem;
+}
+
+.react-flow__controls {
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.react-flow__controls-button {
+  background-color: #0a0a0a !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+  fill: #737373 !important;
+}
+
+.react-flow__controls-button:hover {
+  background-color: #171717 !important;
+}
+
+/* ── Google Fonts Import ─────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');

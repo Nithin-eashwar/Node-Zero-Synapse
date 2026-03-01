@@ -21,8 +21,20 @@ from backend.governance import (
     DriftDetector,
     print_validation_report,
 )
-# Import AI components
-from backend.ai.rag import RAGPipeline
+# Import AI components (may fail on some Python versions due to pyo3 panics)
+_ai_available = False
+rag_pipeline = None
+
+if os.environ.get("SYNAPSE_DISABLE_AI", "").lower() not in ("1", "true", "yes"):
+    try:
+        from backend.ai.rag import RAGPipeline
+        _ai_available = True
+    except Exception as e:
+        print(f"Warning: AI module failed to load: {e}")
+        print("Non-AI endpoints will still work.")
+else:
+    print("AI module disabled via SYNAPSE_DISABLE_AI env var.")
+    RAGPipeline = None  # type: ignore
 
 # --- CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -464,6 +476,8 @@ class QueryRequest(BaseModel):
 @app.post("/ai/index")
 async def index_graph():
     """Triggers the embeddings generation for the current graph"""
+    if not rag_pipeline:
+        raise HTTPException(status_code=503, detail="AI module not available (embedding library failed to load)")
     if not graph_db["raw_data"]:
         raise HTTPException(status_code=400, detail="Graph not loaded yet")
     
