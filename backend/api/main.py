@@ -2,14 +2,13 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
-import networkx as nx
 import os
 import sys
 from typing import Optional
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from backend.graph.code_graph import build_dependency_graph
+from backend.graph.code_graph import build_dependency_graph, CodeGraph
 from backend.git.smart_git import (
     get_git_blame,
     get_expertise_heatmap,
@@ -46,56 +45,42 @@ app.add_middleware(
 
 # --- GLOBAL STATE ---
 # We keep the graph in memory for speed
-# --- GLOBAL STATE ---
-# We keep the graph in memory for speed
 graph_db = {
-    "nx_graph": nx.DiGraph(),
+    "code_graph": None,  # CodeGraph instance (uses pluggable store backend)
     "raw_data": []
 }
 startup_error = None
 
-# Initialize AI Pipeline (lazy load or global?)
-# We'll initialize it globally but it handles its own key checks
-rag_pipeline = RAGPipeline()
+# AI Pipeline - initialized lazily on first /ai/* request
+# This avoids loading the embedding model at startup
+_rag_pipeline = None
 
-def build_graph(data):
-    """Rebuilds the NetworkX graph from JSON data"""
-    G = nx.DiGraph()
-    all_nodes = set()
-    
-    # 1. Add Nodes
-    for func in data:
+def get_rag_pipeline() -> RAGPipeline:
+    """Lazy initialization of RAG pipeline on first AI request."""
+    global _rag_pipeline
+    if _rag_pipeline is None:
+        print("Initializing RAG Pipeline (first AI request)...")
+        _rag_pipeline = RAGPipeline()
+        # Wire in graph context and repo path if graph is already loaded
+        if graph_db["raw_data"] and graph_db["code_graph"]:
+            _rag_pipeline.set_graph_context(
+                graph_db["code_graph"].store, graph_db["raw_data"], REPO_PATH
+            )
+    return _rag_pipeline
 
-        node_id = func['name']
-        G.add_node(node_id, file=func['file'], line=func['range'][0])
-        all_nodes.add(node_id)
-        
-    # 2. Add Edges (Fuzzy Match)
-    for func in data:
-        caller = func['name']
-        for call_str in func.get('calls', []):
-            # Find which node this call refers to
-            target = None
-            for candidate in all_nodes:
-                if call_str == candidate or call_str.endswith("." + candidate):
-                    target = candidate
-                    break
-            
-            if target:
-                G.add_edge(caller, target)
-                
-    return G
+
+# build_graph replaced by build_dependency_graph from CodeGraph module
 
 @app.on_event("startup")
 async def load_data():
-    """Load the graph into memory on startup"""
+    """Load the graph into memory on startup (AI pipeline loaded lazily on first request)"""
     global startup_error
     try:
         with open(INPUT_FILE, "r") as f:
             data = json.load(f)
             graph_db["raw_data"] = data
-            graph_db["nx_graph"] = build_graph(data)
-            print(f"Loaded Graph: {graph_db['nx_graph'].number_of_nodes()} nodes")
+            graph_db["code_graph"] = build_dependency_graph(data)
+            print(f"Loaded Graph: {graph_db['code_graph'].store.number_of_nodes()} nodes")
     except Exception as e:
         import traceback
         traceback.print_exc()
@@ -115,28 +100,75 @@ def health_check():
 @app.get("/graph")
 def get_full_graph():
     """Returns the raw nodes and edges for visualization"""
-    G = graph_db["nx_graph"]
-    return {
-        "nodes": [{"id": n, **G.nodes[n]} for n in G.nodes()],
-        "edges": [{"source": u, "target": v} for u, v in G.edges()]
-    }
+    cg = graph_db["code_graph"]
+    store = cg.store
+    nodes = []
+    for node_id in store.get_all_nodes():
+        node_data = store.get_node_data(node_id)
+        nodes.append({"id": node_id, **node_data})
+    edges = []
+    for node_id in store.get_all_nodes():
+        for succ in store.successors(node_id):
+            edges.append({"source": node_id, "target": succ})
+    return {"nodes": nodes, "edges": edges}
 
 @app.get("/blast-radius/{function_name}")
 def get_blast_radius(function_name: str):
     """Calculates dependencies for a specific function"""
-    G = graph_db["nx_graph"]
+    cg = graph_db["code_graph"]
     
-    if function_name not in G:
+    if not cg.store.has_node(function_name):
         raise HTTPException(status_code=404, detail=f"Function '{function_name}' not found")
     
     # Logic: Who depends on me? (Ancestors)
-    affected_nodes = list(nx.ancestors(G, function_name))
+    affected_nodes = list(cg.store.ancestors(function_name))
     
     return {
         "target": function_name,
         "blast_radius_score": len(affected_nodes),
         "affected_functions": affected_nodes
     }
+
+
+@app.get("/blast-radius/{function_name}/explain")
+async def explain_blast_radius(function_name: str):
+    """
+    AI-Powered Blast Radius Explanation.
+    
+    Uses the preloaded CodeGraph for rich impact assessment and
+    generates a natural language explanation.
+    """
+    cg = graph_db["code_graph"]
+    raw_data = graph_db["raw_data"]
+    
+    if not cg.store.has_node(function_name):
+        raise HTTPException(status_code=404, detail=f"Function '{function_name}' not found")
+    
+    # Build complexity data for risk calculation
+    complexity_data = {}
+    for node in raw_data:
+        if node.get("complexity"):
+            complexity_data[node["name"]] = node["complexity"]
+    
+    # Calculate full impact assessment using preloaded CodeGraph
+    impact = cg.calculate_blast_radius(function_name, complexity_data)
+    impact_dict = impact.to_dict()
+    
+    # Find the entity's raw node data
+    entity_node = next((n for n in raw_data if n["name"] == function_name), None)
+    
+    # Generate AI explanation
+    from backend.ai.blast_radius_explainer import BlastRadiusExplainer
+    explainer = BlastRadiusExplainer()
+    result = explainer.explain(
+        impact_dict=impact_dict,
+        entity_node=entity_node,
+        graph_nodes=raw_data,
+    )
+    
+    # Merge structured data with AI explanation
+    result["impact_assessment"] = impact_dict
+    return result
 
 
 # --- SMART BLAME ENDPOINTS ---
@@ -396,11 +428,13 @@ async def index_graph():
     if not graph_db["raw_data"]:
         raise HTTPException(status_code=400, detail="Graph not loaded yet")
     
-    count = rag_pipeline.index_codebase(graph_db["raw_data"])
+    pipeline = get_rag_pipeline()
+    count = pipeline.index_codebase(graph_db["raw_data"])
     return {"status": "success", "indexed_nodes": count}
 
 @app.get("/ai/ask")
 async def ask_ai(query: str):
     """Asks the RAG pipeline a question"""
-    result = rag_pipeline.ask(query)
+    pipeline = get_rag_pipeline()
+    result = await pipeline.ask(query)
     return result

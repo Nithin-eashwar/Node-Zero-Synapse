@@ -1,65 +1,76 @@
-import chromadb
-import uuid
+"""
+ChromaDB implementation of the vector store.
 
-class VectorStore:
-    def __init__(self, collection_name="codebase_vectors"):
-        # PersistentClient saves data to disk so we don't re-index every restart
-        self.client = chromadb.PersistentClient(path="./chroma_db")
+Uses ChromaDB's PersistentClient for local/dev usage.
+This is the default backend when VECTOR_STORE_BACKEND is not set.
+"""
+
+import os
+from typing import Dict, List
+
+import chromadb
+
+from .base_store import BaseVectorStore
+
+
+class ChromaVectorStore(BaseVectorStore):
+    """Vector store backed by ChromaDB (local persistent storage)."""
+
+    def __init__(self, collection_name: str = "codebase_vectors"):
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+        db_path = os.getenv("CHROMA_DB_PATH", os.path.join(base_dir, "chroma_db"))
+        self.client = chromadb.PersistentClient(path=db_path)
         self.collection = self.client.get_or_create_collection(name=collection_name)
 
-    def add_nodes(self, nodes, embeddings):
-        """
-        Upserts nodes into the vector store in batches.
-        """
+    def add_nodes(self, nodes: List[Dict], embeddings: List[List[float]]) -> None:
         batch_size = 100
         total_nodes = len(nodes)
-        
+
         for i in range(0, total_nodes, batch_size):
             batch_nodes = nodes[i : i + batch_size]
             batch_embeddings = embeddings[i : i + batch_size]
-            
+
             ids = []
             documents = []
             metadatas = []
-            
-            for node in batch_nodes:
-                # Generate unique ID: file:name:line
-                # Use '0' default if range/line missing to allow partial data
-                start_line = node.get('range', [0])[0] if 'range' in node else node.get('line', 0)
-                unique_id = f"{node['file']}:{node['name']}:{start_line}"
+            embeddings_to_upsert = []
+
+            for node, embedding in zip(batch_nodes, batch_embeddings):
+                unique_id = self.build_unique_id(node)
+                if not unique_id:
+                    continue
                 ids.append(unique_id)
-                
-                # Document text for display/context
-                text_rep = f"Type: {node['type']}\nName: {node['name']}\nFile: {node['file']}"
-                if 'calls' in node and node['calls']:
-                    text_rep += f"\nCalls: {', '.join(node['calls'])}"
-                documents.append(text_rep)
-                
-                # Metadata for filtering
-                metadatas.append({
-                    "file": node['file'],
-                    "type": node['type'],
-                    "name": node['name']
-                })
+                documents.append(self.build_document(node))
+                metadatas.append(self.build_metadata(node, unique_id))
+                embeddings_to_upsert.append(embedding)
 
             try:
-                self.collection.upsert(
-                    ids=ids,
-                    documents=documents,
-                    embeddings=batch_embeddings,
-                    metadatas=metadatas
-                )
-                print(f"Indexed batch {i} to {i+len(batch_nodes)}")
+                if ids:
+                    self.collection.upsert(
+                        ids=ids,
+                        documents=documents,
+                        embeddings=embeddings_to_upsert,
+                        metadatas=metadatas,
+                    )
+                    print(f"[ChromaDB] Indexed batch {i} to {i + len(batch_nodes)}")
             except Exception as e:
-                print(f"Error indexing batch {i}: {e}")
-                # Continue to next batch instead of crashing entirely
+                print(f"[ChromaDB] Error indexing batch {i}: {e}")
                 continue
 
-    def search(self, query_embedding, n_results=5):
-        """
-        Search using a pre-computed query embedding.
-        """
+    def search(self, query_embedding: List[float], n_results: int = 5) -> Dict:
         return self.collection.query(
             query_embeddings=[query_embedding],
-            n_results=n_results
+            n_results=n_results,
+            include=["documents", "metadatas"],
         )
+
+    def delete_collection(self) -> None:
+        try:
+            self.client.delete_collection(self.collection.name)
+            print("[ChromaDB] Collection deleted.")
+        except Exception as e:
+            print(f"[ChromaDB] Error deleting collection: {e}")
+
+
+# Backward-compatible alias
+VectorStore = ChromaVectorStore

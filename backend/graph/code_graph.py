@@ -9,7 +9,7 @@ and provides advanced analysis capabilities including:
 """
 
 import json
-import networkx as nx
+from .graph_store_factory import create_graph_store
 from typing import List, Dict, Optional, Set, Tuple
 from dataclasses import dataclass
 
@@ -149,17 +149,17 @@ class CodeGraph:
     """
     Knowledge graph for code analysis.
     
-    Wraps a NetworkX DiGraph with relationship-aware operations.
+    Uses a pluggable graph store backend (NetworkX local or Neptune AWS).
     """
     
     def __init__(self):
-        self.graph = nx.DiGraph()
+        self.store = create_graph_store()
         self.entity_metadata: Dict[str, Dict] = {}
         self.relationships: List[Relationship] = []
     
     def add_entity(self, entity_id: str, metadata: Optional[Dict] = None):
         """Add a code entity node to the graph."""
-        self.graph.add_node(entity_id)
+        self.store.add_node(entity_id)
         if metadata:
             self.entity_metadata[entity_id] = metadata
     
@@ -168,7 +168,7 @@ class CodeGraph:
         self.relationships.append(rel)
         
         # Add edge with relationship metadata
-        self.graph.add_edge(
+        self.store.add_edge(
             rel.source,
             rel.target,
             type=rel.rel_type.value,
@@ -185,8 +185,8 @@ class CodeGraph:
     def get_callers(self, entity_id: str) -> List[str]:
         """Get all entities that call this entity (predecessors with CALLS edge)."""
         callers = []
-        for pred in self.graph.predecessors(entity_id):
-            edge_data = self.graph.get_edge_data(pred, entity_id)
+        for pred in self.store.predecessors(entity_id):
+            edge_data = self.store.get_edge_data(pred, entity_id)
             if edge_data and edge_data.get("type") == RelationType.CALLS.value:
                 callers.append(pred)
         return callers
@@ -194,8 +194,8 @@ class CodeGraph:
     def get_callees(self, entity_id: str) -> List[str]:
         """Get all entities that this entity calls."""
         callees = []
-        for succ in self.graph.successors(entity_id):
-            edge_data = self.graph.get_edge_data(entity_id, succ)
+        for succ in self.store.successors(entity_id):
+            edge_data = self.store.get_edge_data(entity_id, succ)
             if edge_data and edge_data.get("type") == RelationType.CALLS.value:
                 callees.append(succ)
         return callees
@@ -207,8 +207,8 @@ class CodeGraph:
                         RelationType.INHERITS, RelationType.USES_TYPE}
         
         deps = []
-        for succ in self.graph.successors(entity_id):
-            edge_data = self.graph.get_edge_data(entity_id, succ)
+        for succ in self.store.successors(entity_id):
+            edge_data = self.store.get_edge_data(entity_id, succ)
             if edge_data and edge_data.get("type") in {rt.value for rt in rel_types}:
                 deps.append(succ)
         return deps
@@ -220,8 +220,8 @@ class CodeGraph:
                         RelationType.INHERITS, RelationType.USES_TYPE}
         
         deps = []
-        for pred in self.graph.predecessors(entity_id):
-            edge_data = self.graph.get_edge_data(pred, entity_id)
+        for pred in self.store.predecessors(entity_id):
+            edge_data = self.store.get_edge_data(pred, entity_id)
             if edge_data and edge_data.get("type") in {rt.value for rt in rel_types}:
                 deps.append(pred)
         return deps
@@ -237,7 +237,7 @@ class CodeGraph:
         Returns:
             ImpactAssessment with full impact analysis including enhanced risk factors
         """
-        if target not in self.graph:
+        if not self.store.has_node(target):
             return ImpactAssessment(
                 target=target,
                 direct_callers=[],
@@ -336,9 +336,9 @@ class CodeGraph:
         
         # 5. Change Frequency Risk (placeholder - would need git integration)
         # For now, use graph degree as proxy (highly connected = often changed)
-        in_degree = self.graph.in_degree(target) if target in self.graph else 0
-        out_degree = self.graph.out_degree(target) if target in self.graph else 0
-        change_frequency_risk = min((in_degree + out_degree) / 20, 1.0)
+        in_deg = self.store.in_degree(target) if self.store.has_node(target) else 0
+        out_deg = self.store.out_degree(target) if self.store.has_node(target) else 0
+        change_frequency_risk = min((in_deg + out_deg) / 20, 1.0)
         
         # 6. Bus Factor Risk (placeholder - would need git integration)
         # For now, default to medium risk
@@ -360,12 +360,11 @@ class CodeGraph:
         Uses betweenness centrality to identify critical path nodes.
         """
         try:
-            if self.graph.number_of_nodes() < 3:
+            if self.store.number_of_nodes() < 3:
                 return 0.0
             
             # Calculate betweenness centrality for the target
-            # This measures how often a node appears on shortest paths
-            centrality = nx.betweenness_centrality(self.graph)
+            centrality = self.store.betweenness_centrality()
             target_centrality = centrality.get(target, 0.0)
             
             # Normalize against max centrality in graph
@@ -378,10 +377,9 @@ class CodeGraph:
             return min(normalized, 1.0)
         except Exception:
             # Fallback to simple degree-based calculation
-            if target in self.graph:
-                degree = self.graph.degree(target)
-                max_degree = max(dict(self.graph.degree()).values()) if self.graph.number_of_nodes() > 0 else 1
-                return min(degree / max_degree, 1.0) if max_degree > 0 else 0.0
+            if self.store.has_node(target):
+                degree = self.store.in_degree(target) + self.store.out_degree(target)
+                return min(degree / 20, 1.0)
             return 0.0
     
     def _generate_recommendations(
@@ -417,7 +415,7 @@ class CodeGraph:
     
     def _collect_upstream(self, entity_id: str, collected: Set[str]):
         """Recursively collect all upstream dependencies."""
-        for pred in self.graph.predecessors(entity_id):
+        for pred in self.store.predecessors(entity_id):
             if pred not in collected:
                 collected.add(pred)
                 self._collect_upstream(pred, collected)
@@ -431,9 +429,9 @@ class CodeGraph:
         }
         
         for entity in affected:
-            for succ in self.graph.successors(entity):
+            for succ in self.store.successors(entity):
                 if succ == target or succ in affected:
-                    edge_data = self.graph.get_edge_data(entity, succ)
+                    edge_data = self.store.get_edge_data(entity, succ)
                     if edge_data:
                         edge_type = edge_data.get("type")
                         if edge_type == RelationType.CALLS.value:
@@ -453,14 +451,14 @@ class CodeGraph:
         tree = {"class": class_id, "bases": [], "subclasses": []}
         
         # Get bases
-        for succ in self.graph.successors(class_id):
-            edge_data = self.graph.get_edge_data(class_id, succ)
+        for succ in self.store.successors(class_id):
+            edge_data = self.store.get_edge_data(class_id, succ)
             if edge_data and edge_data.get("type") == RelationType.INHERITS.value:
                 tree["bases"].append(succ)
         
         # Get subclasses
-        for pred in self.graph.predecessors(class_id):
-            edge_data = self.graph.get_edge_data(pred, class_id)
+        for pred in self.store.predecessors(class_id):
+            edge_data = self.store.get_edge_data(pred, class_id)
             if edge_data and edge_data.get("type") == RelationType.INHERITS.value:
                 tree["subclasses"].append(pred)
         
@@ -469,24 +467,23 @@ class CodeGraph:
     def find_cycles(self) -> List[List[str]]:
         """Find all cycles in the dependency graph."""
         try:
-            cycles = list(nx.simple_cycles(self.graph))
-            return cycles
+            return self.store.find_cycles()
         except:
             return []
     
     def get_statistics(self) -> Dict:
         """Get graph statistics."""
         stats = {
-            "nodes": self.graph.number_of_nodes(),
-            "edges": self.graph.number_of_edges(),
-            "density": nx.density(self.graph) if self.graph.number_of_nodes() > 0 else 0,
+            "nodes": self.store.number_of_nodes(),
+            "edges": self.store.number_of_edges(),
+            "density": self.store.density(),
         }
         
-        # Count edge types
+        # Count edge types from tracked relationships
         edge_types = {}
-        for u, v, data in self.graph.edges(data=True):
-            edge_type = data.get("type", "unknown")
-            edge_types[edge_type] = edge_types.get(edge_type, 0) + 1
+        for rel in self.relationships:
+            rel_type = rel.rel_type.value
+            edge_types[rel_type] = edge_types.get(rel_type, 0) + 1
         stats["edge_types"] = edge_types
         
         return stats

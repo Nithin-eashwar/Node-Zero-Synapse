@@ -195,6 +195,13 @@ tmp/
 temp/
 *.tmp
 
+# Generated data files
+repo_graph.json
+backend/data/repo_graph.json
+
+# ChromaDB vector store (regenerated via /ai/index)
+chroma_db/
+
 # Data files (if containing sensitive data)
 # Uncomment if needed:
 # backend/data/

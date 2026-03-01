@@ -33,7 +33,7 @@ def main():
         
         print("\nStarting indexing...")
         count = pipeline.index_codebase(data)
-        print(f"\nSUCCESS: Indexed {count} items into ChromaDB.")
+        print(f"\nSUCCESS: Indexed {count} items into vector store.")
         print("You can now start the server and use the AI features.")
         
     except Exception:
