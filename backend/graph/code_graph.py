@@ -226,13 +226,15 @@ class CodeGraph:
                 deps.append(pred)
         return deps
     
-    def calculate_blast_radius(self, target: str, complexity_data: Optional[Dict] = None) -> ImpactAssessment:
+    def calculate_blast_radius(self, target: str, complexity_data: Optional[Dict] = None,
+                                git_risk_analyzer=None) -> ImpactAssessment:
         """
         Calculate the full blast radius of changing an entity.
         
         Args:
             target: Entity ID to analyze
             complexity_data: Optional dict mapping entity_id -> complexity metrics
+            git_risk_analyzer: Optional GitRiskAnalyzer for real git-backed risk metrics
             
         Returns:
             ImpactAssessment with full impact analysis including enhanced risk factors
@@ -272,7 +274,8 @@ class CodeGraph:
             direct_callers=direct_callers,
             indirect_callers=indirect_callers,
             affected_tests=affected_tests,
-            complexity_data=complexity_data
+            complexity_data=complexity_data,
+            git_risk_analyzer=git_risk_analyzer
         )
         
         # Use weighted total as risk score
@@ -299,13 +302,18 @@ class CodeGraph:
         direct_callers: List[str],
         indirect_callers: List[str],
         affected_tests: List[str],
-        complexity_data: Optional[Dict] = None
+        complexity_data: Optional[Dict] = None,
+        git_risk_analyzer=None
     ) -> RiskFactors:
         """
         Calculate comprehensive risk factors for an entity.
         
-        Uses graph analysis, complexity metrics, and coverage data
+        Uses graph analysis, complexity metrics, git history, and coverage data
         to produce a detailed risk breakdown.
+        
+        Args:
+            git_risk_analyzer: Optional GitRiskAnalyzer for real git-backed
+                              change frequency and bus factor metrics.
         """
         # 1. Complexity Risk
         complexity_risk = 0.0
@@ -334,15 +342,21 @@ class CodeGraph:
         total_dependents = len(direct_callers) + len(indirect_callers)
         dependency_risk = min(total_dependents / 10, 1.0)
         
-        # 5. Change Frequency Risk (placeholder - would need git integration)
-        # For now, use graph degree as proxy (highly connected = often changed)
-        in_deg = self.store.in_degree(target) if self.store.has_node(target) else 0
-        out_deg = self.store.out_degree(target) if self.store.has_node(target) else 0
-        change_frequency_risk = min((in_deg + out_deg) / 20, 1.0)
+        # 5. Change Frequency Risk (git-backed or fallback to degree proxy)
+        file_path = self.entity_metadata.get(target, {}).get("file", "")
+        if git_risk_analyzer and file_path:
+            change_frequency_risk = git_risk_analyzer.get_change_frequency_risk(file_path)
+        else:
+            # Fallback: use graph degree as proxy
+            in_deg = self.store.in_degree(target) if self.store.has_node(target) else 0
+            out_deg = self.store.out_degree(target) if self.store.has_node(target) else 0
+            change_frequency_risk = min((in_deg + out_deg) / 20, 1.0)
         
-        # 6. Bus Factor Risk (placeholder - would need git integration)
-        # For now, default to medium risk
-        bus_factor_risk = 0.5
+        # 6. Bus Factor Risk (git-backed or fallback to default)
+        if git_risk_analyzer and file_path:
+            bus_factor_risk = git_risk_analyzer.get_bus_factor_risk(file_path)
+        else:
+            bus_factor_risk = 0.5
         
         return RiskFactors(
             complexity_risk=complexity_risk,

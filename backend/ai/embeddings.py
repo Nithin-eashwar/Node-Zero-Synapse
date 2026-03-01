@@ -1,13 +1,28 @@
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict
+import os
+
+
+# Model comparison:
+#   all-MiniLM-L6-v2:   384-dim, 22M params, fast but lower accuracy
+#   all-mpnet-base-v2:  768-dim, 109M params, ~10% better retrieval accuracy
+#   all-MiniLM-L12-v2:  384-dim, 33M params, balanced speed/quality
+EMBEDDING_MODEL_DEFAULT = "all-mpnet-base-v2"
 
 
 class CodeEmbedder:
-    def __init__(self, model_name="all-MiniLM-L6-v2"):
-        # We use a lightweight local model for speed
+    def __init__(self, model_name=None):
+        model_name = model_name or os.getenv("EMBEDDING_MODEL", EMBEDDING_MODEL_DEFAULT)
         print(f"Loading embedding model: {model_name}...")
         self.model = SentenceTransformer(model_name)
-        print("Embedding model loaded.")
+        self._model_name = model_name
+        self._dim = self.model.get_sentence_embedding_dimension()
+        print(f"Embedding model loaded. (dim={self._dim})")
+
+    @property
+    def embedding_dim(self) -> int:
+        """Return the dimension of the embedding vectors."""
+        return self._dim
 
     def embed_text(self, text):
         return self.model.encode(text).tolist()

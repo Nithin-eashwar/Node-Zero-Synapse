@@ -47,7 +47,8 @@ app.add_middleware(
 # We keep the graph in memory for speed
 graph_db = {
     "code_graph": None,  # CodeGraph instance (uses pluggable store backend)
-    "raw_data": []
+    "raw_data": [],
+    "git_risk": None     # GitRiskAnalyzer instance (lazy, cached)
 }
 startup_error = None
 
@@ -86,6 +87,15 @@ async def load_data():
         traceback.print_exc()
         startup_error = str(e)
         print(f"Error loading graph: {e}")
+    
+    # Initialize git risk analyzer (non-blocking, lightweight)
+    try:
+        from backend.git.git_risk_analyzer import get_git_risk_analyzer
+        graph_db["git_risk"] = get_git_risk_analyzer(REPO_PATH)
+        print(f"[Startup] Git risk analyzer ready")
+    except Exception as e:
+        print(f"[Startup] Git risk analysis unavailable: {e}")
+        graph_db["git_risk"] = None
 
 # --- CORE ENDPOINTS ---
 
@@ -150,8 +160,9 @@ async def explain_blast_radius(function_name: str):
         if node.get("complexity"):
             complexity_data[node["name"]] = node["complexity"]
     
-    # Calculate full impact assessment using preloaded CodeGraph
-    impact = cg.calculate_blast_radius(function_name, complexity_data)
+    # Calculate full impact assessment using preloaded CodeGraph + git risk
+    git_risk = graph_db.get("git_risk")
+    impact = cg.calculate_blast_radius(function_name, complexity_data, git_risk_analyzer=git_risk)
     impact_dict = impact.to_dict()
     
     # Find the entity's raw node data
@@ -169,6 +180,34 @@ async def explain_blast_radius(function_name: str):
     # Merge structured data with AI explanation
     result["impact_assessment"] = impact_dict
     return result
+
+
+@app.get("/git-risk/{file_path:path}")
+def get_git_risk(file_path: str):
+    """
+    Get git-backed risk metrics for a file.
+    
+    Returns change frequency, bus factor, unique authors,
+    and commit history analysis.
+    """
+    git_risk = graph_db.get("git_risk")
+    if not git_risk:
+        raise HTTPException(
+            status_code=503,
+            detail="Git risk analysis not available (no git repo found)"
+        )
+    
+    summary = git_risk.get_file_summary(file_path)
+    if not summary:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No git history found for '{file_path}'"
+        )
+    
+    return {
+        "file": file_path,
+        **summary
+    }
 
 
 # --- SMART BLAME ENDPOINTS ---

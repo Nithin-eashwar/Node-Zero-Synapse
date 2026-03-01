@@ -19,8 +19,19 @@ from typing import Dict, List, Optional
 
 from .base_store import BaseVectorStore
 
-# Embedding dimension for all-MiniLM-L6-v2
-EMBEDDING_DIM = 384
+
+def _get_embedding_dim() -> int:
+    """Get the embedding dimension from the configured model."""
+    from .embeddings import EMBEDDING_MODEL_DEFAULT
+    model_name = os.getenv("EMBEDDING_MODEL", EMBEDDING_MODEL_DEFAULT)
+    # Known dimensions to avoid loading model just for dim check
+    KNOWN_DIMS = {
+        "all-MiniLM-L6-v2": 384,
+        "all-MiniLM-L12-v2": 384,
+        "all-mpnet-base-v2": 768,
+        "all-distilroberta-v1": 768,
+    }
+    return KNOWN_DIMS.get(model_name, 768)
 
 
 class OpenSearchVectorStore(BaseVectorStore):
@@ -35,6 +46,7 @@ class OpenSearchVectorStore(BaseVectorStore):
                 "Install with: pip install opensearch-py"
             )
 
+        self.embedding_dim = _get_embedding_dim()
         self.index_name = index_name or os.getenv("OPENSEARCH_INDEX", "synapse_vectors")
         host = os.getenv("OPENSEARCH_HOST", "localhost")
         port = int(os.getenv("OPENSEARCH_PORT", "9200"))
@@ -53,7 +65,7 @@ class OpenSearchVectorStore(BaseVectorStore):
 
         self.client = OpenSearch(**conn_kwargs)
         self._ensure_index()
-        print(f"[OpenSearch] Connected to {host}:{port}, index: {self.index_name}")
+        print(f"[OpenSearch] Connected to {host}:{port}, index: {self.index_name} (dim={self.embedding_dim})")
 
     def _ensure_index(self) -> None:
         """Create the k-NN index if it doesn't exist."""
@@ -72,7 +84,7 @@ class OpenSearchVectorStore(BaseVectorStore):
                 "properties": {
                     "embedding": {
                         "type": "knn_vector",
-                        "dimension": EMBEDDING_DIM,
+                        "dimension": self.embedding_dim,
                         "method": {
                             "name": "hnsw",
                             "space_type": "cosinesimil",
