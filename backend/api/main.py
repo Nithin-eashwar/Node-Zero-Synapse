@@ -39,7 +39,7 @@ else:
 # --- CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(BASE_DIR, "..", "..", "repo_graph.json")
-REPO_PATH = os.path.join(BASE_DIR, "..", "..", "dummy_repo") # Point back to root
+REPO_PATH = os.environ.get("SYNAPSE_REPO_PATH") or os.path.join(BASE_DIR, "..", "..", "dummy_repo")
 
 app = FastAPI(
     title="Synapse Backend Engine",
@@ -494,7 +494,7 @@ def get_condensed_graph():
     }
 
 
-@app.get("/blast-radius/{function_name}")
+@app.get("/blast-radius/{function_name:path}")
 def get_blast_radius(function_name: str):
     """Calculates dependencies for a specific function"""
     cg = graph_db["code_graph"]
@@ -512,7 +512,7 @@ def get_blast_radius(function_name: str):
     }
 
 
-@app.get("/blast-radius/{function_name}/explain")
+@app.get("/blast-radius/{function_name:path}/explain")
 async def explain_blast_radius(function_name: str):
     """
     AI-Powered Blast Radius Explanation.
