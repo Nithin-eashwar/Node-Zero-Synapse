@@ -39,6 +39,7 @@ from .blame import (
 
 # Global analyzer instance (lazy initialized)
 _analyzer: Optional[SmartBlameAnalyzer] = None
+_analyzer_repo_path: Optional[str] = None
 
 
 async def get_analyzer(repo_path: Optional[str] = None) -> SmartBlameAnalyzer:
@@ -52,11 +53,13 @@ async def get_analyzer(repo_path: Optional[str] = None) -> SmartBlameAnalyzer:
     Returns:
         SmartBlameAnalyzer instance
     """
-    global _analyzer
-    
-    if _analyzer is None:
-        path = repo_path or os.getcwd()
-        _analyzer = await create_analyzer(path)
+    global _analyzer, _analyzer_repo_path
+    requested_path = os.path.abspath(repo_path or os.getcwd())
+
+    # Rebuild analyzer when repo changes; otherwise Smart Blame keeps using stale repo context.
+    if _analyzer is None or _analyzer_repo_path != requested_path:
+        _analyzer = await create_analyzer(requested_path)
+        _analyzer_repo_path = requested_path
     
     return _analyzer
 
@@ -168,8 +171,9 @@ async def get_developer_expertise(
 
 def reset_analyzer() -> None:
     """Reset the global analyzer instance."""
-    global _analyzer
+    global _analyzer, _analyzer_repo_path
     _analyzer = None
+    _analyzer_repo_path = None
 
 
 __all__ = [
