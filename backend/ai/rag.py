@@ -84,7 +84,7 @@ Answer:
         
         # 5. Build graph-aware context if available
         if self.graph_context and entity_names:
-            return self._ask_with_full_context(
+            return await self._ask_with_full_context(
                 query, prompt, intent, code_context_str, entity_names, retrieved_docs
             )
         else:

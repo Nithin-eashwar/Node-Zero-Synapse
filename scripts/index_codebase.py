@@ -31,6 +31,14 @@ def main():
         # Initialize RAG Pipeline
         pipeline = RAGPipeline()
         
+        # Delete old collection to handle embedding model changes
+        print("Clearing old vector index (dimension may have changed)...")
+        pipeline.vector_store.delete_collection()
+        
+        # Re-initialize store after deletion
+        from backend.ai.store_factory import create_vector_store
+        pipeline.vector_store = create_vector_store()
+        
         print("\nStarting indexing...")
         count = pipeline.index_codebase(data)
         print(f"\nSUCCESS: Indexed {count} items into vector store.")

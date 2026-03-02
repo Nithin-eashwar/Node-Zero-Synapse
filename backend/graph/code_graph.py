@@ -159,7 +159,8 @@ class CodeGraph:
     
     def add_entity(self, entity_id: str, metadata: Optional[Dict] = None):
         """Add a code entity node to the graph."""
-        self.store.add_node(entity_id)
+        attrs = metadata or {}
+        self.store.add_node(entity_id, **attrs)
         if metadata:
             self.entity_metadata[entity_id] = metadata
     

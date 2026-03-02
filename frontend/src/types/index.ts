@@ -26,6 +26,83 @@ export interface BlastRadiusEdge {
     weight: number;
 }
 
+export interface FullGraphNode {
+    id: string;
+    file?: string;
+    name?: string;
+    type?: string;
+    range?: number[];
+    complexity?: number | { cyclomatic?: number };
+    [key: string]: unknown;
+}
+
+export interface FullGraphEdge {
+    source: string;
+    target: string;
+}
+
+export interface FullGraphResponse {
+    nodes: FullGraphNode[];
+    edges: FullGraphEdge[];
+}
+
+export interface CondensedDirectoryNode {
+    id: string;
+    type: 'directory';
+    label: string;
+    file_count: number;
+    entity_count: number;
+    risk_level: RiskLevel;
+    total_complexity: number;
+}
+
+export interface CondensedDirectoryEdge {
+    source: string;
+    target: string;
+    weight: number;
+}
+
+export interface CondensedFileNode {
+    id: string;
+    type: 'file';
+    label: string;
+    full_path: string;
+    directory: string;
+    entity_count: number;
+    risk_level: RiskLevel;
+    total_complexity: number;
+}
+
+export interface CondensedFileEdge {
+    source: string;
+    target: string;
+    weight: number;
+}
+
+export interface CondensedEntityNode {
+    id: string;
+    name: string;
+    type: string;
+    risk_level: RiskLevel;
+    complexity: number;
+    degree: number;
+    line: number;
+}
+
+export interface CondensedEntityEdge {
+    source: string;
+    target: string;
+}
+
+export interface CondensedGraphResponse {
+    directory_nodes: CondensedDirectoryNode[];
+    directory_edges: CondensedDirectoryEdge[];
+    files_by_directory: Record<string, CondensedFileNode[]>;
+    file_edges: CondensedFileEdge[];
+    entities_by_file: Record<string, CondensedEntityNode[]>;
+    entity_edges: CondensedEntityEdge[];
+}
+
 // ── Expert / Smart Blame Types ──────────────────────────
 
 export interface ExpertiseFactor {
