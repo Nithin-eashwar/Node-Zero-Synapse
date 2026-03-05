@@ -121,5 +121,83 @@
   background-color: #171717 !important;
 }
 
+/* ── AI Mentor Markdown Styles ──────────────────────── */
+.md-content p.md-p {
+  margin: 0.4em 0;
+}
+
+.md-content h2.md-h1,
+.md-content h3.md-h2,
+.md-content h4.md-h3 {
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  color: #e5e5e5;
+}
+
+.md-content h2.md-h1 { font-size: 1.15em; }
+.md-content h3.md-h2 { font-size: 1.05em; }
+.md-content h4.md-h3 { font-size: 1em; }
+
+.md-content code.md-code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: #c4b5fd;
+}
+
+.md-content pre.md-codeblock {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.75em 1em;
+  margin: 0.5em 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  line-height: 1.5;
+  color: #d4d4d8;
+}
+
+.md-content ul.md-list,
+.md-content ol.md-list {
+  margin: 0.4em 0;
+  padding-left: 1.4em;
+}
+
+.md-content ul.md-list { list-style-type: disc; }
+.md-content ol.md-list { list-style-type: decimal; }
+
+.md-content li {
+  margin: 0.2em 0;
+}
+
+.md-content strong {
+  color: #e5e5e5;
+  font-weight: 600;
+}
+
+.md-content em {
+  font-style: italic;
+  color: #a5b4fc;
+}
+
+.md-content a.md-link {
+  color: #818cf8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.md-content a.md-link:hover {
+  color: #a5b4fc;
+}
+
+.md-content hr.md-hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 0.8em 0;
+}
+
 /* ── Google Fonts Import ─────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');

@@ -1,6 +1,7 @@
 import { Sparkles, MessageSquare, Send, Loader2 } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useAskAI } from '../lib/hooks';
+import { markdownToHtml } from '../lib/markdown';
 
 interface Message {
     role: 'user' | 'assistant';
@@ -106,10 +107,17 @@ export default function MentorPage() {
                                     <div
                                         className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${msg.role === 'user'
                                             ? 'bg-indigo-500/15 text-indigo-200'
-                                            : 'bg-white/[0.04] text-neutral-300'
+                                            : 'md-response bg-white/[0.04] text-neutral-300'
                                             }`}
                                     >
-                                        <pre className="whitespace-pre-wrap font-sans">{msg.content}</pre>
+                                        {msg.role === 'user' ? (
+                                            <pre className="whitespace-pre-wrap font-sans">{msg.content}</pre>
+                                        ) : (
+                                            <div
+                                                className="md-content"
+                                                dangerouslySetInnerHTML={{ __html: markdownToHtml(msg.content) }}
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             ))}

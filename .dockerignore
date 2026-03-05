@@ -1,0 +1,35 @@
+# Virtual environments
+.venv/
+venv/
+__pycache__/
+
+# Git
+.git/
+.gitignore
+
+# Frontend (separate build)
+frontend/
+packages/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Data files (mounted at runtime)
+chroma_db/
+dummy_repo/
+repo_graph.json
+
+# Docs
+*.md
+LICENSE*
+design.md
+requirements.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gemini
+.gemini/
