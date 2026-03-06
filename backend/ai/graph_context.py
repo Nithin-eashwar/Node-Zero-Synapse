@@ -139,24 +139,17 @@ class GraphContextBuilder:
         
         This is the main entry point called from the RAG pipeline.
         For each entity matched by vector search, we enrich it with
-        graph-aware context.
+        graph-aware context. Limited to top 3 to keep prompts lean.
         """
         contexts = []
-        seen_files = set()
 
-        for name in matched_names[:5]:  # Limit to top 5 to avoid context bloat
+        for name in matched_names[:3]:  # Limit to top 3 for faster LLM responses
             node = self._find_node(name)
             if not node:
                 continue
             
-            # Entity-level context
+            # Entity-level context (includes file path already)
             contexts.append(self.get_entity_context(name))
-            
-            # Add file context once per unique file
-            file_path = node.get("file", "")
-            if file_path and file_path not in seen_files:
-                seen_files.add(file_path)
-                contexts.append(self.get_file_context(file_path))
 
         if not contexts:
             return ""

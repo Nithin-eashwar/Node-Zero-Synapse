@@ -1,4 +1,5 @@
 import os
+import asyncio
 import dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from .embeddings import CodeEmbedder
@@ -70,8 +71,8 @@ Answer:
         # 2. Embed query for vector search
         query_embedding = self.embedder.embed_text(query)
         
-        # 3. Retrieve from vector store
-        results = self.vector_store.search(query_embedding, n_results=5)
+        # 3. Retrieve from vector store (3 results balances quality vs speed)
+        results = self.vector_store.search(query_embedding, n_results=3)
         
         if not results['documents'] or not results['documents'][0]:
             return {"answer": "No relevant code context found.", "context": []}
@@ -93,16 +94,38 @@ Answer:
     async def _ask_with_full_context(self, query, prompt, intent, code_context_str, entity_names, retrieved_docs):
         """Generate response using multi-source context injection."""
         try:
-            # Source 1: Graph-aware structural context
-            graph_context_str = self.graph_context.get_query_context(entity_names)
-            graph_summary = self.graph_context.get_graph_summary()
-            
-            # Source 2: Live feature data from backend services
-            feature_data = ""
-            if self.context_aggregator:
-                feature_data = await self.context_aggregator.gather(
-                    intent, entity_names, self._repo_path
+            # Build all context sources in parallel (saves ~300-400ms)
+            async def _get_graph_context():
+                # Run sync graph traversal in a thread to not block event loop
+                ctx = await asyncio.to_thread(
+                    self.graph_context.get_query_context, entity_names
                 )
+                if len(ctx) > 1500:
+                    ctx = ctx[:1500] + "\n... (truncated for brevity)"
+                return ctx
+
+            async def _get_graph_summary():
+                return await asyncio.to_thread(
+                    self.graph_context.get_graph_summary
+                )
+
+            async def _get_feature_data():
+                if self.context_aggregator and intent != QueryIntent.GENERAL:
+                    return await self.context_aggregator.gather(
+                        intent, entity_names, self._repo_path
+                    )
+                return ""
+
+            # Run all 3 concurrently
+            graph_context_str, graph_summary, feature_data = await asyncio.gather(
+                _get_graph_context(),
+                _get_graph_summary(),
+                _get_feature_data(),
+            )
+            
+            # Cap code context to avoid oversized prompts
+            if len(code_context_str) > 2000:
+                code_context_str = code_context_str[:2000] + "\n... (truncated for brevity)"
             
             chain = prompt | self.llm
             response = chain.invoke({

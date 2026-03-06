@@ -135,6 +135,7 @@ function buildHierarchyGraph(
     graphData: CondensedGraphResponse,
     expandedDirs: Set<string>,
     expandedFiles: Set<string>,
+    focusedDir: string | null,
 ): { nodes: Node[]; edges: Edge[] } {
     const nodes: Node[] = [];
     const edges: Edge[] = [];
@@ -145,6 +146,8 @@ function buildHierarchyGraph(
         const isExpanded = expandedDirs.has(directory.id);
         const directoryX = (index % directoryColumns) * 340;
         const directoryY = Math.floor(index / directoryColumns) * 300;
+
+        const isDimmed = focusedDir !== null && directory.id !== focusedDir;
 
         nodes.push({
             id: directory.id,
@@ -158,6 +161,9 @@ function buildHierarchyGraph(
                 totalComplexity: directory.total_complexity,
                 expanded: isExpanded,
             } satisfies DirectoryNodeData,
+            style: isDimmed
+                ? { opacity: 0.12, pointerEvents: 'none' as const, transition: 'opacity 0.4s ease' }
+                : { opacity: 1, transition: 'opacity 0.4s ease' },
         });
 
         if (!isExpanded) {
@@ -248,6 +254,20 @@ function buildHierarchyGraph(
         }
     }
 
+    // Build the set of node IDs belonging to the focused directory's subtree
+    const focusedSubtreeIds = new Set<string>();
+    if (focusedDir) {
+        focusedSubtreeIds.add(focusedDir);
+        const files = graphData.files_by_directory[focusedDir] ?? [];
+        for (const fileNode of files) {
+            focusedSubtreeIds.add(fileNode.id);
+            const entities = graphData.entities_by_file[fileNode.id] ?? [];
+            for (const entity of entities) {
+                focusedSubtreeIds.add(entity.id);
+            }
+        }
+    }
+
     const seenEdges = new Set<string>();
     let edgeIndex = 0;
     for (const edge of graphData.entity_edges) {
@@ -255,6 +275,9 @@ function buildHierarchyGraph(
         const targetVisible = entityToVisible[edge.target] ?? edge.target;
         if (sourceVisible === targetVisible) continue;
         if (!visibleNodeIds.has(sourceVisible) || !visibleNodeIds.has(targetVisible)) continue;
+
+        // When focused, only show edges where both endpoints are in the focused subtree
+        if (focusedDir && (!focusedSubtreeIds.has(sourceVisible) || !focusedSubtreeIds.has(targetVisible))) continue;
 
         const key = `${sourceVisible}->${targetVisible}`;
         if (seenEdges.has(key)) continue;
@@ -283,6 +306,7 @@ export default function BlastRadiusGraph({ onNodeSelect, viewMode }: BlastRadius
     const [expandedDirs, setExpandedDirs] = useState<Set<string>>(new Set());
     const [expandedFiles, setExpandedFiles] = useState<Set<string>>(new Set());
     const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+    const [focusedDir, setFocusedDir] = useState<string | null>(null);
 
     const fullView = useFullViewGraph(isHierarchy ? undefined : fullQuery.data);
 
@@ -291,12 +315,12 @@ export default function BlastRadiusGraph({ onNodeSelect, viewMode }: BlastRadius
             if (!condensedQuery.data) {
                 return { renderNodes: [] as Node[], renderEdges: [] as Edge[], blastNodes: [] as BlastRadiusNode[] };
             }
-            const { nodes, edges } = buildHierarchyGraph(condensedQuery.data, expandedDirs, expandedFiles);
+            const { nodes, edges } = buildHierarchyGraph(condensedQuery.data, expandedDirs, expandedFiles, focusedDir);
             return { renderNodes: nodes, renderEdges: edges, blastNodes: [] as BlastRadiusNode[] };
         }
 
         return { renderNodes: fullView.flowNodes, renderEdges: fullView.flowEdges, blastNodes: fullView.blastNodes };
-    }, [isHierarchy, condensedQuery.data, expandedDirs, expandedFiles, fullView]);
+    }, [isHierarchy, condensedQuery.data, expandedDirs, expandedFiles, focusedDir, fullView]);
 
     const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
@@ -326,6 +350,9 @@ export default function BlastRadiusGraph({ onNodeSelect, viewMode }: BlastRadius
                     }
                     return next;
                 });
+
+                // Focus isolation: expanding → focus this dir, collapsing → clear focus
+                setFocusedDir(isCollapsing ? null : node.id);
 
                 if (isCollapsing && condensedQuery.data) {
                     const fileIds = (condensedQuery.data.files_by_directory[node.id] ?? []).map((file) => file.id);
@@ -370,6 +397,7 @@ export default function BlastRadiusGraph({ onNodeSelect, viewMode }: BlastRadius
 
     const onPaneClick = useCallback(() => {
         setSelectedNodeId(null);
+        setFocusedDir(null);
         onNodeSelect(null);
     }, [onNodeSelect]);
 
@@ -377,6 +405,7 @@ export default function BlastRadiusGraph({ onNodeSelect, viewMode }: BlastRadius
         setExpandedDirs(new Set());
         setExpandedFiles(new Set());
         setSelectedNodeId(null);
+        setFocusedDir(null);
         onNodeSelect(null);
     }, [viewMode, onNodeSelect]);
 
