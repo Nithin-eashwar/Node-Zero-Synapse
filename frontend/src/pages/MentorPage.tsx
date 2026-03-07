@@ -1,5 +1,5 @@
 import { Sparkles, MessageSquare, Send, Loader2 } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useAskAI } from '../lib/hooks';
 import { markdownToHtml } from '../lib/markdown';
 
