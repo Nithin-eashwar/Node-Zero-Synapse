@@ -355,10 +355,10 @@ export default function BlastRadiusGraph({ onNodeSelect, viewMode }: BlastRadius
                 setFocusedDir(isCollapsing ? null : node.id);
 
                 if (isCollapsing && condensedQuery.data) {
-                    const fileIds = (condensedQuery.data.files_by_directory[node.id] ?? []).map((file: { id: string }) => file.id);
+                    const fileIds = (condensedQuery.data.files_by_directory[node.id] ?? []).map((file) => file.id);
                     setExpandedFiles((prev) => {
                         const next = new Set(prev);
-                        fileIds.forEach((fileId: string) => next.delete(fileId));
+                        fileIds.forEach((fileId) => next.delete(fileId));
                         return next;
                     });
                 }
