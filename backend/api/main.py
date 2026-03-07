@@ -1,9 +1,14 @@
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 import os
 import sys
+import shutil
+import zipfile
+import subprocess
+import threading
+import stat
 from typing import Any, Dict, List, Optional, Tuple
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +19,8 @@ from backend.git.smart_git import (
     get_expertise_heatmap,
     get_bus_factor_analysis,
     get_knowledge_gaps,
-    get_developer_expertise
+    get_developer_expertise,
+    reset_analyzer
 )
 from backend.governance import (
     ArchitectureValidator,
@@ -851,3 +857,227 @@ async def ask_ai(query: str):
     pipeline = get_rag_pipeline()
     result = await pipeline.ask(query)
     return result
+
+
+# --- UPLOAD / ANALYZE ENDPOINTS ---
+
+UPLOADS_DIR = os.path.join(BASE_DIR, "..", "..", "uploads")
+os.makedirs(UPLOADS_DIR, exist_ok=True)
+
+
+def robust_rmtree(path: str):
+    """
+    Windows-safe recursive directory removal.
+    .git pack files are read-only on Windows, which causes shutil.rmtree to
+    raise WinError 5 (Access Denied). This helper clears the read-only bit
+    before retrying.
+    """
+    def _handle_readonly(func, fpath, exc_info):
+        try:
+            os.chmod(fpath, stat.S_IWRITE)
+            func(fpath)
+        except Exception:
+            pass
+    shutil.rmtree(path, onerror=_handle_readonly)
+
+
+upload_state = {
+    "status": "idle",     # idle | cloning | parsing | building | ready | error
+    "repo_name": None,
+    "error": None,
+    "stats": None,
+    "repo_path": None,
+    "step_times": {},     # {"cloning": {"start": ts, "end": ts}, "parsing": {...}, "building": {...}}
+    "progress": 0,        # 0-100
+}
+
+import time as _time
+
+
+def reparse_and_reload(repo_path: str, repo_name: str):
+    """Parse a repository and reload the in-memory graph. Runs in background thread."""
+    global REPO_PATH, startup_error
+    try:
+        upload_state["status"] = "parsing"
+        upload_state["repo_name"] = repo_name
+        upload_state["error"] = None
+        upload_state["progress"] = 35
+        upload_state["step_times"]["parsing"] = {"start": _time.time(), "end": None}
+
+        from backend.parsing.parser import scan_repository, get_all_entities
+
+        parsed_files = scan_repository(repo_path)
+        all_entities = get_all_entities(parsed_files)
+
+        upload_state["step_times"]["parsing"]["end"] = _time.time()
+        upload_state["progress"] = 65
+
+        # --- Building phase ---
+        upload_state["status"] = "building"
+        upload_state["step_times"]["building"] = {"start": _time.time(), "end": None}
+
+        # Save repo_graph.json (compact, no indent for speed)
+        with open(INPUT_FILE, "w") as f:
+            json.dump(all_entities, f, separators=(",", ":"))
+
+        # Rebuild in-memory graph
+        graph_db["raw_data"] = all_entities
+        graph_db["nx_graph"] = build_dependency_graph(all_entities)
+
+        upload_state["progress"] = 85
+
+        # Update repo path for blame/governance endpoints
+        REPO_PATH = repo_path
+        upload_state["repo_path"] = repo_path
+        startup_error = None
+
+        # Reset the cached git analyzer so it picks up the new repo
+        try:
+            reset_analyzer()
+        except Exception as e:
+            print(f"Warning: Failed to reset analyzer: {e}")
+
+        upload_state["step_times"]["building"]["end"] = _time.time()
+        upload_state["progress"] = 100
+
+        graph_stats = graph_db["nx_graph"].get_statistics()
+        upload_state["stats"] = {
+            "files": len(parsed_files),
+            "entities": len(all_entities),
+            "nodes": graph_stats["nodes"],
+            "edges": graph_stats["edges"],
+        }
+        upload_state["status"] = "ready"
+        print(f"[OK] Parsed {repo_name}: {len(all_entities)} entities, "
+              f"{graph_stats['nodes']} nodes")
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        upload_state["status"] = "error"
+        upload_state["error"] = str(e)
+        print(f"[ERROR] Parse failed: {e}")
+
+
+class GithubUploadRequest(BaseModel):
+    url: str
+
+
+@app.post("/upload/folder")
+async def upload_folder(file: UploadFile = File(...)):
+    """
+    Upload a ZIP of a codebase for analysis.
+    Extracts, parses with tree-sitter, and rebuilds the in-memory graph.
+    """
+    if upload_state["status"] in ("cloning", "parsing"):
+        raise HTTPException(status_code=409, detail="An analysis is already in progress")
+
+    if not file.filename or not file.filename.endswith(".zip"):
+        raise HTTPException(status_code=400, detail="Please upload a .zip file")
+
+    upload_state["status"] = "parsing"
+    upload_state["repo_name"] = file.filename.replace(".zip", "")
+    upload_state["error"] = None
+    upload_state["stats"] = None
+    upload_state["step_times"] = {}
+    upload_state["progress"] = 20
+
+    try:
+        repo_name = file.filename.replace(".zip", "")
+        zip_path = os.path.join(UPLOADS_DIR, file.filename)
+        extract_dir = os.path.join(UPLOADS_DIR, repo_name)
+
+        if os.path.exists(extract_dir):
+            robust_rmtree(extract_dir)
+
+        with open(zip_path, "wb") as f:
+            content = await file.read()
+            f.write(content)
+
+        with zipfile.ZipFile(zip_path, "r") as z:
+            z.extractall(extract_dir)
+
+        os.remove(zip_path)
+
+        entries = os.listdir(extract_dir)
+        if len(entries) == 1 and os.path.isdir(os.path.join(extract_dir, entries[0])):
+            actual_path = os.path.join(extract_dir, entries[0])
+        else:
+            actual_path = extract_dir
+
+        thread = threading.Thread(
+            target=reparse_and_reload,
+            args=(actual_path, repo_name)
+        )
+        thread.start()
+
+        return {"status": "parsing", "repo_name": repo_name}
+
+    except Exception as e:
+        upload_state["status"] = "error"
+        upload_state["error"] = str(e)
+        raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+
+
+@app.post("/upload/github")
+async def upload_github(req: GithubUploadRequest):
+    """
+    Clone a GitHub repository and analyze it.
+    Accepts { "url": "https://github.com/user/repo" }
+    """
+    if upload_state["status"] in ("cloning", "parsing"):
+        raise HTTPException(status_code=409, detail="An analysis is already in progress")
+
+    url = req.url.strip()
+    if not url.startswith("https://github.com/"):
+        raise HTTPException(status_code=400, detail="Please provide a valid GitHub URL (https://github.com/...)")
+
+    parts = url.rstrip("/").split("/")
+    repo_name = parts[-1].replace(".git", "") if len(parts) >= 2 else "repo"
+
+    upload_state["status"] = "cloning"
+    upload_state["repo_name"] = repo_name
+    upload_state["error"] = None
+    upload_state["stats"] = None
+    upload_state["step_times"] = {}
+    upload_state["progress"] = 0
+
+    def clone_and_parse():
+        try:
+            upload_state["step_times"]["cloning"] = {"start": _time.time(), "end": None}
+            upload_state["progress"] = 10
+
+            clone_dir = os.path.join(UPLOADS_DIR, repo_name)
+            if os.path.exists(clone_dir):
+                robust_rmtree(clone_dir)
+
+            result = subprocess.run(
+                ["git", "clone", "--depth", "1", url, clone_dir],
+                capture_output=True, text=True, timeout=120
+            )
+
+            upload_state["step_times"]["cloning"]["end"] = _time.time()
+
+            if result.returncode != 0:
+                upload_state["status"] = "error"
+                upload_state["error"] = f"Git clone failed: {result.stderr}"
+                return
+
+            upload_state["progress"] = 30
+            reparse_and_reload(clone_dir, repo_name)
+        except subprocess.TimeoutExpired:
+            upload_state["status"] = "error"
+            upload_state["error"] = "Git clone timed out (120s limit)"
+        except Exception as e:
+            upload_state["status"] = "error"
+            upload_state["error"] = str(e)
+
+    thread = threading.Thread(target=clone_and_parse)
+    thread.start()
+
+    return {"status": "cloning", "repo_name": repo_name}
+
+
+@app.get("/upload/status")
+def get_upload_status():
+    """Get the current upload/analysis status."""
+    return upload_state

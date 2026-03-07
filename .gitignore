@@ -194,6 +194,7 @@ build/
 tmp/
 temp/
 *.tmp
+uploads/
 
 # Generated data files
 repo_graph.json
