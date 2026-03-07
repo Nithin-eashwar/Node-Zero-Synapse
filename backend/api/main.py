@@ -85,6 +85,7 @@ def get_rag_pipeline() -> RAGPipeline:
             _rag_pipeline.set_graph_context(
                 graph_db["code_graph"].store, graph_db["raw_data"], REPO_PATH
             )
+            _rag_pipeline.ensure_indexed(graph_db["raw_data"])
     return _rag_pipeline
 
 
@@ -94,7 +95,27 @@ RISK_ORDER = {"LOW": 0, "MEDIUM": 1, "HIGH": 2, "CRITICAL": 3}
 def _normalise_file_path(file_path: str) -> str:
     if not file_path:
         return ""
-    return file_path.replace("\\", "/").lstrip("./")
+
+    normalized = file_path.replace("\\", "/")
+    active_repo = os.path.abspath(_active_repo_path()).replace("\\", "/")
+
+    if os.path.isabs(file_path):
+        absolute = os.path.abspath(file_path).replace("\\", "/")
+        if absolute == active_repo:
+            return ""
+        if absolute.startswith(active_repo + "/"):
+            return absolute[len(active_repo) + 1:]
+        return absolute.lstrip("./")
+
+    return normalized.lstrip("./")
+
+
+def _normalise_violation_dict(violation: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = dict(violation)
+    normalized["file_path"] = _normalise_file_path(str(violation.get("file_path") or ""))
+    normalized["from_module"] = _normalise_file_path(str(violation.get("from_module") or ""))
+    normalized["to_module"] = _normalise_file_path(str(violation.get("to_module") or ""))
+    return normalized
 
 
 def _directory_key(file_path: str) -> str:
@@ -125,6 +146,10 @@ def _highest_risk_level(levels: List[str]) -> str:
     return max(levels, key=lambda risk: RISK_ORDER.get(risk, 0))
 
 
+def _active_repo_path(repo_path: Optional[str] = None) -> str:
+    return repo_path or upload_state.get("repo_path") or REPO_PATH
+
+
 def _build_raw_entity_map() -> Dict[str, Dict[str, Any]]:
     raw_entity_map: Dict[str, Dict[str, Any]] = {}
     for entity in graph_db["raw_data"]:
@@ -132,6 +157,22 @@ def _build_raw_entity_map() -> Dict[str, Dict[str, Any]]:
         if entity_id:
             raw_entity_map[entity_id] = entity
     return raw_entity_map
+
+
+def _infer_repo_path_from_raw_data(data: List[Dict[str, Any]]) -> Optional[str]:
+    absolute_files: List[str] = []
+    for entity in data:
+        file_path = entity.get("file")
+        if isinstance(file_path, str) and file_path and os.path.isabs(file_path):
+            absolute_files.append(os.path.abspath(file_path))
+
+    if not absolute_files:
+        return None
+
+    try:
+        return os.path.commonpath(absolute_files)
+    except ValueError:
+        return None
 
 
 def _collect_graph_nodes_and_edges() -> Tuple[List[Dict[str, Any]], List[Dict[str, str]]]:
@@ -160,12 +201,17 @@ def _collect_graph_nodes_and_edges() -> Tuple[List[Dict[str, Any]], List[Dict[st
 @app.on_event("startup")
 async def load_data():
     """Load the graph into memory on startup (AI pipeline loaded lazily on first request)"""
-    global startup_error
+    global startup_error, REPO_PATH
     try:
         with open(INPUT_FILE, "r") as f:
             data = json.load(f)
             graph_db["raw_data"] = data
             graph_db["code_graph"] = build_dependency_graph(data)
+            inferred_repo_path = _infer_repo_path_from_raw_data(data)
+            if inferred_repo_path:
+                REPO_PATH = inferred_repo_path
+                upload_state["repo_path"] = inferred_repo_path
+                upload_state["repo_name"] = os.path.basename(inferred_repo_path.rstrip("/"))
             print(f"Loaded Graph: {graph_db['code_graph'].store.number_of_nodes()} nodes")
     except Exception as e:
         import traceback
@@ -608,7 +654,7 @@ async def get_expert_for_file(
     - System distinguishes between code authors and domain experts
     """
     try:
-        result = await get_git_blame(file_path, repo_path)
+        result = await get_git_blame(file_path, _active_repo_path(repo_path))
         return result
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -630,7 +676,7 @@ async def get_heatmap(
     - Shows expertise gaps and recommends knowledge transfer
     """
     try:
-        result = await get_expertise_heatmap(module, repo_path)
+        result = await get_expertise_heatmap(module, _active_repo_path(repo_path))
         return result
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -652,7 +698,7 @@ async def get_bus_factor(
     Low bus factor (1-2) indicates high risk areas.
     """
     try:
-        result = await get_bus_factor_analysis(repo_path)
+        result = await get_bus_factor_analysis(_active_repo_path(repo_path))
         return {
             "analysis": result,
             "warning_threshold": 2,
@@ -675,7 +721,7 @@ async def get_gaps(
     expertise score, indicating potential maintenance risks.
     """
     try:
-        gaps = await get_knowledge_gaps(repo_path)
+        gaps = await get_knowledge_gaps(_active_repo_path(repo_path))
         return {
             "knowledge_gaps": gaps,
             "total_gaps": len(gaps),
@@ -699,7 +745,7 @@ async def get_developer_areas(
     sorted by expertise score.
     """
     try:
-        expertise = await get_developer_expertise(email, repo_path)
+        expertise = await get_developer_expertise(email, _active_repo_path(repo_path))
         return {
             "developer_email": email,
             "expertise_areas": expertise,
@@ -741,14 +787,14 @@ async def get_violations(
     Violations are imports that cross layer boundaries in prohibited ways.
     """
     try:
-        path = repo_path or REPO_PATH
+        path = _active_repo_path(repo_path)
         validator = ArchitectureValidator()
         result = validator.validate_repository(path)
         return {
             "total_violations": result.total_violations,
             "total_warnings": result.total_warnings,
-            "violations": [v.to_dict() for v in result.all_violations],
-            "warnings": [w.to_dict() for w in result.all_warnings]
+            "violations": [_normalise_violation_dict(v.to_dict()) for v in result.all_violations],
+            "warnings": [_normalise_violation_dict(w.to_dict()) for w in result.all_warnings]
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get violations: {str(e)}")
@@ -855,6 +901,7 @@ async def index_graph():
 async def ask_ai(query: str):
     """Asks the RAG pipeline a question"""
     pipeline = get_rag_pipeline()
+    pipeline.ensure_indexed(graph_db["raw_data"])
     result = await pipeline.ask(query)
     return result
 
@@ -896,7 +943,7 @@ import time as _time
 
 def reparse_and_reload(repo_path: str, repo_name: str):
     """Parse a repository and reload the in-memory graph. Runs in background thread."""
-    global REPO_PATH, startup_error
+    global REPO_PATH, startup_error, _rag_pipeline
     try:
         upload_state["status"] = "parsing"
         upload_state["repo_name"] = repo_name
@@ -922,7 +969,7 @@ def reparse_and_reload(repo_path: str, repo_name: str):
 
         # Rebuild in-memory graph
         graph_db["raw_data"] = all_entities
-        graph_db["nx_graph"] = build_dependency_graph(all_entities)
+        graph_db["code_graph"] = build_dependency_graph(all_entities)
 
         upload_state["progress"] = 85
 
@@ -931,16 +978,33 @@ def reparse_and_reload(repo_path: str, repo_name: str):
         upload_state["repo_path"] = repo_path
         startup_error = None
 
-        # Reset the cached git analyzer so it picks up the new repo
+        # Refresh any lazily-built AI context against the newly uploaded repo.
+        if _rag_pipeline is not None:
+            try:
+                _rag_pipeline.set_graph_context(
+                    graph_db["code_graph"].store, graph_db["raw_data"], REPO_PATH
+                )
+                _rag_pipeline.ensure_indexed(graph_db["raw_data"], force_reindex=True)
+            except Exception as e:
+                print(f"Warning: Failed to refresh RAG context: {e}")
+
+        # Refresh git-backed analyzers so Smart Blame and risk metrics use the uploaded repo.
         try:
             reset_analyzer()
         except Exception as e:
             print(f"Warning: Failed to reset analyzer: {e}")
 
+        try:
+            from backend.git.git_risk_analyzer import get_git_risk_analyzer
+            graph_db["git_risk"] = get_git_risk_analyzer(REPO_PATH)
+        except Exception as e:
+            print(f"Warning: Failed to refresh git risk analyzer: {e}")
+            graph_db["git_risk"] = None
+
         upload_state["step_times"]["building"]["end"] = _time.time()
         upload_state["progress"] = 100
 
-        graph_stats = graph_db["nx_graph"].get_statistics()
+        graph_stats = graph_db["code_graph"].get_statistics()
         upload_state["stats"] = {
             "files": len(parsed_files),
             "entities": len(all_entities),
@@ -1051,7 +1115,7 @@ async def upload_github(req: GithubUploadRequest):
                 robust_rmtree(clone_dir)
 
             result = subprocess.run(
-                ["git", "clone", "--depth", "1", url, clone_dir],
+                ["git", "clone", url, clone_dir],
                 capture_output=True, text=True, timeout=120
             )
 
