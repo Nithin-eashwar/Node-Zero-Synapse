@@ -30,8 +30,13 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
 
 export interface GraphNode {
     id: string;
-    file: string;
-    line: number;
+    file?: string;
+    line?: number;
+    name?: string;
+    type?: string;
+    range?: number[];
+    complexity?: number | { cyclomatic?: number };
+    [key: string]: unknown;
 }
 
 export interface GraphEdge {
@@ -107,8 +112,18 @@ export interface ViolationsResponse {
 }
 
 export interface DriftResponse {
-    baseline: unknown;
-    current: unknown;
+    baseline: {
+        coupling_score?: number;
+        cohesion_score?: number;
+        violation_count?: number;
+        layer_balance?: Record<string, number>;
+    } | null;
+    current: {
+        coupling_score?: number;
+        cohesion_score?: number;
+        violation_count?: number;
+        layer_balance?: Record<string, number>;
+    } | null;
     drift_score: number;
     indicators: Record<string, number>;
     recommendations: string[];

@@ -276,17 +276,17 @@ class LocalGitProvider(GitProvider):
         if cache_key in self._commit_cache:
             return self._commit_cache[cache_key]
         
-        # Get commit stats
+        # Shallow or partial histories can be missing parent stats; keep the
+        # analysis usable by falling back to minimal metadata.
         try:
             stats = commit.stats.total
             lines_added = stats.get('insertions', 0)
             lines_deleted = stats.get('deletions', 0)
+            files_changed = list(commit.stats.files.keys()) if commit.stats.files else []
         except Exception:
             lines_added = 0
             lines_deleted = 0
-        
-        # Get files changed
-        files_changed = list(commit.stats.files.keys()) if commit.stats.files else []
+            files_changed = [file_path] if file_path else []
         
         # Classify the commit
         commit_type, is_refactor, is_architectural, is_bug_fix = self._classify_commit(commit)

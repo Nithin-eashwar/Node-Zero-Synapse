@@ -17,7 +17,7 @@ export default function SmartBlamePage() {
             filePath,
             busFactor,
             isRisk: busFactor <= (busFactorQuery.data?.warning_threshold ?? 2),
-        }));
+        })).filter((row) => row.filePath.trim().length > 0);
     }, [busFactorQuery.data]);
 
     const filteredFiles = useMemo(() => {
