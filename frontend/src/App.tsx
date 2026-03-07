@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import AppShell from './components/layout/AppShell';
 import LandingPage from './pages/LandingPage';
+import AnalyzingPage from './pages/AnalyzingPage';
 import DashboardPage from './pages/DashboardPage';
 import BlastRadiusPage from './pages/BlastRadiusPage';
 import SmartBlamePage from './pages/SmartBlamePage';
@@ -10,8 +11,9 @@ import MentorPage from './pages/MentorPage';
 export default function App() {
   return (
     <Routes>
-      {/* Standalone landing page (no AppShell) */}
+      {/* Standalone pages (no AppShell) */}
       <Route path="/" element={<LandingPage />} />
+      <Route path="/analyzing" element={<AnalyzingPage />} />
 
       {/* Dashboard & app pages wrapped in AppShell */}
       <Route element={<AppShell />}>
