@@ -1,4 +1,11 @@
+/**
+ * API client for the Synapse backend.
+ * All backend communication goes through this module.
+ */
+
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000';
+
+// ─── Generic fetch wrapper ─────────────────────────────
 
 async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
     let res: Response;
@@ -7,7 +14,7 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
             ...init,
             headers: { 'Content-Type': 'application/json', ...init?.headers },
         });
-    } catch (_err) {
+    } catch (err) {
         throw new Error(
             'Cannot connect to backend server. Make sure it is running on ' + API_BASE
         );
@@ -19,14 +26,12 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
     return res.json() as Promise<T>;
 }
 
+// ─── Response types ────────────────────────────────────
+
 export interface GraphNode {
     id: string;
-    file?: string;
-    line?: number;
-    name?: string;
-    type?: string;
-    range?: number[];
-    [key: string]: unknown;
+    file: string;
+    line: number;
 }
 
 export interface GraphEdge {
@@ -48,7 +53,7 @@ export interface BlastRadiusResponse {
 export interface DeveloperProfileAPI {
     name: string;
     email: string;
-    total_commits?: number;
+    total_commits: number;
 }
 
 export interface ExpertiseScoreAPI {
@@ -82,16 +87,16 @@ export interface HeatmapResponse {
 }
 
 export interface ViolationAPI {
-    file_path?: string;
-    line_number?: number;
+    file_path: string;
+    line_number: number;
     from_module: string;
     to_module: string;
-    from_layer?: string;
-    to_layer?: string;
+    from_layer: string;
+    to_layer: string;
     rule_name: string;
     severity: string;
     message: string;
-    timestamp?: string;
+    timestamp: string;
 }
 
 export interface ViolationsResponse {
@@ -102,20 +107,10 @@ export interface ViolationsResponse {
 }
 
 export interface DriftResponse {
-    baseline: {
-        coupling_score?: number;
-        cohesion_score?: number;
-        violation_count?: number;
-        layer_balance?: Record<string, number>;
-    } | null;
-    current: {
-        coupling_score?: number;
-        cohesion_score?: number;
-        violation_count?: number;
-        layer_balance?: Record<string, number>;
-    } | null;
+    baseline: unknown;
+    current: unknown;
     drift_score: number;
-    indicators?: Record<string, number>;
+    indicators: Record<string, number>;
     recommendations: string[];
     [key: string]: unknown;
 }
@@ -128,7 +123,7 @@ export interface LayersResponse {
 export interface AIResponse {
     answer: string;
     context: string[];
-    sources?: string[];
+    sources: string[];
 }
 
 export interface HealthResponse {
@@ -152,12 +147,19 @@ export interface UploadStatusResponse {
     } | null;
 }
 
+// ─── API functions ─────────────────────────────────────
+
 export const api = {
+    // Health
     health: () => apiFetch<HealthResponse>('/'),
+
+    // Graph
     getFullGraph: () => apiFetch<FullGraphResponse>('/graph'),
     getCondensedGraph: () => apiFetch<any>('/graph/condensed'),
     getBlastRadius: (functionName: string) =>
         apiFetch<BlastRadiusResponse>(`/blast-radius/${encodeURIComponent(functionName)}`),
+
+    // Smart Blame
     getExpertForFile: (filePath: string, repoPath?: string) => {
         const params = repoPath ? `?repo_path=${encodeURIComponent(repoPath)}` : '';
         return apiFetch<ExpertResponse>(`/blame/expert/${encodeURIComponent(filePath)}${params}`);
@@ -177,6 +179,8 @@ export const api = {
         const params = repoPath ? `?repo_path=${encodeURIComponent(repoPath)}` : '';
         return apiFetch<{ knowledge_gaps: string[]; total_gaps: number }>(`/blame/gaps${params}`);
     },
+
+    // Governance
     getViolations: (repoPath?: string) => {
         const params = repoPath ? `?repo_path=${encodeURIComponent(repoPath)}` : '';
         return apiFetch<ViolationsResponse>(`/governance/violations${params}`);
@@ -186,10 +190,14 @@ export const api = {
         return apiFetch<DriftResponse>(`/governance/drift${params}`);
     },
     getLayers: () => apiFetch<LayersResponse>('/governance/layers'),
+
+    // AI
     askAI: (query: string) =>
         apiFetch<AIResponse>(`/ai/ask?query=${encodeURIComponent(query)}`),
     indexGraph: () =>
         apiFetch<{ status: string; indexed_nodes: number }>('/ai/index', { method: 'POST' }),
+
+    // Upload
     uploadFolder: async (file: File): Promise<{ status: string; repo_name: string }> => {
         const formData = new FormData();
         formData.append('file', file);

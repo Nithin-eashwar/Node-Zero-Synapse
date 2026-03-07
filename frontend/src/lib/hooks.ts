@@ -1,5 +1,12 @@
+/**
+ * React Query hooks for all Synapse API endpoints.
+ * Each hook handles loading, error, and caching automatically.
+ */
+
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from './api';
+
+// ─── Query keys ────────────────────────────────────────
 
 export const queryKeys = {
     health: ['health'] as const,
@@ -15,6 +22,8 @@ export const queryKeys = {
     layers: ['layers'] as const,
     uploadStatus: ['uploadStatus'] as const,
 };
+
+// ─── Graph hooks ───────────────────────────────────────
 
 export function useHealth() {
     return useQuery({
@@ -49,6 +58,8 @@ export function useBlastRadius(functionName: string) {
     });
 }
 
+// ─── Smart Blame hooks ─────────────────────────────────
+
 export function useExpertForFile(filePath: string) {
     return useQuery({
         queryKey: queryKeys.expert(filePath),
@@ -81,6 +92,8 @@ export function useGaps() {
     });
 }
 
+// ─── Governance hooks ──────────────────────────────────
+
 export function useViolations() {
     return useQuery({
         queryKey: queryKeys.violations,
@@ -105,6 +118,8 @@ export function useLayers() {
     });
 }
 
+// ─── AI hooks ──────────────────────────────────────────
+
 export function useAskAI() {
     return useMutation({
         mutationFn: (query: string) => api.askAI(query),
@@ -120,6 +135,8 @@ export function useIndexGraph() {
         },
     });
 }
+
+// ─── Upload hooks ──────────────────────────────────────
 
 export function useUploadFolder() {
     return useMutation({
