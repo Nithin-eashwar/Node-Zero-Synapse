@@ -21,6 +21,7 @@ class RAGPipeline:
         self.graph_context: GraphContextBuilder = None
         self.context_aggregator: ContextAggregator = None
         self._repo_path: str = None
+        self._indexed_node_count: int = 0
         
         # Initialize LLM via factory (provider selected by LLM_PROVIDER env var)
         self.llm = create_llm(temperature=0.2)
@@ -58,8 +59,41 @@ Answer:
         print(f"Indexing {len(nodes)} nodes...")
         embeddings = self.embedder.embed_nodes(nodes)
         self.vector_store.add_nodes(nodes, embeddings)
+        self._indexed_node_count = len(nodes)
         print("Indexing complete.")
         return len(nodes)
+
+    def reset_index(self) -> None:
+        """Clear the vector store before re-indexing the active repo."""
+        self.vector_store.delete_collection()
+        self.vector_store = create_vector_store()
+        self._indexed_node_count = 0
+
+    def ensure_indexed(self, nodes, force_reindex: bool = False) -> int:
+        """
+        Ensure the active graph is present in the vector store.
+        """
+        if not nodes:
+            return 0
+
+        should_index = force_reindex
+        if not should_index:
+            should_index = self._indexed_node_count != len(nodes)
+
+        if not should_index:
+            try:
+                collection = getattr(self.vector_store, "collection", None)
+                if collection is not None and collection.count() == 0:
+                    should_index = True
+            except Exception:
+                should_index = True
+
+        if should_index:
+            print("Vector index missing or stale; rebuilding for active repo...")
+            self.reset_index()
+            return self.index_codebase(nodes)
+
+        return self._indexed_node_count
 
     async def ask(self, query):
         if not self.llm:
