@@ -3,7 +3,11 @@
  * All backend communication goes through this module.
  */
 
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000';
+export const API_BASE =
+    import.meta.env.VITE_API_URL ??
+    import.meta.env.VITE_BACKEND_URL ??
+    import.meta.env.VITE_REACT_APP_BACKEND_URL ??
+    'http://127.0.0.1:8000';
 
 // ─── Generic fetch wrapper ─────────────────────────────
 

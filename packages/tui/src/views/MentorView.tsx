@@ -15,6 +15,14 @@ type Segment =
   | { type: "text"; value: string }
   | { type: "code"; value: string; language: string };
 
+type MarkdownTone = "body" | "heading1" | "heading2" | "heading3" | "list" | "quote" | "muted";
+
+type MarkdownLine = {
+  prefix: string;
+  content: string;
+  tone: MarkdownTone;
+};
+
 type RenderedEntry =
   | {
       id: string;
@@ -95,6 +103,102 @@ const wrapText = (value: string, width: number): string[] =>
     .split("\n")
     .flatMap((line) => wrapLine(line, width));
 
+const normalizeInlineMarkdown = (line: string): string =>
+  line
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1 ($2)")
+    .replace(/`([^`]+)`/g, "[$1]")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/__([^_]+)__/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1")
+    .replace(/_([^_]+)_/g, "$1")
+    .replace(/~~([^~]+)~~/g, "$1");
+
+const parseMarkdownLine = (rawLine: string, bodyWidth: number): MarkdownLine => {
+  const trimmed = rawLine.trim();
+
+  if (trimmed.length === 0) {
+    return { prefix: "", content: "", tone: "body" };
+  }
+
+  if (/^([-*_]\s*){3,}$/.test(trimmed)) {
+    const dividerWidth = Math.max(8, Math.min(bodyWidth, 56));
+    return { prefix: "", content: "-".repeat(dividerWidth), tone: "muted" };
+  }
+
+  const headingMatch = trimmed.match(/^(#{1,3})\s+(.+)$/);
+  if (headingMatch) {
+    const level = headingMatch[1].length;
+    const content = normalizeInlineMarkdown(headingMatch[2]);
+
+    if (level === 1) {
+      return { prefix: "", content: content.toUpperCase(), tone: "heading1" };
+    }
+
+    if (level === 2) {
+      return { prefix: "", content, tone: "heading2" };
+    }
+
+    return { prefix: "", content, tone: "heading3" };
+  }
+
+  const orderedMatch = rawLine.match(/^\s*(\d+)[.)]\s+(.+)$/);
+  if (orderedMatch) {
+    return {
+      prefix: `${orderedMatch[1]}. `,
+      content: normalizeInlineMarkdown(orderedMatch[2]),
+      tone: "list"
+    };
+  }
+
+  const listMatch = rawLine.match(/^\s*[-*+]\s+(.+)$/);
+  if (listMatch) {
+    return {
+      prefix: "- ",
+      content: normalizeInlineMarkdown(listMatch[1]),
+      tone: "list"
+    };
+  }
+
+  const quoteMatch = rawLine.match(/^\s*>\s?(.+)$/);
+  if (quoteMatch) {
+    return {
+      prefix: "| ",
+      content: normalizeInlineMarkdown(quoteMatch[1]),
+      tone: "quote"
+    };
+  }
+
+  return {
+    prefix: "",
+    content: normalizeInlineMarkdown(trimmed),
+    tone: "body"
+  };
+};
+
+const paintMarkdown = (text: string, tone: MarkdownTone): string => {
+  if (text.length === 0) {
+    return text;
+  }
+
+  switch (tone) {
+    case "heading1":
+      return chalk.hex(theme.accent).bold(text);
+    case "heading2":
+      return chalk.hex(theme.accent)(text);
+    case "heading3":
+      return chalk.hex(theme.yellow)(text);
+    case "quote":
+      return chalk.hex(theme.dim)(text);
+    case "muted":
+      return chalk.hex(theme.dim)(text);
+    case "list":
+      return chalk.hex(theme.text)(text);
+    case "body":
+    default:
+      return chalk.hex(theme.text)(text);
+  }
+};
+
 const toRenderableEntries = (messages: MentorMessage[], width: number): RenderedEntry[] => {
   const entries: RenderedEntry[] = [];
 
@@ -130,17 +234,25 @@ const toRenderableEntries = (messages: MentorMessage[], width: number): Rendered
         return;
       }
 
-      const wrapped = wrapText(segment.value, bodyWidth);
-      const lineValues = wrapped.length > 0 ? wrapped : [""];
+      const markdownLines = segment.value.split("\n").map((line) => parseMarkdownLine(line, bodyWidth));
+      const lineValues = markdownLines.length > 0 ? markdownLines : [{ prefix: "", content: "", tone: "body" as const }];
 
       lineValues.forEach((lineValue, lineIndex) => {
-        const linePrefix = hasRenderedFirstLine ? CONTINUATION_PREFIX : styledPrefix;
-        entries.push({
-          id: `${messageIndex}-${segmentIndex}-${lineIndex}`,
-          type: "text",
-          text: `${linePrefix}${chalk.hex(theme.text)(lineValue)}`
+        const prefixWidth = lineValue.prefix.length;
+        const wrappedContent = wrapLine(lineValue.content, Math.max(1, bodyWidth - prefixWidth));
+        const rows = wrappedContent.length > 0 ? wrappedContent : [""];
+
+        rows.forEach((rowValue, rowIndex) => {
+          const marker = rowIndex === 0 ? lineValue.prefix : " ".repeat(prefixWidth);
+          const linePrefix = hasRenderedFirstLine ? CONTINUATION_PREFIX : styledPrefix;
+          entries.push({
+            id: `${messageIndex}-${segmentIndex}-${lineIndex}-${rowIndex}`,
+            type: "text",
+            text: `${linePrefix}${paintMarkdown(`${marker}${rowValue}`, lineValue.tone)}`
+          });
+          hasRenderedFirstLine = true;
         });
-        hasRenderedFirstLine = true;
+
       });
     });
   });

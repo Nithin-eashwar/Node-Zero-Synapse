@@ -40,13 +40,16 @@ COPY scripts/ ./scripts/
 COPY requirements.txt .
 
 # Create non-root user for security
-RUN useradd --create-home appuser
+RUN useradd --create-home appuser && \
+    mkdir -p /app/uploads /app/chroma_db && \
+    touch /app/repo_graph.json && \
+    chown -R appuser:appuser /app
 USER appuser
 
 # Environment defaults (override at runtime)
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    VECTOR_STORE_BACKEND=chromadb \
+    VECTOR_STORE_BACKEND=chroma \
     GRAPH_STORE_BACKEND=networkx \
     LLM_PROVIDER=gemini \
     EMBEDDING_MODEL=all-mpnet-base-v2
@@ -55,8 +58,8 @@ ENV PYTHONUNBUFFERED=1 \
 EXPOSE 8000
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/')" || exit 1
+# HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+#     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/')" || exit 1
 
 # Start the API server
-CMD ["uvicorn", "backend.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
+CMD ["uvicorn", "backend.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

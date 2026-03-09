@@ -47,6 +47,33 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(BASE_DIR, "..", "..", "repo_graph.json")
 REPO_PATH = os.environ.get("SYNAPSE_REPO_PATH") or os.path.join(BASE_DIR, "..", "..", "dummy_repo")
 
+
+def _get_cors_origins() -> List[str]:
+    raw = os.environ.get("CORS_ALLOW_ORIGINS", "*")
+    origins = [origin.strip().strip('"').strip("'") for origin in raw.split(",") if origin.strip()]
+    return origins or ["*"]
+
+
+def _get_cors_origin_regex(origins: List[str]) -> Optional[str]:
+    explicit_regex = os.environ.get("CORS_ALLOW_ORIGIN_REGEX", "").strip()
+    if explicit_regex:
+        return explicit_regex
+
+    wildcard_origins = [origin for origin in origins if "*" in origin and origin != "*"]
+    if not wildcard_origins:
+        return None
+
+    patterns = []
+    for origin in wildcard_origins:
+        escaped = origin.replace(".", r"\.").replace("*", ".*")
+        patterns.append(f"^{escaped}$")
+    return "|".join(patterns)
+
+
+cors_origins = _get_cors_origins()
+cors_origin_regex = _get_cors_origin_regex(cors_origins)
+exact_cors_origins = [origin for origin in cors_origins if "*" not in origin or origin == "*"]
+
 app = FastAPI(
     title="Synapse Backend Engine",
     description="GraphRAG platform for code intelligence with Smart Blame expertise identification",
@@ -56,9 +83,11 @@ app = FastAPI(
 # Enable CORS (so your future VS Code extension can talk to this)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=exact_cors_origins,
+    allow_origin_regex=cors_origin_regex,
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=True,
 )
 
 # --- GLOBAL STATE ---
@@ -76,12 +105,22 @@ _rag_pipeline = None
 
 def get_rag_pipeline() -> RAGPipeline:
     """Lazy initialization of RAG pipeline on first AI request."""
-    global _rag_pipeline
+    global _rag_pipeline, _ai_available
     if not _ai_available or RAGPipeline is None:
         raise HTTPException(status_code=503, detail="AI module is disabled or unavailable")
     if _rag_pipeline is None:
         print("Initializing RAG Pipeline (first AI request)...")
-        _rag_pipeline = RAGPipeline()
+        try:
+            _rag_pipeline = RAGPipeline()
+        except BaseException as e:
+            # pyo3 panics from native bindings may bypass Exception.
+            _ai_available = False
+            detail = (
+                "AI initialization failed (vector store). "
+                f"Reason: {e}. "
+                "Try deleting/rebuilding local Chroma data or restart with SYNAPSE_DISABLE_AI=1."
+            )
+            raise HTTPException(status_code=503, detail=detail)
         # Wire in graph context and repo path if graph is already loaded
         if graph_db["raw_data"] and graph_db["code_graph"]:
             _rag_pipeline.set_graph_context(

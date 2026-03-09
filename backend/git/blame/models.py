@@ -180,6 +180,7 @@ class ModuleExpertise:
         return {
             "module_path": self.module_path,
             "experts": [e.to_dict() for e in self.experts[:5]],  # Top 5
+            "expert_count": len(self.experts),
             "bus_factor": self.bus_factor,
             "top_expert_score": round(self.top_expert_score, 4),
             "has_knowledge_gap": self.has_knowledge_gap

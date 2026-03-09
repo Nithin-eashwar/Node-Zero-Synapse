@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, Github, ArrowRight, FileArchive, X, Sparkles, LogOut } from 'lucide-react';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
+import { API_BASE } from '@/lib/api';
 import { useUploadFolder, useUploadGithub } from '@/lib/hooks';
 import { useAuth } from '@/lib/AuthContext';
 
@@ -44,7 +45,7 @@ export default function LandingPage() {
         try {
             const formData = new FormData();
             formData.append('file', selectedFile);
-            const res = await fetch('http://127.0.0.1:8000/upload/folder', {
+            const res = await fetch(`${API_BASE}/upload/folder`, {
                 method: 'POST',
                 body: formData,
             });
@@ -64,7 +65,7 @@ export default function LandingPage() {
         }
         setError(null);
         try {
-            const res = await fetch('http://127.0.0.1:8000/upload/github', {
+            const res = await fetch(`${API_BASE}/upload/github`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url }),

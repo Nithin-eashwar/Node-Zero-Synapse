@@ -11,6 +11,7 @@ Required env vars for AWS:
     OPENSEARCH_INDEX     (default: synapse_vectors)
     OPENSEARCH_USER      (optional)
     OPENSEARCH_PASSWORD  (optional)
+    OPENSEARCH_KNN_ENGINE (default: faiss)
 """
 
 import os
@@ -48,6 +49,7 @@ class OpenSearchVectorStore(BaseVectorStore):
 
         self.embedding_dim = _get_embedding_dim()
         self.index_name = index_name or os.getenv("OPENSEARCH_INDEX", "synapse_vectors")
+        self.knn_engine = os.getenv("OPENSEARCH_KNN_ENGINE", "faiss").lower()
         host = os.getenv("OPENSEARCH_HOST", "localhost")
         port = int(os.getenv("OPENSEARCH_PORT", "9200"))
         user = os.getenv("OPENSEARCH_USER")
@@ -65,12 +67,25 @@ class OpenSearchVectorStore(BaseVectorStore):
 
         self.client = OpenSearch(**conn_kwargs)
         self._ensure_index()
-        print(f"[OpenSearch] Connected to {host}:{port}, index: {self.index_name} (dim={self.embedding_dim})")
+        print(
+            f"[OpenSearch] Connected to {host}:{port}, index: {self.index_name} "
+            f"(dim={self.embedding_dim}, engine={self.knn_engine})"
+        )
 
     def _ensure_index(self) -> None:
         """Create the k-NN index if it doesn't exist."""
         if self.client.indices.exists(index=self.index_name):
             return
+
+        method = {
+            "name": "hnsw",
+            "space_type": "cosinesimil",
+            "engine": self.knn_engine,
+        }
+
+        # OpenSearch 3.x rejects deprecated nmslib for new index creation.
+        if self.knn_engine == "faiss":
+            method["parameters"] = {"ef_construction": 128, "m": 16}
 
         index_body = {
             "settings": {
@@ -85,11 +100,7 @@ class OpenSearchVectorStore(BaseVectorStore):
                     "embedding": {
                         "type": "knn_vector",
                         "dimension": self.embedding_dim,
-                        "method": {
-                            "name": "hnsw",
-                            "space_type": "cosinesimil",
-                            "engine": "nmslib",
-                        },
+                        "method": method,
                     },
                     "document": {"type": "text"},
                     "metadata": {

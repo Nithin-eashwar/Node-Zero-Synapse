@@ -26,7 +26,10 @@ export default function RepoHeatmap() {
         // Extract available fields with safe defaults
         const busFactorVal = (mod.bus_factor ?? mod.average_bus_factor ?? 0) as number;
         const hasGap = (mod.has_knowledge_gap ?? false) as boolean;
-        const expertCount = (mod.expert_count ?? mod.total_experts ?? 0) as number;
+        const experts = mod.experts;
+        const expertCount = (mod.expert_count
+            ?? mod.total_experts
+            ?? (Array.isArray(experts) ? experts.length : 0)) as number;
         const fileCount = (mod.file_count ?? mod.total_files ?? 1) as number;
 
         // Health: higher bus factor = healthier, has_knowledge_gap = bad

@@ -97,7 +97,12 @@ function StepProgressBar({
 
 export default function AnalyzingPage() {
     const navigate = useNavigate();
-    const { data: status } = useUploadStatus(true);
+    const {
+        data: status,
+        isError: isStatusQueryError,
+        error: statusQueryError,
+        refetch: refetchStatus,
+    } = useUploadStatus(true);
     const idleSinceRef = useRef<number | null>(null);
     const [tick, setTick] = useState(0);
 
@@ -128,12 +133,17 @@ export default function AnalyzingPage() {
         }
     }, [status?.status, navigate]);
 
-    const currentStatus = status?.status ?? 'cloning';
+    const currentStatus = status?.status ?? 'idle';
     const repoName = status?.repo_name ?? 'repository';
-    const isError = currentStatus === 'error';
+    const isError = currentStatus === 'error' || isStatusQueryError;
     const isReady = currentStatus === 'ready';
     const progress = status?.progress ?? 0;
     const stepTimes = (status?.step_times ?? {}) as Record<string, StepTiming>;
+    const queryErrorMessage =
+        statusQueryError instanceof Error
+            ? statusQueryError.message
+            : 'Unable to fetch analysis status from backend.';
+    const displayError = currentStatus === 'error' ? status?.error : queryErrorMessage;
 
     const getStepState = (stepKey: string): 'pending' | 'active' | 'done' => {
         const order = ['cloning', 'parsing', 'building'];
@@ -184,7 +194,13 @@ export default function AnalyzingPage() {
                             {isError ? 'Analysis Failed' : isReady ? 'Analysis Complete!' : 'Analyzing Codebase'}
                         </h2>
                         <p className="mt-1 text-sm text-white/40">
-                            {isError ? status?.error : isReady ? 'Redirecting to dashboard...' : repoName}
+                            {isError
+                                ? displayError
+                                : isReady
+                                    ? 'Redirecting to dashboard...'
+                                    : currentStatus === 'idle'
+                                        ? 'Waiting for analysis job to start...'
+                                        : repoName}
                         </p>
                     </div>
 
@@ -302,13 +318,27 @@ export default function AnalyzingPage() {
                     {/* Error retry */}
                     {isError && (
                         <div className="mt-6 text-center">
-                            <p className="mb-4 text-sm text-red-300/70">{status?.error}</p>
-                            <button
-                                onClick={() => navigate('/')}
-                                className="rounded-full border border-white/15 bg-white/5 px-6 py-2 text-sm font-medium text-white transition-all hover:bg-white/10"
-                            >
-                                Try Again
-                            </button>
+                            <p className="mb-4 text-sm text-red-300/70">{displayError}</p>
+                            <div className="flex items-center justify-center gap-3">
+                                <button
+                                    onClick={() => {
+                                        if (isStatusQueryError) {
+                                            void refetchStatus();
+                                            return;
+                                        }
+                                        navigate('/');
+                                    }}
+                                    className="rounded-full border border-white/15 bg-white/5 px-6 py-2 text-sm font-medium text-white transition-all hover:bg-white/10"
+                                >
+                                    {isStatusQueryError ? 'Retry Status Check' : 'Try Again'}
+                                </button>
+                                <button
+                                    onClick={() => navigate('/')}
+                                    className="rounded-full border border-white/15 bg-white/5 px-6 py-2 text-sm font-medium text-white transition-all hover:bg-white/10"
+                                >
+                                    Back Home
+                                </button>
+                            </div>
                         </div>
                     )}
                 </motion.div>

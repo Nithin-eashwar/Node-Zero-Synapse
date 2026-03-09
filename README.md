@@ -1,376 +1,412 @@
-# Synapse - The Organizational Brain for Software Teams
+# Synapse
 
-A Graph-Augmented Generation (GraphRAG) platform that creates a "Living Knowledge Graph" of entire codebases. Synapse moves beyond "writing code faster" to "understanding code deeper" by solving the "Context Gap" in large software teams.
+Synapse is a full-stack code intelligence platform that turns any repository into an explorable knowledge system. It combines static code analysis, dependency graphing, git-based expertise mapping, architecture governance, and AI-assisted reasoning so teams can understand impact before they ship changes.
 
-## 🎯 What Synapse Solves
+Built for hackathon submission, the current project is a complete, runnable product with a React frontend, FastAPI backend, a terminal UI, repository ingestion flow, interactive analysis screens, and GraphRAG-powered codebase Q and A.
 
-| Problem | Solution |
-|---------|----------|
-| **Blast Radius Blindness** | Visualize all downstream impacts before merging |
-| **Imposter Syndrome** | Private AI mentor for judgment-free learning |
-| **Knowledge Silos** | Smart Blame identifies true experts, not just last committers |
-| **Architectural Drift** | Automated boundary enforcement |
+## Why Synapse Exists
 
-## 🏗️ Current Implementation Status
+Modern teams move fast, but code understanding does not scale linearly with team size. The result is a repeated set of failures:
 
-### ✅ Phase 1: Rich Node Model (Complete)
-- Comprehensive entity extraction (functions, classes, imports)
-- Complexity metrics (cyclomatic, cognitive)
-- Parameter/type/decorator parsing
+- Engineers change code without understanding downstream impact.
+- Critical knowledge stays trapped with a small number of people.
+- Architecture drifts silently until it becomes expensive to reverse.
+- New contributors struggle to build context quickly.
 
-### ✅ Phase 2: Complete Relationship Graph (Complete)
-- 15+ relationship types (CALLS, INHERITS, IMPORTS, DECORATES, etc.)
-- Smart call resolution with import alias tracking
-- Blast radius calculation with risk scoring
+Synapse addresses those problems with one workflow:
 
-### ✅ Phase 3: Git Integration (Complete)
-- Smart Blame expert identification
-- 7 weighted scoring factors for expertise calculation
-- Expertise heatmap and bus factor analysis
-- AWS cloud-ready architecture (Neptune/CodeCommit ready)
+1. Ingest a repository from GitHub or a ZIP upload.
+2. Parse source code into entities and relationships.
+3. Build a dependency graph and risk model.
+4. Analyze git history to identify true experts.
+5. Validate architectural boundaries and drift.
+6. Layer AI reasoning on top of structured graph context.
 
-### ✅ Phase 4: Architectural Governance (Complete)
-- Boundary rules engine with YAML configuration
-- Clean Architecture defaults with import validation
-- Real-time violation detection
-- Drift metrics and tracking over time
+## Core Product Features
 
-### ✅ Phase 4.5: Enhanced Risk Assessment (Complete)
-- 6-factor weighted risk scoring (complexity, centrality, coverage, etc.)
-- Betweenness centrality for hub node detection
-- Actionable recommendations based on risk factors
-- Risk levels: LOW/MEDIUM/HIGH/CRITICAL
+### 1. Repository Ingestion
 
-### 🔲 Phase 5: Semantic/Vector Layer (Planned)
+- Upload a zipped codebase.
+- Clone a GitHub repository directly from the UI.
+- Parse and rebuild the knowledge graph in the background.
+- Track analysis state with live progress via the upload status API.
 
-## 📁 Project Structure
+### 2. Dependency Graph and Blast Radius Analysis
 
+- Extract entities such as functions, classes, imports, and relationships.
+- Build repository-wide dependency graphs.
+- Visualize graph structure at directory, file, and entity levels.
+- Calculate blast radius for a selected function.
+- Generate AI explanations for impact and risk.
+
+### 3. Smart Blame and Knowledge Risk
+
+- Identify the most likely expert for any file.
+- Go beyond last-commit ownership by weighting multiple contribution signals.
+- Surface bus factor risk areas.
+- Show expertise heatmaps and knowledge gaps.
+
+### 4. Architectural Governance
+
+- Validate repositories against layered architecture rules.
+- Detect boundary violations between modules and layers.
+- Report architecture drift indicators over time.
+- Present issues and layer summaries in the frontend.
+
+### 5. AI Mentor
+
+- Ask questions about the indexed codebase in natural language.
+- Combine graph context with vector search for better answers.
+- Use AI to explain blast radius findings and system structure.
+- Support a private, low-friction learning workflow for developers.
+
+### 6. Full-Stack Product Experience
+
+- Authentication-enabled React frontend.
+- Ink-based terminal UI for keyboard-first interaction.
+- Dashboard for graph, risk, and governance health.
+- Dedicated pages for blast radius, Smart Blame, governance, and AI mentor.
+- FastAPI backend with documented endpoints via Swagger.
+
+## Product Walkthrough
+
+The intended user flow is:
+
+1. Sign in from the landing page.
+2. Import a repository by GitHub URL or ZIP upload.
+3. Wait while Synapse clones or extracts, parses, and builds the graph.
+4. Open the dashboard to review repository scale, risk areas, and violations.
+5. Use Blast Radius to inspect the impact of a function change.
+6. Use Smart Blame to find the right engineer to consult.
+7. Use Governance to inspect boundary violations and drift.
+8. Use AI Mentor to ask questions about the repository in plain English.
+
+## What Makes It Different
+
+Synapse is not just a code visualizer and not just a chatbot.
+
+- Graph-first: repository structure is represented as explicit entities and relationships.
+- Human-aware: git history becomes expertise intelligence, not just blame output.
+- Governance-aware: architectural rules are validated as part of code understanding.
+- AI-grounded: model responses are anchored in indexed repository context.
+- Demo-ready: the project already includes both the analysis engine and the usable UI.
+
+## Architecture Overview
+
+```text
+Web App (React + Vite + TypeScript)     TUI (Ink + React)
+                 |                                |
+                 | HTTP                           | shared package logic
+                 v                                v
+                    Backend API (FastAPI)
+    |
+    |-- Parsing engine (tree-sitter)
+    |-- Graph builder and blast radius analysis
+    |-- Git expertise and risk analysis
+    |-- Governance validation and drift detection
+    |-- AI RAG pipeline
+    |
+    |-- repo_graph.json        structured repository model
+    |-- chroma_db/             local vector store for AI retrieval
+    |-- uploads/               imported repositories
 ```
+
+## Tech Stack
+
+### Frontend
+
+- React 19
+- TypeScript
+- Vite
+- React Router
+- TanStack Query
+- Framer Motion
+- Recharts
+- Firebase Authentication
+
+### Terminal UI
+
+- Ink
+- React
+- Chalk
+- tsx
+
+### Backend
+
+- FastAPI
+- Python 3.10+
+- tree-sitter
+- NetworkX
+- GitPython
+- Pydantic
+
+### AI and Retrieval
+
+- ChromaDB
+- LangChain
+- sentence-transformers
+- Google Generative AI integration
+- Optional AWS/OpenSearch abstractions for future deployment paths
+
+## Repository Structure
+
+```text
 Node-Zero-Synapse/
 ├── backend/
-│   ├── api/                     # API Layer
-│   │   ├── main.py              # FastAPI application
-│   │   └── routes/              # Route handlers
-│   ├── parsing/                 # Code Parsing Domain
-│   │   ├── parser.py            # tree-sitter AST parsing
-│   │   ├── entities.py          # FunctionEntity, ClassEntity, etc.
-│   │   └── complexity.py        # Cyclomatic & cognitive metrics
-│   ├── graph/                   # Graph Analysis Domain
-│   │   ├── relationships.py     # RelationType enum, Relationship model
-│   │   ├── resolver.py          # Smart call resolution
-│   │   ├── extractor.py         # Relationship extraction
-│   │   └── code_graph.py        # CodeGraph, blast radius, RiskFactors
-│   ├── git/                     # Git Analysis Domain
-│   │   ├── smart_git.py         # High-level Smart Blame API
-│   │   └── blame/               # Smart Blame module
-│   │       ├── models.py        # DeveloperProfile, ExpertiseScore
-│   │       ├── analyzer.py      # SmartBlameAnalyzer orchestrator
-│   │       ├── providers/       # Git providers (local, AWS)
-│   │       ├── scoring/         # 7 weighted scoring factors
-│   │       └── stores/          # Expert stores (memory, Neptune)
-│   ├── governance/              # Architectural Governance
-│   │   ├── models.py            # Layer, BoundaryRule, Violation, DriftMetrics
-│   │   ├── rules.py             # RuleEngine with YAML config
-│   │   ├── validator.py         # ArchitectureValidator
-│   │   └── drift.py             # DriftDetector
-│   └── data/                    # Data files
-├── dummy_repo/                  # Test codebase
-├── design.md                    # System architecture
-└── requirements.md              # Business requirements
+│   ├── ai/                  AI, embeddings, prompts, GraphRAG pipeline
+│   ├── api/                 FastAPI application and endpoints
+│   ├── git/                 Smart Blame and git-backed risk analysis
+│   ├── governance/          rule engine, validation, and drift detection
+│   ├── graph/               dependency graph construction and traversal
+│   ├── parsing/             AST parsing and entity extraction
+│   ├── ingestion/           ingestion handlers
+│   └── tests/               backend tests
+├── frontend/
+│   ├── src/pages/           landing, dashboard, blast radius, mentor, governance
+│   ├── src/components/      visualization and UI components
+│   ├── src/lib/             API client, hooks, auth, utilities
+│   └── tests/               frontend tests
+├── packages/
+│   ├── core/                shared logic used across app surfaces
+│   └── tui/                 terminal user interface for Synapse
+├── scripts/
+│   └── index_codebase.py    offline indexing into ChromaDB
+├── uploads/                 uploaded or cloned repositories
+├── dummy_repo/              sample repository for testing/demo use
+├── design.md                system design reference
+├── requirements.md          product requirements reference
+└── RUN_PROJECT.md           alternate run guide
 ```
 
-## 🚀 Quick Start
+## Running The Project Locally
+
+### Prerequisites
+
+- Python 3.10 or newer
+- Node.js 18 or newer
+- Git
+
+### 1. Backend Setup
 
 ```bash
-# 1. Create virtual environment
 python -m venv .venv
-.venv\Scripts\activate  # Windows
-source .venv/bin/activate  # Linux/Mac
-
-# 2. Install dependencies
-pip install -r backend/requirements.txt
-
-# 3. Parse a repository
-python -m backend.parsing.parser <path_to_repo>
-
-# 4. Analyze the graph
-python -m backend.graph.code_graph
-
-# 5. Run the API server
-uvicorn backend.api.main:app --reload
+.venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-## 📊 Example Output
+Optional environment variables:
 
-```
-[*] Building dependency graph...
-[INFO] Graph Stats: 17 nodes, 11 edges
-[INFO] Edge types: {'CALLS': 9, 'INHERITS': 2}
-
-[*] Calculating Blast Radius for: 'process_data'
-[!] WARNING: Changing this affects 1 functions!
-    Direct callers: 1
-    Risk score: 0.27 (MEDIUM)
-    
-Risk Factors:
-    complexity_risk: 0.0
-    centrality_risk: 0.5
-    test_coverage_risk: 1.0
-    dependency_risk: 0.1
-    
-Recommendations:
-    - Add unit tests before modifying this code
+```env
+GOOGLE_API_KEY=your_key_here
+SYNAPSE_DISABLE_AI=0
+CORS_ALLOW_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
 ```
 
-## 🔧 API Endpoints
+Notes:
 
-### Core Endpoints
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Health check |
-| `/graph` | GET | Get full dependency graph |
-| `/blast-radius/{function}` | GET | Calculate blast radius with risk factors |
+- `GOOGLE_API_KEY` is needed for AI Q and A when the RAG pipeline is enabled.
+- Set `SYNAPSE_DISABLE_AI=1` if you want to run the platform without loading AI dependencies.
+- The backend defaults to analyzing the bundled `dummy_repo` until a new repository is uploaded.
 
-### Governance Endpoints
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/governance/validate` | GET | Validate architecture against rules |
-| `/governance/violations` | GET | List boundary violations |
-| `/governance/drift` | GET | Get architectural drift report |
-| `/governance/layers` | GET | View configured layers and rules |
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Parsing | tree-sitter (Python grammar) |
-| Graph (Local) | NetworkX |
-| Graph (Production) | Amazon Neptune / Neo4j (planned) |
-| Vector Store | Amazon OpenSearch (planned) |
-| LLM | Amazon Bedrock (planned) |
-| API | FastAPI |
-| Frontend | VS Code Extension (planned) |
-
-## 📈 Architecture
-
-The codebase is modular with single-responsibility modules:
-
-- **entities.py** - Pure data classes, no logic
-- **complexity.py** - Metrics calculation only
-- **parser.py** - AST parsing only
-- **graph.py** - Graph operations only
-
-Each module can be independently tested and swapped (e.g., NetworkX → Neo4j).
-
----
-
-## ✅ Phase 3: Smart Blame - Git Integration (Complete)
-
-The **Smart Blame** feature identifies true code experts beyond simple `git blame` by analyzing commit patterns, refactoring depth, architectural contributions, and recency.
-
-### Features
-
-| Feature | Description |
-|---------|-------------|
-| **Expert Identification** | "Ask Sarah, she architected this" - finds true experts, not just last committers |
-| **7 Weighted Scoring Factors** | Commit frequency, lines changed, refactor depth, architectural changes, bug fixes, recency, code review |
-| **Expertise Heatmap** | Visualize expertise distribution across modules |
-| **Bus Factor Analysis** | Identify single points of failure (modules with only 1-2 experts) |
-| **Knowledge Gap Detection** | Find areas with insufficient expertise coverage |
-| **AWS Cloud-Ready** | Abstract interfaces for future Neptune/CodeCommit integration |
-
-### Smart Blame Module Structure
-
-```
-backend/core/blame/
-├── __init__.py              # Main module exports
-├── models.py                # Data models (DeveloperProfile, ExpertiseScore, etc.)
-├── analyzer.py              # SmartBlameAnalyzer orchestrator
-├── providers/
-│   ├── base.py              # Abstract GitProvider interface (AWS-ready)
-│   └── local_git.py         # GitPython implementation
-├── scoring/
-│   ├── factors.py           # 7 weighted scoring factors
-│   └── calculator.py        # ExpertiseScoreCalculator
-└── stores/
-    ├── base.py              # Abstract ExpertStore interface (Neptune-ready)
-    └── memory.py            # InMemoryStore implementation
-```
-
-### Scoring Algorithm
-
-| Factor | Weight | Description |
-|--------|--------|-------------|
-| `commit_frequency` | 0.15 | How often the developer commits to this file |
-| `lines_changed` | 0.10 | Total lines modified by the developer |
-| `refactor_depth` | 0.25 | Complexity and depth of refactoring commits |
-| `architectural_changes` | 0.20 | Contributions to structural changes |
-| `bug_fixes` | 0.15 | Bug fixes demonstrate deep understanding |
-| `recency` | 0.10 | Recent activity weighted higher (exponential decay) |
-| `code_review_participation` | 0.05 | Participation in code reviews |
-
-### Usage
-
-**Analyze any git repository:**
+Start the backend:
 
 ```bash
-cd /path/to/Node-Zero-Synapse && python -c "
-import sys, os; sys.path.insert(0, 'backend/core')
-import asyncio
-from blame.analyzer import create_analyzer
-
-async def main():
-    repo_path = '/path/to/your/repo'  # Use absolute path
-    analyzer = await create_analyzer(repo_path)
-    
-    # Get expert recommendation for a file
-    result = await analyzer.identify_expert('src/main.py')
-    print(result.recommendation_text)  # 'Ask Sarah, she architected this'
-    print(f'Score: {result.score.total_score:.2f}')
-    print(f'Bus Factor: {result.bus_factor}')
-
-asyncio.run(main())
-"
+python -m uvicorn backend.api.main:app --reload
 ```
 
-**Analyze entire repository:**
+Backend URLs:
 
-```python
-# Get expertise for all Python files
-results = await analyzer.analyze_repository(file_patterns=['.py'])
+- API: `http://127.0.0.1:8000`
+- Swagger UI: `http://127.0.0.1:8000/docs`
 
-# Generate expertise heatmap
-heatmap = await analyzer.generate_heatmap()
-print(f'Risk areas: {heatmap.risk_areas}')
-print(f'Knowledge gaps: {heatmap.knowledge_gaps}')
-
-# Get bus factor analysis
-bus_factors = await analyzer.get_bus_factor_analysis()
-```
-
-### Smart Blame API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/blame/expert/{file_path}` | GET | Get recommended expert for a file |
-| `/blame/heatmap` | GET | Get expertise heatmap for codebase |
-| `/blame/bus-factor` | GET | Get bus factor analysis |
-| `/blame/gaps` | GET | Identify knowledge gaps |
-| `/blame/developer/{email}` | GET | Get developer's expertise areas |
-
-### Requirements
+### 2. Frontend Setup
 
 ```bash
-pip install gitpython
+cd frontend
+npm install
+npm run dev
 ```
 
-### Example Output
+Optional frontend environment variable:
 
-```
-*** EXPERT RECOMMENDATION ***
-Target: src/main.py
-Recommendation: Ask Sarah, she architected this module
-Bus Factor: 3
-Primary Expert: Sarah Chen <sarah@example.com>
-Score: 0.85
-Confidence: 0.92
-
-Factors:
-  - commit_frequency: 0.75
-  - lines_changed: 0.80
-  - refactor_depth: 0.95
-  - architectural_changes: 0.90
-  - bug_fixes: 0.60
-  - recency: 0.85
-  - code_review_participation: 0.70
+```env
+VITE_API_URL=http://127.0.0.1:8000
 ```
 
----
+The frontend defaults to `http://127.0.0.1:8000` if no backend URL is provided.
 
-## ✅ Phase 4: Architectural Governance (Complete)
-
-Enforce layered architecture boundaries and detect drift over time.
-
-### Features
-
-| Feature | Description |
-|---------|-------------|
-| **Boundary Rules Engine** | Define allowed/blocked imports between layers |
-| **YAML Configuration** | Customizable layer definitions via `.synapse/architecture.yaml` |
-| **Clean Architecture Defaults** | Built-in rules for API → Service → Data patterns |
-| **Violation Detection** | Real-time import validation |
-| **Drift Metrics** | Track coupling, cohesion, and violations over time |
-
-### Usage
+### 3. TUI Setup
 
 ```bash
-# Validate architecture
-python -m backend.governance.validator <repo_path>
-
-# Save baseline metrics
-python -m backend.governance.drift --save-baseline <repo_path> baseline.json
-
-# Detect drift
-python -m backend.governance.drift <repo_path> baseline.json
+cd packages/tui
+npm install
+npm run dev
 ```
 
-### Example Config (`.synapse/architecture.yaml`)
+The terminal UI is implemented with Ink and is useful for keyboard-first demos or lightweight local interaction.
 
-```yaml
-layers:
-  api:
-    patterns: ["**/api/**", "**/routes/**"]
-  service:
-    patterns: ["**/services/**", "**/core/**"]
-  data:
-    patterns: ["**/data/**", "**/models/**"]
+### 4. Open The App
 
-rules:
-  - name: "API cannot access Data directly"
-    from: api
-    to: data
-    action: block
+- Frontend: `http://localhost:5173`
+- Backend docs: `http://127.0.0.1:8000/docs`
+- TUI: run from `packages/tui` with `npm run dev`
+
+## Data and Indexing Flow
+
+Synapse uses two persistent generated artifacts during local development:
+
+1. `repo_graph.json`
+   This stores the structured repository entities extracted from parsing.
+
+2. `chroma_db/`
+   This stores the local vector index used by the AI retrieval layer.
+
+Typical generation flow:
+
+```bash
+python -m backend.parsing.parser .
+python scripts/index_codebase.py
 ```
 
----
+The UI can also rebuild analysis data automatically through the upload endpoints.
 
-## ✅ Phase 4.5: Enhanced Risk Assessment (Complete)
+## Additional Interface
 
-Multi-factor risk scoring for blast radius analysis.
+### Terminal UI
 
-### Risk Factors
+- Provides a terminal-first Synapse experience alongside the web app.
+- Lives in `packages/tui` and uses Ink with React.
+- Complements the frontend for demos, local exploration, and keyboard-driven usage.
 
-| Factor | Weight | Description |
-|--------|--------|-------------|
-| `complexity_risk` | 25% | Cyclomatic/cognitive complexity |
-| `centrality_risk` | 20% | Betweenness centrality (hub nodes) |
-| `test_coverage_risk` | 20% | 0.0 = well tested, 1.0 = no tests |
-| `dependency_risk` | 15% | Number of things depending on this |
-| `change_frequency_risk` | 10% | How often the code changes |
-| `bus_factor_risk` | 10% | Single expert = higher risk |
+## Main Screens
 
-### Risk Levels
+### Landing Page
 
-| Score | Level | Action |
-|-------|-------|--------|
-| 0.0 - 0.2 | LOW | Standard workflow |
-| 0.2 - 0.5 | MEDIUM | Extra review recommended |
-| 0.5 - 0.8 | HIGH | Pair programming suggested |
-| 0.8 - 1.0 | CRITICAL | Refactor before changes |
+- Authentication entry point.
+- ZIP upload and GitHub import.
+- Starts repository analysis workflow.
 
-### Recommendations Generated
+### Dashboard
 
-The system automatically generates actionable advice:
-- "Add unit tests before modifying this code"
-- "This is a critical path node - changes will have wide impact"
-- "Consider refactoring to reduce complexity before changes"
+- Total nodes and edges.
+- Bus factor risk areas.
+- Architecture violations and warnings.
+- Heatmap and drift-oriented summary widgets.
 
----
+### Blast Radius
 
-## 📝 License
+- Explore dependency impact from a selected function.
+- Inspect affected functions and risk implications.
+- Use AI-generated explanation for deeper interpretation.
 
-MIT License - See LICENSE file for details.
+### Smart Blame
 
----
+- Search by file path.
+- Find the primary expert and secondary experts.
+- Review bus factor and expertise score factors.
 
-*Part of the Node-Zero project suite.*
+### Governance
+
+- Inspect layer definitions.
+- Review active violations and warnings.
+- Validate architecture boundaries.
+
+### AI Mentor
+
+- Ask free-form questions about the indexed codebase.
+- Receive graph- and retrieval-aware answers.
+
+## API Highlights
+
+### Core Analysis
+
+- `GET /`
+- `GET /graph`
+- `GET /graph/condensed`
+- `GET /blast-radius/{function_name}`
+- `GET /blast-radius/{function_name}/explain`
+- `GET /git-risk/{file_path}`
+
+### Smart Blame
+
+- `GET /blame/expert/{file_path}`
+- `GET /blame/heatmap`
+- `GET /blame/bus-factor`
+- `GET /blame/gaps`
+- `GET /blame/developer/{email}`
+
+### Governance
+
+- `GET /governance/validate`
+- `GET /governance/violations`
+- `GET /governance/drift`
+- `GET /governance/layers`
+
+### AI
+
+- `POST /ai/index`
+- `GET /ai/ask`
+
+### Repository Import
+
+- `POST /upload/folder`
+- `POST /upload/github`
+- `GET /upload/status`
+
+## Smart Blame Scoring Model
+
+The expertise model blends several signals rather than relying on raw blame lines.
+
+| Factor | Weight |
+|--------|--------|
+| commit_frequency | 0.15 |
+| lines_changed | 0.10 |
+| refactor_depth | 0.25 |
+| architectural_changes | 0.20 |
+| bug_fixes | 0.15 |
+| recency | 0.10 |
+| code_review_participation | 0.05 |
+
+This makes the recommendation closer to "who truly understands this area" than "who touched it last".
+
+## Testing
+
+### Backend
+
+```bash
+pytest backend/tests -q
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm run test:run
+```
+
+## Demo Checklist For Judges
+
+If you are reviewing the project quickly, this is the best path through the product:
+
+1. Start backend and frontend.
+2. Import a repository from GitHub or upload a ZIP.
+3. Watch `Analyzing` complete and open the dashboard.
+4. Open Smart Blame and search for a file.
+5. Open Governance and review active issues.
+6. Open AI Mentor and ask how a subsystem works.
+7. Open Blast Radius and inspect the impact of a function change.
+
+## Current Status
+
+Synapse is currently implemented as a complete MVP with:
+
+- end-to-end repository ingestion,
+- graph construction and visualization support,
+- Smart Blame expertise analysis,
+- governance validation,
+- AI-assisted repository reasoning,
+- and a working full-stack user experience.
+
+## License
+
+This project is licensed under the terms in `LICENSE.md`.
