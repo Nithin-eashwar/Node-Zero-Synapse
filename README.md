@@ -4,6 +4,18 @@ Synapse is a full-stack code intelligence platform that turns any repository int
 
 Built for hackathon submission, the current project is a complete, runnable product with a React frontend, FastAPI backend, a terminal UI, repository ingestion flow, interactive analysis screens, and GraphRAG-powered codebase Q and A.
 
+## Quick Navigation
+
+- [Why Synapse Exists](#why-synapse-exists)
+- [Core Product Features](#core-product-features)
+- [Architecture Overview](#architecture-overview)
+- [Tech Stack](#tech-stack)
+- [Repository Structure](#repository-structure)
+- [Running The Project Locally](#running-the-project-locally)
+- [UI Preview](#ui-preview)
+- [API Highlights](#api-highlights)
+- [Testing](#testing)
+
 ## Why Synapse Exists
 
 Modern teams move fast, but code understanding does not scale linearly with team size. The result is a repeated set of failures:
@@ -93,23 +105,42 @@ Synapse is not just a code visualizer and not just a chatbot.
 
 ## Architecture Overview
 
-```text
-Web App (React + Vite + TypeScript)     TUI (Ink + React)
-                 |                                |
-                 | HTTP                           | shared package logic
-                 v                                v
-                    Backend API (FastAPI)
-    |
-    |-- Parsing engine (tree-sitter)
-    |-- Graph builder and blast radius analysis
-    |-- Git expertise and risk analysis
-    |-- Governance validation and drift detection
-    |-- AI RAG pipeline
-    |
-    |-- repo_graph.json        structured repository model
-    |-- chroma_db/             local vector store for AI retrieval
-    |-- uploads/               imported repositories
+```mermaid
+flowchart TB
+   FE[Web App\nReact + Vite + TypeScript]
+   TUI[TUI\nInk + React]
+   API[FastAPI API Layer\nbackend/api]
+
+   FE -->|HTTP| API
+   TUI -->|shared logic + API calls| API
+
+   subgraph ANALYTICS[Analysis and Intelligence Services]
+      PARSER[Parsing Engine\nbackend/parsing\ntree-sitter]
+      GRAPH[Code Graph + Blast Radius\nbackend/graph]
+      GIT[Smart Blame + Risk\nbackend/git]
+      GOV[Governance + Drift\nbackend/governance]
+      AI[GraphRAG + Explanations\nbackend/ai]
+   end
+
+   API --> PARSER
+   API --> GRAPH
+   API --> GIT
+   API --> GOV
+   API --> AI
+
+   PARSER --> RG[repo_graph.json\nstructured code entities]
+   GRAPH --> RG
+   AI --> VDB[chroma_db/\nvector index]
+   API --> UP[uploads/\nimported repositories]
 ```
+
+### Architecture Notes
+
+- `backend/api` orchestrates ingestion, analysis, and query endpoints.
+- `backend/parsing` and `backend/graph` build the structural model used across features.
+- `backend/git` powers expertise, bus-factor, and knowledge-risk views.
+- `backend/governance` enforces layer boundaries and tracks architecture drift.
+- `backend/ai` combines graph context plus vector retrieval for grounded responses.
 
 ## Tech Stack
 
@@ -315,6 +346,49 @@ The UI can also rebuild analysis data automatically through the upload endpoints
 
 - Ask free-form questions about the indexed codebase.
 - Receive graph- and retrieval-aware answers.
+
+## UI Preview
+
+Yes, adding UI screenshots is a strong upgrade for this README. It helps reviewers understand product maturity in seconds.
+
+Suggested screenshot set:
+
+- Landing page (upload + GitHub import)
+- Dashboard (risk + governance summary)
+- Blast Radius graph view
+- Smart Blame expert lookup
+- Governance violations view
+- AI Mentor chat panel
+
+Suggested folder structure:
+
+```text
+docs/
+   images/
+      ui-landing.png
+      ui-dashboard.png
+      ui-blast-radius.png
+      ui-smart-blame.png
+      ui-governance.png
+      ui-ai-mentor.png
+```
+
+Then embed them like this:
+
+```md
+### Product UI
+
+| Screen | Preview |
+|--------|---------|
+| Landing | ![Landing page](docs/images/ui-landing.png) |
+| Dashboard | ![Dashboard](docs/images/ui-dashboard.png) |
+| Blast Radius | ![Blast radius graph](docs/images/ui-blast-radius.png) |
+| Smart Blame | ![Smart blame](docs/images/ui-smart-blame.png) |
+| Governance | ![Governance view](docs/images/ui-governance.png) |
+| AI Mentor | ![AI mentor](docs/images/ui-ai-mentor.png) |
+```
+
+Tip: keep all screenshots at a consistent width ratio and crop out browser chrome for a cleaner, product-first look.
 
 ## API Highlights
 
