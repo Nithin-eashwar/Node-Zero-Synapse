@@ -347,49 +347,6 @@ The UI can also rebuild analysis data automatically through the upload endpoints
 - Ask free-form questions about the indexed codebase.
 - Receive graph- and retrieval-aware answers.
 
-## UI Preview
-
-Yes, adding UI screenshots is a strong upgrade for this README. It helps reviewers understand product maturity in seconds.
-
-Suggested screenshot set:
-
-- Landing page (upload + GitHub import)
-- Dashboard (risk + governance summary)
-- Blast Radius graph view
-- Smart Blame expert lookup
-- Governance violations view
-- AI Mentor chat panel
-
-Suggested folder structure:
-
-```text
-docs/
-   images/
-      ui-landing.png
-      ui-dashboard.png
-      ui-blast-radius.png
-      ui-smart-blame.png
-      ui-governance.png
-      ui-ai-mentor.png
-```
-
-Then embed them like this:
-
-```md
-### Product UI
-
-| Screen | Preview |
-|--------|---------|
-| Landing | ![Landing page](docs/images/ui-landing.png) |
-| Dashboard | ![Dashboard](docs/images/ui-dashboard.png) |
-| Blast Radius | ![Blast radius graph](docs/images/ui-blast-radius.png) |
-| Smart Blame | ![Smart blame](docs/images/ui-smart-blame.png) |
-| Governance | ![Governance view](docs/images/ui-governance.png) |
-| AI Mentor | ![AI mentor](docs/images/ui-ai-mentor.png) |
-```
-
-Tip: keep all screenshots at a consistent width ratio and crop out browser chrome for a cleaner, product-first look.
-
 ## API Highlights
 
 ### Core Analysis
