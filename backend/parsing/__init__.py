@@ -35,17 +35,27 @@ from .parser import (
     get_all_entities
 )
 
+from .java_parser import parse_java_file
+
+from .java_complexity import (
+    calculate_java_cyclomatic_complexity,
+    calculate_java_cognitive_complexity,
+    count_java_lines_of_code,
+    count_java_total_lines,
+    JAVA_BUILTINS,
+)
+
 __all__ = [
     # Entities
     "EntityType",
     "Parameter",
-    "FunctionEntity", 
+    "FunctionEntity",
     "ClassEntity",
     "ImportEntity",
     "ModuleEntity",
     "VariableEntity",
     "ParsedFile",
-    # Complexity
+    # Python Complexity
     "calculate_cyclomatic_complexity",
     "calculate_cognitive_complexity",
     "count_lines_of_code",
@@ -56,8 +66,16 @@ __all__ = [
     "extract_local_definitions",
     "ScopeTracker",
     "PYTHON_BUILTINS",
-    # Parser
+    # Java Complexity
+    "calculate_java_cyclomatic_complexity",
+    "calculate_java_cognitive_complexity",
+    "count_java_lines_of_code",
+    "count_java_total_lines",
+    "JAVA_BUILTINS",
+    # Parser (language-agnostic entry points)
     "parse_file",
     "scan_repository",
     "get_all_entities",
+    # Java-specific entry point
+    "parse_java_file",
 ]

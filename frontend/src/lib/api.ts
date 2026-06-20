@@ -142,7 +142,32 @@ export interface LayersResponse {
 export interface AIResponse {
     answer: string;
     context: string[];
-    sources: string[];
+    sources?: string[];
+    evidence?: Array<{
+        id: string;
+        unique_id: string;
+        file: string;
+        snippet: string;
+        score: number;
+        source_type: string;
+        rank: number;
+    }>;
+    retrieval_trace?: Record<string, unknown>;
+    grounding?: {
+        grounded: boolean;
+        unsupported_claim_count: number;
+        uncertainty_reason: string;
+    };
+    metrics?: {
+        stage_ms?: Record<string, number>;
+        total_latency_ms?: number;
+        cost_query_usd_estimate?: number;
+        token_estimate?: {
+            input: number;
+            output: number;
+        };
+        failure_reason?: string;
+    };
 }
 
 export interface HealthResponse {

@@ -200,6 +200,75 @@ def _build_raw_entity_map() -> Dict[str, Dict[str, Any]]:
     return raw_entity_map
 
 
+def _collapse_escaped_backslashes(value: str) -> str:
+    """Normalize ids pasted from encoded URLs that contain doubled backslashes."""
+    while "\\\\" in value:
+        value = value.replace("\\\\", "\\")
+    return value
+
+
+def _resolve_graph_entity_id(identifier: str) -> Tuple[str, Dict[str, Any]]:
+    """
+    Resolve a user/API supplied entity identifier to the exact graph node id.
+
+    Accepts exact graph ids, ids with slash/backslash differences, plain entity
+    names, and qualified names like ClassName.method_name when the match is
+    unambiguous.
+    """
+    cg = graph_db["code_graph"]
+    if not cg:
+        raise HTTPException(status_code=503, detail="Code graph is not loaded")
+
+    requested = identifier.strip()
+    normalized = _collapse_escaped_backslashes(requested)
+    variants = list(dict.fromkeys([requested, normalized]))
+
+    raw_entity_map = _build_raw_entity_map()
+
+    for candidate in variants:
+        if cg.store.has_node(candidate):
+            return candidate, raw_entity_map.get(candidate, {})
+
+    slash_variants = {candidate.replace("\\", "/") for candidate in variants}
+    matches: Dict[str, Dict[str, Any]] = {}
+
+    for entity in graph_db["raw_data"]:
+        entity_id = entity.get("unique_id") or entity.get("name")
+        entity_name = entity.get("name")
+        if not entity_id:
+            continue
+
+        normalized_entity_id = str(entity_id).replace("\\", "/")
+        qualified_name = str(entity_id).split(":")[-1]
+
+        if (
+            normalized_entity_id in slash_variants
+            or entity_name in variants
+            or qualified_name in variants
+        ):
+            matches[str(entity_id)] = entity
+
+    if not matches:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Function or entity '{identifier}' not found"
+        )
+
+    if len(matches) > 1:
+        sample_matches = list(matches.keys())[:5]
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "message": f"Entity name '{identifier}' is ambiguous. Use a qualified name or full id.",
+                "matches": sample_matches,
+                "total_matches": len(matches),
+            },
+        )
+
+    resolved_id, entity = next(iter(matches.items()))
+    return resolved_id, entity
+
+
 def _infer_repo_path_from_raw_data(data: List[Dict[str, Any]]) -> Optional[str]:
     absolute_files: List[str] = []
     for entity in data:
@@ -587,24 +656,6 @@ def get_condensed_graph():
     }
 
 
-@app.get("/blast-radius/{function_name:path}")
-def get_blast_radius(function_name: str):
-    """Calculates dependencies for a specific function"""
-    cg = graph_db["code_graph"]
-    
-    if not cg.store.has_node(function_name):
-        raise HTTPException(status_code=404, detail=f"Function '{function_name}' not found")
-    
-    # Logic: Who depends on me? (Ancestors)
-    affected_nodes = list(cg.store.ancestors(function_name))
-    
-    return {
-        "target": function_name,
-        "blast_radius_score": len(affected_nodes),
-        "affected_functions": affected_nodes
-    }
-
-
 @app.get("/blast-radius/{function_name:path}/explain")
 async def explain_blast_radius(function_name: str):
     """
@@ -615,24 +666,20 @@ async def explain_blast_radius(function_name: str):
     """
     cg = graph_db["code_graph"]
     raw_data = graph_db["raw_data"]
-    
-    if not cg.store.has_node(function_name):
-        raise HTTPException(status_code=404, detail=f"Function '{function_name}' not found")
+    resolved_id, entity_node = _resolve_graph_entity_id(function_name)
     
     # Build complexity data for risk calculation
     complexity_data = {}
     for node in raw_data:
-        if node.get("complexity"):
-            complexity_data[node["name"]] = node["complexity"]
+        entity_id = node.get("unique_id") or node.get("name")
+        if entity_id and node.get("complexity"):
+            complexity_data[entity_id] = node["complexity"]
     
     # Calculate full impact assessment using preloaded CodeGraph + git risk
     git_risk = graph_db.get("git_risk")
-    impact = cg.calculate_blast_radius(function_name, complexity_data, git_risk_analyzer=git_risk)
+    impact = cg.calculate_blast_radius(resolved_id, complexity_data, git_risk_analyzer=git_risk)
     impact_dict = impact.to_dict()
-    
-    # Find the entity's raw node data
-    entity_node = next((n for n in raw_data if n["name"] == function_name), None)
-    
+
     # Generate AI explanation
     from backend.ai.blast_radius_explainer import BlastRadiusExplainer
     explainer = BlastRadiusExplainer()
@@ -644,7 +691,26 @@ async def explain_blast_radius(function_name: str):
     
     # Merge structured data with AI explanation
     result["impact_assessment"] = impact_dict
+    result["requested_entity"] = function_name
+    result["resolved_entity"] = resolved_id
     return result
+
+
+@app.get("/blast-radius/{function_name:path}")
+def get_blast_radius(function_name: str):
+    """Calculates dependencies for a specific function or entity."""
+    cg = graph_db["code_graph"]
+    resolved_id, _ = _resolve_graph_entity_id(function_name)
+
+    # Logic: Who depends on me? (Ancestors)
+    affected_nodes = list(cg.store.ancestors(resolved_id))
+
+    return {
+        "target": resolved_id,
+        "requested_entity": function_name,
+        "blast_radius_score": len(affected_nodes),
+        "affected_functions": affected_nodes
+    }
 
 
 @app.get("/git-risk/{file_path:path}")
@@ -944,6 +1010,19 @@ async def ask_ai(query: str):
     pipeline = get_rag_pipeline()
     pipeline.ensure_indexed(graph_db["raw_data"])
     result = await pipeline.ask(query)
+    # Structured log without raw query text to preserve private mentor privacy.
+    try:
+        metrics = result.get("metrics", {})
+        print(
+            "[GraphRAG] ask "
+            f"query_len={len(query)} "
+            f"mode={result.get('mode', '')} "
+            f"intent={result.get('intent', '')} "
+            f"latency_ms={metrics.get('total_latency_ms', 0)} "
+            f"failure_reason={metrics.get('failure_reason', '')}"
+        )
+    except Exception:
+        pass
     return result
 
 

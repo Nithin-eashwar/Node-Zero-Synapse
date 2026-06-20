@@ -62,6 +62,14 @@ class FunctionEntity:
     # Documentation
     docstring: Optional[str] = None
     
+    # Visibility / access modifier (e.g. "public", "private", "protected")
+    # Populated for Java; None for Python (Python has no formal access modifiers).
+    visibility: Optional[str] = None
+
+    # Checked exceptions declared in the method signature (Java only)
+    # e.g. throws IOException, SQLException
+    throws: List[str] = field(default_factory=list)
+
     # Function characteristics
     is_async: bool = False
     is_generator: bool = False
@@ -115,6 +123,8 @@ class FunctionEntity:
             "return_type": self.return_type,
             "decorators": self.decorators,
             "docstring": self.docstring,
+            "visibility": self.visibility,
+            "throws": self.throws,
             "is_async": self.is_async,
             "is_generator": self.is_generator,
             "is_method": self.is_method,
@@ -149,10 +159,17 @@ class ClassEntity:
     bases: List[str] = field(default_factory=list)
     metaclass: Optional[str] = None
     
+    # Visibility / access modifier (e.g. "public", "private", "protected")
+    # Populated for Java; None for Python.
+    visibility: Optional[str] = None
+
     # Class characteristics
     is_abstract: bool = False
     is_dataclass: bool = False
     is_protocol: bool = False
+
+    # True when this entity represents a Java interface (not a class or abstract class)
+    is_interface: bool = False
     
     # Decorators
     decorators: List[str] = field(default_factory=list)
@@ -187,9 +204,11 @@ class ClassEntity:
             "range": [self.start_line, self.end_line],
             "bases": self.bases,
             "metaclass": self.metaclass,
+            "visibility": self.visibility,
             "is_abstract": self.is_abstract,
             "is_dataclass": self.is_dataclass,
             "is_protocol": self.is_protocol,
+            "is_interface": self.is_interface,
             "decorators": self.decorators,
             "docstring": self.docstring,
             "methods": self.methods,

@@ -468,14 +468,24 @@ def extract_global_variable(node, file_path: str) -> Optional[VariableEntity]:
 
 def parse_file(file_path: str) -> ParsedFile:
     """
-    Parse a Python file and extract all entities.
-    
+    Parse a source file and extract all entities.
+
+    Dispatches to the appropriate language parser based on file extension:
+    - .py  → Python parser (this module)
+    - .java → Java parser (java_parser module)
+
     Args:
-        file_path: Path to the Python file
-        
+        file_path: Path to the source file
+
     Returns:
         ParsedFile containing all extracted entities
     """
+    ext = os.path.splitext(file_path)[1].lower()
+    if ext == ".java":
+        from .java_parser import parse_java_file
+        return parse_java_file(file_path)
+
+    # --- Python parsing (original logic below) ---
     try:
         with open(file_path, "r", encoding="utf8") as f:
             code = f.read()
@@ -568,31 +578,38 @@ def parse_file(file_path: str) -> ParsedFile:
 
 def scan_repository(path: str) -> List[ParsedFile]:
     """
-    Scan a repository and parse all Python files.
-    
+    Scan a repository and parse all supported source files.
+
+    Currently supports:
+    - Python (.py)
+    - Java (.java)
+
     Args:
         path: Path to the repository root
-        
+
     Returns:
         List of ParsedFile objects
     """
     print(f"[*] Scanning Repository: {path}...")
     parsed_files = []
-    
+
+    _supported = (".py", ".java")
+
     for root, dirs, files in os.walk(path):
         # Skip hidden and system directories
         dirs[:] = [d for d in dirs if d not in [".venv", "venv", ".git", "__pycache__", "node_modules", "site-packages", "chroma_db", "tests"]]
-        
+
         for file in files:
-            if file.endswith(".py"):
-                full_path = os.path.join(root, file)
-                print(f"  -> Parsing {file}...")
-                try:
-                    parsed = parse_file(full_path)
-                    parsed_files.append(parsed)
-                except Exception as e:
-                    print(f"  [ERROR] Error parsing {file}: {e}")
-    
+            if not file.endswith(_supported):
+                continue
+            full_path = os.path.join(root, file)
+            print(f"  -> Parsing {file}...")
+            try:
+                parsed = parse_file(full_path)
+                parsed_files.append(parsed)
+            except Exception as e:
+                print(f"  [ERROR] Error parsing {file}: {e}")
+
     return parsed_files
 
 
