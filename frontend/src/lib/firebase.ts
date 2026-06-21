@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    apiKey: "AIzaSyA7dPpQO5Xp679NmdQmxY0TKJJlUr9O7xE",
     authDomain: "node-zero-synapse.firebaseapp.com",
     projectId: "node-zero-synapse",
     storageBucket: "node-zero-synapse.firebasestorage.app",

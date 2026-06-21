@@ -45,6 +45,16 @@ from .java_complexity import (
     JAVA_BUILTINS,
 )
 
+from .cpp_parser import parse_cpp_file
+
+from .cpp_complexity import (
+    calculate_cpp_cyclomatic_complexity,
+    calculate_cpp_cognitive_complexity,
+    count_cpp_lines_of_code,
+    count_cpp_total_lines,
+    CPP_BUILTINS,
+)
+
 __all__ = [
     # Entities
     "EntityType",
@@ -78,4 +88,12 @@ __all__ = [
     "get_all_entities",
     # Java-specific entry point
     "parse_java_file",
+    # C++ Complexity
+    "calculate_cpp_cyclomatic_complexity",
+    "calculate_cpp_cognitive_complexity",
+    "count_cpp_lines_of_code",
+    "count_cpp_total_lines",
+    "CPP_BUILTINS",
+    # C++-specific entry point
+    "parse_cpp_file",
 ]

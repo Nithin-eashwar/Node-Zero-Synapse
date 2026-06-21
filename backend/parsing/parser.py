@@ -484,6 +484,9 @@ def parse_file(file_path: str) -> ParsedFile:
     if ext == ".java":
         from .java_parser import parse_java_file
         return parse_java_file(file_path)
+    elif ext in (".cpp", ".cc", ".cxx", ".hpp", ".h"):
+        from .cpp_parser import parse_cpp_file
+        return parse_cpp_file(file_path)
 
     # --- Python parsing (original logic below) ---
     try:
@@ -593,7 +596,7 @@ def scan_repository(path: str) -> List[ParsedFile]:
     print(f"[*] Scanning Repository: {path}...")
     parsed_files = []
 
-    _supported = (".py", ".java")
+    _supported = (".py", ".java", ".cpp", ".cc", ".cxx", ".hpp", ".h")
 
     for root, dirs, files in os.walk(path):
         # Skip hidden and system directories
